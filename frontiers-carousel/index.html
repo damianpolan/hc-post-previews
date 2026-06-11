@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hacker Cottage Weekend — Four Frontiers Carousel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1A1613;
+    --charcoal: #3D3530;
+    --stone: #9B9286;
+    --sand: #C4B49A;
+    --cream: #D6C6AB;
+    --ivory: #E2D4BC;
+    --amber: #C8923C;
+    --amber-light: #F0DFBE;
+    --rust: #A8472B;
+    --espresso: #1C1410;
+    --walnut: #2E2117;
+
+    --display: "Space Mono", ui-monospace, monospace;
+    --body: "DM Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+
+    --slide-w: 1080px;
+    --slide-h: 1440px;
+    --preview-scale: 0.46;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0e0a07; color: var(--ivory); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+
+  .stage {
+    min-height: 100vh;
+    padding: 56px 24px 120px;
+    display: flex; flex-direction: column; align-items: center; gap: 48px;
+  }
+  .stage-header { text-align: center; color: var(--cream); max-width: 720px; }
+  .stage-header .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--amber);
+  }
+  .stage-header h1 {
+    font-family: var(--display); font-style: italic; font-weight: 400;
+    font-size: 34px; margin-top: 14px; color: var(--ivory);
+  }
+  .stage-header p { margin-top: 14px; font-size: 14px; color: rgba(226,212,188,0.7); line-height: 1.55; }
+
+  .deck {
+    display: grid; grid-template-columns: repeat(2, auto);
+    gap: 48px 40px; align-items: start; justify-items: center;
+  }
+  @media (max-width: 1100px) { .deck { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { :root { --preview-scale: 0.33; } .stage { padding: 40px 12px 80px; } }
+
+  .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .slide-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: rgba(214,198,171,0.55);
+  }
+  .slide-frame {
+    width: calc(var(--slide-w) * var(--preview-scale));
+    height: calc(var(--slide-h) * var(--preview-scale));
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+    background: var(--espresso);
+  }
+
+  .slide {
+    width: var(--slide-w); height: var(--slide-h);
+    position: relative; overflow: hidden;
+    transform: scale(var(--preview-scale)); transform-origin: top left;
+    background: var(--espresso); color: var(--ivory);
+  }
+  .slide::after {
+    content: "";
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.65'/></svg>");
+    opacity: 0.05; mix-blend-mode: screen; z-index: 30;
+  }
+
+  .bg-img { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 1; }
+  .bg-overlay { position: absolute; inset: 0; z-index: 2; }
+  .content {
+    position: relative; z-index: 5;
+    width: 100%; height: 100%;
+    padding: 96px;
+    display: flex; flex-direction: column;
+  }
+
+  /* ════════════════════════════════════════════
+     COVER
+     ════════════════════════════════════════════ */
+  .fr-cover .bg-img { background-image: url("images/chalet-workspace.jpg"); background-position: center 64%; }
+  .fr-cover .bg-overlay {
+    background: linear-gradient(180deg, rgba(28,20,16,0.72) 0%, rgba(28,20,16,0.5) 36%, rgba(28,20,16,0.88) 100%);
+  }
+  .fr-cover .content { justify-content: space-between; }
+  .fr-cover .top-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .fr-cover .wordmark {
+    font-family: var(--display); font-weight: 700; font-size: 30px;
+    letter-spacing: 0.04em; color: rgba(226,212,188,0.92);
+  }
+  .fr-cover .top-date {
+    font-family: var(--mono); font-size: 21px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(226,212,188,0.66);
+  }
+  .fr-cover .display {
+    font-family: var(--display); font-style: italic; font-weight: 400;
+    font-size: 148px; line-height: 0.96; letter-spacing: -0.015em;
+    color: var(--ivory);
+  }
+  .fr-cover .sub-tag {
+    font-family: var(--display); font-style: italic;
+    font-size: 56px; line-height: 1.1; color: var(--amber);
+    margin-top: 44px; max-width: 720px;
+  }
+  .fr-cover .footer-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
+  .fr-cover .footer-left {
+    font-family: var(--body); font-size: 30px; line-height: 1.38;
+    color: var(--cream); max-width: 560px;
+  }
+  .fr-cover .hosted {
+    font-family: var(--mono); font-size: 17px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: rgba(226,212,188,0.6);
+    margin-top: 22px;
+  }
+  .fr-cover .swipe-badge {
+    flex-shrink: 0; width: 270px; height: 270px; border-radius: 9999px;
+    background: var(--rust); color: var(--amber-light);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; line-height: 1; padding-bottom: 22px;
+    box-shadow: 0 20px 50px -12px rgba(0,0,0,0.55);
+  }
+  .fr-cover .swipe-arrow { font-family: var(--display); font-size: 68px; line-height: 1; margin-bottom: 18px; }
+  .fr-cover .swipe-text {
+    font-family: var(--mono); font-weight: 700; font-size: 29px;
+    letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.18;
+  }
+
+  /* ════════════════════════════════════════════
+     FRONTIER TEMPLATE
+     ════════════════════════════════════════════ */
+  .frontier { background: var(--espresso); }
+  .frontier .ghost {
+    position: absolute; top: -70px; right: -28px; z-index: 1;
+    font-family: var(--display); font-style: italic; font-weight: 700;
+    font-size: 430px; line-height: 1; letter-spacing: -0.04em;
+    color: rgba(226,212,188,0.055);
+  }
+  .frontier .content { padding: 92px 96px 72px; }
+  .frontier .eyebrow-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .frontier .fr-index {
+    font-family: var(--mono); font-weight: 700; font-size: 26px;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--amber);
+  }
+  .frontier .fr-series {
+    font-family: var(--mono); font-size: 17px; letter-spacing: 0.26em;
+    text-transform: uppercase; color: rgba(226,212,188,0.4);
+  }
+  .frontier .fr-title {
+    font-family: var(--display); font-style: italic; font-weight: 400;
+    font-size: 100px; line-height: 1.0; letter-spacing: -0.015em;
+    color: var(--ivory); margin-top: 36px;
+  }
+  .frontier .title-rule { width: 110px; height: 5px; background: var(--amber); margin-top: 42px; }
+
+  .frontier .secs { display: flex; flex-direction: column; gap: 52px; margin-top: 58px; }
+  .frontier .sec-label {
+    font-family: var(--mono); font-weight: 700; font-size: 22px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber);
+  }
+  .frontier .sec-text {
+    font-family: var(--body); font-size: 33px; line-height: 1.44;
+    color: rgba(226,212,188,0.88); margin-top: 16px; max-width: 884px;
+  }
+  .frontier .sec-text .hl { color: var(--amber-light); font-weight: 600; }
+
+  .frontier .build-card {
+    margin-top: 56px;
+    background: var(--walnut);
+    border-left: 6px solid var(--amber);
+    border-radius: 18px;
+    padding: 46px 50px;
+  }
+  .frontier .build-label {
+    font-family: var(--mono); font-weight: 700; font-size: 22px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber);
+  }
+  .frontier .build-text {
+    font-family: var(--body); font-size: 32px; line-height: 1.44;
+    color: var(--amber-light); margin-top: 16px;
+  }
+
+  .frontier .footer-meta {
+    margin-top: auto; padding-top: 28px;
+    border-top: 1px solid rgba(226,212,188,0.16);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .frontier .fm-wordmark {
+    font-family: var(--display); font-weight: 700; font-size: 20px;
+    letter-spacing: 0.04em; color: rgba(226,212,188,0.82);
+  }
+  .frontier .fm-date {
+    font-family: var(--mono); font-size: 16px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: rgba(226,212,188,0.45);
+  }
+
+  /* ════════════════════════════════════════════
+     APPLY / CTA
+     ════════════════════════════════════════════ */
+  .fr-apply .bg-img { background-image: url("images/chalet-55.jpg"); }
+  .fr-apply .bg-overlay {
+    background: linear-gradient(180deg, rgba(28,20,16,0.78) 0%, rgba(28,20,16,0.55) 26%, rgba(28,20,16,0.86) 64%, rgba(28,20,16,0.97) 100%);
+  }
+  .fr-apply .content { justify-content: space-between; }
+  .fr-apply .eyebrow {
+    font-family: var(--mono); font-size: 24px; letter-spacing: 0.26em;
+    text-transform: uppercase; color: rgba(226,212,188,0.72); font-weight: 500;
+  }
+  .fr-apply .apply-headline {
+    font-family: var(--display); font-style: italic;
+    font-size: 96px; line-height: 1.0; color: var(--ivory); margin-top: 30px;
+  }
+  .fr-apply .apply-body {
+    font-family: var(--body); font-size: 31px; line-height: 1.45;
+    color: rgba(226,212,188,0.88); margin-top: 44px; max-width: 800px;
+  }
+  .fr-apply .apply-bottom { display: flex; flex-direction: column; gap: 44px; }
+  .fr-apply .deadline { border-left: 4px solid var(--amber); padding-left: 40px; }
+  .fr-apply .deadline-label {
+    font-family: var(--mono); font-weight: 700; font-size: 24px;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--amber);
+  }
+  .fr-apply .deadline-date {
+    font-family: var(--display); font-style: italic; font-weight: 700;
+    font-size: 88px; line-height: 1.0; color: var(--ivory); margin-top: 16px; white-space: nowrap;
+  }
+  .fr-apply .deadline-time {
+    font-family: var(--mono); font-weight: 500; font-size: 32px;
+    letter-spacing: 0.06em; color: var(--cream); margin-top: 14px;
+  }
+  .fr-apply .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 16px;
+    padding: 30px 52px; border-radius: 9999px;
+    background: var(--amber); color: var(--ink);
+    font-family: var(--mono); font-size: 26px; letter-spacing: 0.12em;
+    text-transform: uppercase; font-weight: 700; text-decoration: none;
+    align-self: stretch;
+  }
+  .fr-apply .btn .arrow { font-family: var(--display); font-size: 32px; }
+  .fr-apply .hosted {
+    font-family: var(--mono); font-size: 17px; letter-spacing: 0.26em;
+    text-transform: uppercase; color: rgba(226,212,188,0.55);
+    text-align: center;
+  }
+
+  /* ════════════════════════════════════════════
+     Export mode (?only=<id>)
+     ════════════════════════════════════════════ */
+  body.export { background: #fff; }
+  body.export .stage, body.export .stage-header { all: unset; }
+  body.export .stage-header, body.export .slide-label { display: none !important; }
+  body.export .stage { padding: 0; gap: 0; display: block; }
+  body.export .deck { display: block; }
+  body.export .slide-wrap { display: none; }
+  body.export .slide-wrap.show { display: block; }
+  body.export .slide-frame { width: 1080px; height: 1440px; box-shadow: none; }
+  body.export .slide { transform: none; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <header class="stage-header">
+    <div class="kicker">Carousel · what should you build</div>
+    <h1>Four Frontiers</h1>
+    <p>6 slides at 1080×1440. Answers the question builders keep asking — "what should I work on?" — with four frontier spaces and verified Canadian proof in each. Caption lives in descriptions.md.</p>
+  </header>
+
+  <div class="deck">
+
+    <!-- ─────────────── 1 · COVER ─────────────── -->
+    <div class="slide-wrap" data-id="fr-cover">
+      <div class="slide-frame">
+        <div class="slide fr-cover">
+          <div class="bg-img"></div>
+          <div class="bg-overlay"></div>
+          <div class="content">
+            <div class="top-row">
+              <div class="wordmark">Hacker Cottage Weekend</div>
+              <div class="top-date">Aug 28–31, 2026</div>
+            </div>
+            <div>
+              <div class="display">What<br/>should you<br/>build?</div>
+              <div class="sub-tag">Four frontiers worth your weekend.</div>
+            </div>
+            <div class="footer-row">
+              <div class="footer-left">
+                The spaces where the next decade gets decided — and where Canada already has receipts.
+                <div class="hosted">Hosted by AGI Ventures Canada</div>
+              </div>
+              <div class="swipe-badge">
+                <div class="swipe-arrow">→</div>
+                <div class="swipe-text">Swipe<br/>to explore</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">01 · Cover</div>
+    </div>
+
+    <!-- ─────────────── 2 · AGENTIC AI ─────────────── -->
+    <div class="slide-wrap" data-id="fr-agentic">
+      <div class="slide-frame">
+        <div class="slide frontier">
+          <div class="ghost">01</div>
+          <div class="content">
+            <div class="eyebrow-row">
+              <div class="fr-index">Frontier 01 / 04</div>
+              <div class="fr-series">What should you build?</div>
+            </div>
+            <div class="fr-title">Agentic AI</div>
+            <div class="title-rule"></div>
+            <div class="secs">
+              <div class="sec">
+                <div class="sec-label">Why now</div>
+                <div class="sec-text">The leap from chat to agents that do real work is happening right now. The model layer is solved — the vertical wedges are still wide open.</div>
+              </div>
+              <div class="sec">
+                <div class="sec-label">In Canada</div>
+                <div class="sec-text">Cohere ships frontier models from Toronto at a <span class="hl">US$7B valuation</span>. Vector, Mila &amp; Amii anchor the research — backed by a <span class="hl">$2B Sovereign AI Compute Strategy</span>, public supercomputer included.</div>
+              </div>
+            </div>
+            <div class="build-card">
+              <div class="build-label">Build</div>
+              <div class="build-text">An agent that owns one painful workflow in law, health, finance or government — end to end — plus the evals that prove it works.</div>
+            </div>
+            <div class="footer-meta">
+              <div class="fm-wordmark">Hacker Cottage Weekend</div>
+              <div class="fm-date">Aug 28–31 · St-Sauveur, QC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">02 · Agentic AI</div>
+    </div>
+
+    <!-- ─────────────── 3 · QUANTUM ─────────────── -->
+    <div class="slide-wrap" data-id="fr-quantum">
+      <div class="slide-frame">
+        <div class="slide frontier">
+          <div class="ghost">02</div>
+          <div class="content">
+            <div class="eyebrow-row">
+              <div class="fr-index">Frontier 02 / 04</div>
+              <div class="fr-series">What should you build?</div>
+            </div>
+            <div class="fr-title">Quantum</div>
+            <div class="title-rule"></div>
+            <div class="secs">
+              <div class="sec">
+                <div class="sec-label">Why now</div>
+                <div class="sec-text">Quantum is leaving the lab — and the early winners in hardware, software and security are being decided now.</div>
+              </div>
+              <div class="sec">
+                <div class="sec-label">In Canada</div>
+                <div class="sec-text">Canada has built <span class="hl">four billion-dollar quantum companies</span> — D-Wave, Xanadu, Photonic, Nord Quantique. Only the US can match that. A <span class="hl">$360M national strategy</span> and Waterloo's Quantum Valley back the field.</div>
+              </div>
+            </div>
+            <div class="build-card">
+              <div class="build-label">Build</div>
+              <div class="build-text">Post-quantum crypto tooling, circuit visualizers, or hybrid algorithms on PennyLane — Xanadu's open-source framework.</div>
+            </div>
+            <div class="footer-meta">
+              <div class="fm-wordmark">Hacker Cottage Weekend</div>
+              <div class="fm-date">Aug 28–31 · St-Sauveur, QC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">03 · Quantum</div>
+    </div>
+
+    <!-- ─────────────── 4 · ROBOTICS ─────────────── -->
+    <div class="slide-wrap" data-id="fr-robotics">
+      <div class="slide-frame">
+        <div class="slide frontier">
+          <div class="ghost">03</div>
+          <div class="content">
+            <div class="eyebrow-row">
+              <div class="fr-index">Frontier 03 / 04</div>
+              <div class="fr-series">What should you build?</div>
+            </div>
+            <div class="fr-title">Robotics &amp;<br/>Embodied AI</div>
+            <div class="title-rule"></div>
+            <div class="secs">
+              <div class="sec">
+                <div class="sec-label">Why now</div>
+                <div class="sec-text">After language, embodiment. Foundation models are getting bodies — and robotics startups raised a record <span class="hl">US$14B in 2025</span>.</div>
+              </div>
+              <div class="sec">
+                <div class="sec-label">In Canada</div>
+                <div class="sec-text">Sanctuary AI builds humanoids in Vancouver. Waabi (Toronto) just raised <span class="hl">US$750M</span> — one of the largest VC rounds in Canadian history — to put <span class="hl">25,000 autonomous vehicles</span> on Uber.</div>
+              </div>
+            </div>
+            <div class="build-card">
+              <div class="build-label">Build</div>
+              <div class="build-text">Skip the hardware — ship the software layer: sim-to-real pipelines, teleoperation, perception modules.</div>
+            </div>
+            <div class="footer-meta">
+              <div class="fm-wordmark">Hacker Cottage Weekend</div>
+              <div class="fm-date">Aug 28–31 · St-Sauveur, QC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">04 · Robotics &amp; Embodied AI</div>
+    </div>
+
+    <!-- ─────────────── 5 · AI FOR SCIENCE ─────────────── -->
+    <div class="slide-wrap" data-id="fr-science">
+      <div class="slide-frame">
+        <div class="slide frontier">
+          <div class="ghost">04</div>
+          <div class="content">
+            <div class="eyebrow-row">
+              <div class="fr-index">Frontier 04 / 04</div>
+              <div class="fr-series">What should you build?</div>
+            </div>
+            <div class="fr-title">AI for Science</div>
+            <div class="title-rule"></div>
+            <div class="secs">
+              <div class="sec">
+                <div class="sec-label">Why now</div>
+                <div class="sec-text">AlphaFold turned years of protein work into minutes — and won the <span class="hl">2024 Nobel Prize in Chemistry</span>. Discovery timelines are collapsing.</div>
+              </div>
+              <div class="sec">
+                <div class="sec-label">In Canada</div>
+                <div class="sec-text">Mila runs a dedicated AI-for-science program. Valence Labs powers Recursion's drug discovery from inside Mila — and BenchSci's AI serves <span class="hl">16 of the top 20 pharma</span>.</div>
+              </div>
+            </div>
+            <div class="build-card">
+              <div class="build-label">Build</div>
+              <div class="build-text">A protein-binder designer, a lab-data copilot, or an agent that turns papers into testable hypotheses.</div>
+            </div>
+            <div class="footer-meta">
+              <div class="fm-wordmark">Hacker Cottage Weekend</div>
+              <div class="fm-date">Aug 28–31 · St-Sauveur, QC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">05 · AI for Science</div>
+    </div>
+
+    <!-- ─────────────── 6 · APPLY ─────────────── -->
+    <div class="slide-wrap" data-id="fr-apply">
+      <div class="slide-frame">
+        <div class="slide fr-apply">
+          <div class="bg-img"></div>
+          <div class="bg-overlay"></div>
+          <div class="content">
+            <div>
+              <div class="eyebrow">Aug 28–31, 2026 · St-Sauveur, QC</div>
+              <div class="apply-headline">Pick a<br/>frontier.<br/>Come build.</div>
+              <div class="apply-body">Bring the project you've already started — the cottage is your ship date. Or start fresh in a room with 22 of Canada's best AI builders.</div>
+            </div>
+            <div class="apply-bottom">
+              <div class="deadline">
+                <div class="deadline-label">Application Deadline</div>
+                <div class="deadline-date">Wed, July 15</div>
+                <div class="deadline-time">11:59 PM ET</div>
+              </div>
+              <a class="btn" href="https://hackercottage.com">Apply at hackercottage.com <span class="arrow">→</span></a>
+              <div class="hosted">Hosted by AGI Ventures Canada</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">06 · Apply</div>
+    </div>
+
+  </div>
+</div>
+<script>
+  (function(){
+    var only = new URLSearchParams(location.search).get('only');
+    if (only) {
+      document.body.classList.add('export');
+      var w = document.querySelector('.slide-wrap[data-id="' + only + '"]');
+      if (w) w.classList.add('show');
+    }
+  })();
+</script>
+</body>
+</html>
