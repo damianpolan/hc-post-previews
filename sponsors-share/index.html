@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hacker Cottage Weekend — Sponsor Share Assets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --espresso:#1C1410; --cream:#D6C6AB; --ivory:#E2D4BC; --amber:#C8923C;
+    --display:"Space Mono",monospace; --body:"DM Sans",sans-serif; --mono:"JetBrains Mono",monospace;
+    --lk-cream:#F3ECDD;
+    --slide-w:1080px; --slide-h:1440px; --preview-scale:0.46;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#0e0a07;color:var(--ivory);font-family:var(--body);-webkit-font-smoothing:antialiased}
+  .stage{min-height:100vh;padding:56px 24px 120px;display:flex;flex-direction:column;align-items:center;gap:40px}
+  .stage-header{text-align:center;color:var(--cream);max-width:760px}
+  .stage-header .kicker{font-family:var(--mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--amber)}
+  .stage-header h1{font-family:var(--display);font-style:italic;font-weight:400;font-size:34px;margin-top:14px;color:var(--ivory)}
+  .stage-header p{margin-top:14px;font-size:14px;color:rgba(226,212,188,0.7);line-height:1.55}
+  .deck{display:grid;grid-template-columns:repeat(3,auto);gap:44px 32px;justify-items:center}
+  @media (max-width:1100px){.deck{grid-template-columns:1fr}}
+  .slide-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+  .slide-label{font-family:var(--mono);font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(214,198,171,0.6)}
+  .slide-frame{width:calc(var(--slide-w)*var(--preview-scale));height:calc(var(--slide-h)*var(--preview-scale));position:relative;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.05);background:var(--espresso)}
+
+  .slide{width:var(--slide-w);height:var(--slide-h);position:relative;overflow:hidden;transform:scale(var(--preview-scale));transform-origin:top left;background:var(--espresso);color:var(--ivory)}
+  .slide::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.65'/></svg>");opacity:0.05;mix-blend-mode:screen;z-index:30}
+
+  /* layout: brand panel (top) + chalet photo band (bottom) */
+  .sp{display:flex;flex-direction:column}
+  .sp>.brandblock{height:60%;padding:84px 92px;display:flex;flex-direction:column;justify-content:center;gap:34px;background:var(--brand-grad)}
+  .sp>.photo{height:40%;position:relative;background-image:url("images/chalet/chalet-02.jpg");background-size:cover;background-position:center 52%}
+  .sp>.photo .hc-cap{position:absolute;left:0;right:0;bottom:0;padding:46px 92px 52px;background:linear-gradient(180deg,rgba(20,14,10,0),rgba(20,14,10,0.86) 70%)}
+  .hc-cap .dt{font-family:var(--mono);font-weight:500;font-size:24px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.92)}
+  .hc-cap .hosted{font-family:var(--mono);font-weight:400;font-size:18px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.62);margin-top:12px}
+
+  .bb-rolelabel{font-family:var(--mono);font-weight:700;font-size:25px;letter-spacing:0.2em;text-transform:uppercase;color:var(--role-hi)}
+  .bb-logo{display:flex;align-items:center}
+  .bb-logo img{display:block;object-fit:contain}
+  .logo-white{filter:brightness(0) invert(1)}
+  .bb-statement{font-family:var(--body);font-weight:600;font-size:44px;line-height:1.16;letter-spacing:-0.01em;color:var(--on-brand);max-width:850px}
+  .bb-desc{font-family:var(--body);font-weight:400;font-size:26px;line-height:1.46;color:var(--desc-col);max-width:830px}
+  .bb-statement .hcw{font-family:var(--display);font-weight:700;font-size:0.94em;letter-spacing:-0.02em;white-space:nowrap}
+
+  .tl-logo{display:inline-flex;align-items:center;gap:0.34em;line-height:1;color:#fff}
+  .tl-logo .tl-mark{height:1.05em;width:auto;display:block}
+  .tl-logo .tl-mark path{fill:currentColor}
+  .lk-card{background:var(--lk-cream);border-radius:16px;padding:26px 40px;display:inline-flex}
+  .badge-circle{background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+  /* logo sizing (bigger) */
+  .tl-logo{font-size:98px}
+  .bb-logo .ee{height:108px}
+  .bb-logo .an{height:86px}
+  .bb-logo .mx{height:158px}
+  .bb-logo .lkw{height:142px}
+  .badge-circle{width:188px;height:188px}
+  .badge-circle img{width:158px;height:158px}
+
+  /* per-sponsor skins */
+  .sp.textlayer{--brand-grad:linear-gradient(160deg,#141d3a,#0c0c18 60%,#0a0a0e);--on-brand:#fff;--desc-col:rgba(226,212,188,0.74);--role-hi:#FBCF00}
+  .sp.logankatz{--brand-grad:linear-gradient(160deg,#8c0a20,#78081A 60%,#5c0414);--on-brand:#fff;--desc-col:rgba(255,255,255,0.78);--role-hi:#FBCF00}
+  .sp.extreme{--brand-grad:linear-gradient(160deg,#1a1014,#0A0A0E 62%,#050507);--on-brand:#fff;--desc-col:rgba(255,255,255,0.74);--role-hi:#FF2E78}
+  .sp.ananda{--brand-grad:linear-gradient(160deg,#357a57,#2E6E4D 60%,#1b4631);--on-brand:#fff;--desc-col:rgba(255,255,255,0.82);--role-hi:#EAF0E9}
+  .sp.mirepoix{--brand-grad:linear-gradient(160deg,#241b10,#16120c 60%,#0d0a07);--on-brand:#f3ecdd;--desc-col:rgba(243,236,221,0.72);--role-hi:#D8B255}
+  .sp.partnr{--brand-grad:linear-gradient(160deg,#13233f,#0C1626 60%,#070d18);--on-brand:#fff;--desc-col:rgba(255,255,255,0.76);--role-hi:#18C667}
+
+  .cap{width:calc(var(--slide-w)*var(--preview-scale));margin-top:2px;padding:18px 22px;background:rgba(28,20,16,0.55);border:1px solid rgba(226,212,188,0.12);border-radius:10px;color:var(--cream);font-family:var(--body)}
+  .cap .ck{font-family:var(--mono);font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--amber)}
+  .cap .cb{margin-top:10px;font-size:12px;line-height:1.55;white-space:pre-wrap;color:rgba(226,212,188,0.92)}
+
+  body.export{background:#fff}
+  body.export .stage,body.export .stage-header{all:unset}
+  body.export .stage-header,body.export .slide-label,body.export .cap{display:none!important}
+  body.export .stage{padding:0;gap:0;display:block}
+  body.export .deck{display:block}
+  body.export .slide-wrap{display:none}
+  body.export .slide-wrap.show{display:block}
+  body.export .slide-frame{width:1080px;height:1440px;box-shadow:none}
+  body.export .slide{transform:none}
+</style>
+</head>
+<body>
+<div class="stage">
+  <header class="stage-header">
+    <div class="kicker">Sponsor share assets · for sponsors to post</div>
+    <h1>Sponsor Posts</h1>
+    <p>One post per sponsor for them to share on their own channels. Same Hacker Cottage hero photo, each skinned in the sponsor’s brand, with a one-line description so their audience knows what Hacker Cottage is.</p>
+  </header>
+  <div class="deck">
+    <div class="slide-wrap" data-id="sp-textlayer">
+      <div class="slide-frame"><div class="slide sp textlayer"><div class="brandblock"><div class="bb-rolelabel">Gold Sponsor</div><div class="bb-logo"><span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span></div><div class="bb-statement">We’re a proud sponsor of <span class="hcw">Hacker Cottage Weekend</span>.</div><div class="bb-desc">Hacker Cottage Weekend brings 22 of Canada’s top AI builders to a lakeside chalet to build, demo, and ship in one weekend.</div></div><div class="photo"><div class="hc-cap"><div class="dt">Aug 28–31, 2026 · St-Sauveur, QC</div><div class="hosted">Hosted by AGI Ventures Canada</div></div></div></div></div>
+      <div class="slide-label">TextLayer</div>
+      <div class="cap"><div class="ck">Caption · TextLayer’s feed</div><div class="cb">We’re a proud sponsor of Hacker Cottage Weekend (Aug 28–31, 2026 · St-Sauveur, QC), where 22 of Canada’s top AI builders gather at a lakeside chalet to build and ship in one weekend.
+
+TextLayer builds production-grade AI for the enterprise. We’re glad to back the builders. Come find us on the unconference stage.
+
+textlayer.ai
+
+Apply at hackercottage.com. Deadline July 15th.</div></div>
+    </div>
+    <div class="slide-wrap" data-id="sp-logankatz">
+      <div class="slide-frame"><div class="slide sp logankatz"><div class="brandblock"><div class="bb-rolelabel">Silver Sponsor</div><div class="bb-logo"><img class="lkw" src="assets/logankatz-white.png" alt="Logan Katz"/></div><div class="bb-statement">We’re a proud sponsor of <span class="hcw">Hacker Cottage Weekend</span>.</div><div class="bb-desc">Hacker Cottage Weekend brings 22 of Canada’s top AI builders to a lakeside chalet to build, demo, and ship in one weekend.</div></div><div class="photo"><div class="hc-cap"><div class="dt">Aug 28–31, 2026 · St-Sauveur, QC</div><div class="hosted">Hosted by AGI Ventures Canada</div></div></div></div></div>
+      <div class="slide-label">Logan Katz</div>
+      <div class="cap"><div class="ck">Caption · Logan Katz’s feed</div><div class="cb">Logan Katz is a proud sponsor of Hacker Cottage Weekend (Aug 28–31, 2026 · St-Sauveur, QC), a weekend where 22 of Canada’s top AI builders gather at a lakeside chalet to build and ship.
+
+We handle the books so founders can focus on building. Thirty years of accounting, from Ottawa.
+
+logankatz.com
+
+Apply at hackercottage.com. Deadline July 15th.</div></div>
+    </div>
+    <div class="slide-wrap" data-id="sp-extreme">
+      <div class="slide-frame"><div class="slide sp extreme"><div class="brandblock"><div class="bb-rolelabel">Closing Party Sponsor</div><div class="bb-logo"><img class="ee" src="assets/extreme-white.png" alt="Extreme Entertainment"/></div><div class="bb-statement">We’re a proud sponsor of <span class="hcw">Hacker Cottage Weekend</span>.</div><div class="bb-desc">Hacker Cottage Weekend brings 22 of Canada’s top AI builders to a lakeside chalet to build, demo, and ship in one weekend.</div></div><div class="photo"><div class="hc-cap"><div class="dt">Aug 28–31, 2026 · St-Sauveur, QC</div><div class="hosted">Hosted by AGI Ventures Canada</div></div></div></div></div>
+      <div class="slide-label">Extreme Entertainment</div>
+      <div class="cap"><div class="ck">Caption · Extreme Entertainment’s feed</div><div class="cb">Extreme Entertainment is the closing party sponsor of Hacker Cottage Weekend (Aug 30 · St-Sauveur, QC), where 22 of Canada’s top AI builders gather at a lakeside chalet to build and ship.
+
+Sound, lighting, and a proper send-off after demo day. 300+ events and counting.
+
+Apply at hackercottage.com. Deadline July 15th.</div></div>
+    </div>
+    <div class="slide-wrap" data-id="sp-ananda">
+      <div class="slide-frame"><div class="slide sp ananda"><div class="brandblock"><div class="bb-rolelabel">Drinks Sponsor</div><div class="bb-logo"><img class="an" src="assets/ananda-white.png" alt="Ananda Elixirs"/></div><div class="bb-statement">We’re a proud sponsor of <span class="hcw">Hacker Cottage Weekend</span>.</div><div class="bb-desc">Hacker Cottage Weekend brings 22 of Canada’s top AI builders to a lakeside chalet to build, demo, and ship in one weekend.</div></div><div class="photo"><div class="hc-cap"><div class="dt">Aug 28–31, 2026 · St-Sauveur, QC</div><div class="hosted">Hosted by AGI Ventures Canada</div></div></div></div></div>
+      <div class="slide-label">Ananda Elixirs</div>
+      <div class="cap"><div class="ck">Caption · Ananda Elixirs’s feed</div><div class="cb">Ananda Elixirs is the drinks sponsor of Hacker Cottage Weekend (Aug 28–31, 2026 · St-Sauveur, QC), where 22 of Canada’s top AI builders gather at a lakeside chalet to build and ship.
+
+Zero-sugar functional sodas to keep the builders going all weekend. Every attendee gets 20% off.
+
+Apply at hackercottage.com. Deadline July 15th.</div></div>
+    </div>
+    <div class="slide-wrap" data-id="sp-mirepoix">
+      <div class="slide-frame"><div class="slide sp mirepoix"><div class="brandblock"><div class="bb-rolelabel">Food Sponsor</div><div class="bb-logo"><img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur"/></div><div class="bb-statement">We’re a proud sponsor of <span class="hcw">Hacker Cottage Weekend</span>.</div><div class="bb-desc">Hacker Cottage Weekend brings 22 of Canada’s top AI builders to a lakeside chalet to build, demo, and ship in one weekend.</div></div><div class="photo"><div class="hc-cap"><div class="dt">Aug 28–31, 2026 · St-Sauveur, QC</div><div class="hosted">Hosted by AGI Ventures Canada</div></div></div></div></div>
+      <div class="slide-label">Mirepoix Traiteur</div>
+      <div class="cap"><div class="ck">Caption · Mirepoix Traiteur’s feed</div><div class="cb">Mirepoix Traiteur is the food sponsor of Hacker Cottage Weekend (Aug 28–31, 2026 · St-Sauveur, QC), where 22 of Canada’s top AI builders gather at a lakeside chalet to build and ship.
+
+Generous French cooking for a weekend of builders, made here in the Laurentians.
+
+mirepoixtraiteur.com
+
+Apply at hackercottage.com. Deadline July 15th.</div></div>
+    </div>
+    <div class="slide-wrap" data-id="sp-partnr">
+      <div class="slide-frame"><div class="slide sp partnr"><div class="brandblock"><div class="bb-rolelabel">Marketing &amp; Merch Sponsor</div><div class="bb-logo"><span class="badge-circle"><img src="assets/partnr.png" alt="Partnr Media"/></span></div><div class="bb-statement">We’re a proud sponsor of <span class="hcw">Hacker Cottage Weekend</span>.</div><div class="bb-desc">Hacker Cottage Weekend brings 22 of Canada’s top AI builders to a lakeside chalet to build, demo, and ship in one weekend.</div></div><div class="photo"><div class="hc-cap"><div class="dt">Aug 28–31, 2026 · St-Sauveur, QC</div><div class="hosted">Hosted by AGI Ventures Canada</div></div></div></div></div>
+      <div class="slide-label">Partnr Media</div>
+      <div class="cap"><div class="ck">Caption · Partnr Media’s feed</div><div class="cb">Partnr Media is the marketing and merch sponsor of Hacker Cottage Weekend (Aug 28–31, 2026 · St-Sauveur, QC), where 22 of Canada’s top AI builders gather at a lakeside chalet to build and ship.
+
+Proud to help tell the story of one of Canada’s best builder weekends.
+
+partnrmedia.com
+
+Apply at hackercottage.com. Deadline July 15th.</div></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function(){
+    var only=new URLSearchParams(location.search).get('only');
+    if(only){document.body.classList.add('export');var w=document.querySelector('.slide-wrap[data-id="'+only+'"]');if(w)w.classList.add('show');}
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hacker Cottage Weekend — Sponsor Social Posts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+  /* ─────────────────────────────────────────────
+     Design tokens — mirror posts/launch-carousel/index.html
+     ───────────────────────────────────────────── */
+  :root {
+    --ink: #1A1613;
+    --charcoal: #3D3530;
+    --stone: #9B9286;
+    --sand: #C4B49A;
+    --cream: #D6C6AB;
+    --ivory: #E2D4BC;
+    --amber: #C8923C;
+    --amber-light: #F0DFBE;
+    --forest: #3B7A57;
+    --rust: #A8472B;
+    --espresso: #1C1410;
+    --walnut: #2E2117;
+
+    --display: "Space Mono", ui-monospace, monospace;
+    --body: "DM Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+
+    /* ── Per-sponsor accent vars ── */
+    --tl-blue: #243BFF;       /* TextLayer */
+    --tl-blue-bright: #5468FF;
+    --tl-offwhite: #FAFAFA;
+    --tl-ink: #0A0A0A;
+
+    --lk-burgundy: #78081A;   /* Logan Katz */
+    --lk-gold: #FBCF00;
+    --lk-cream: #F3ECDD;
+
+    --ee-ink: #0A0A0E;        /* Extreme Entertainment */
+    --ee-neon: #FF1E6B;
+    --ee-cyan: #1FE3E3;
+
+    --an-green: #2E6E4D;      /* Ananda Elixirs */
+    --an-mist: #EAF0E9;
+
+    --mx-gold: #C9A24B;       /* Mirepoix Traiteur */
+    --mx-ink: #14110D;
+
+    --pm-navy: #0C1626;       /* Partnr Media */
+    --pm-green: #18C667;
+
+    --slide-w: 1080px;
+    --slide-h: 1440px;
+    --preview-scale: 0.46;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0e0a07; color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+
+  /* ─────────────────────────────────────────────
+     Preview stage
+     ───────────────────────────────────────────── */
+  .stage { min-height: 100vh; padding: 56px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 64px; }
+  .stage-header { text-align: center; color: var(--cream); max-width: 720px; }
+  .stage-header .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); opacity: 0.85; }
+  .stage-header h1 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 36px; margin-top: 14px; color: var(--ivory); }
+  .stage-header p { margin-top: 14px; font-size: 14px; color: rgba(226,212,188,0.7); line-height: 1.55; }
+
+  .section-head {
+    width: min(1100px, 100% - 48px);
+    border-top: 1px solid rgba(226,212,188,0.16);
+    padding-top: 22px;
+    margin-top: 12px;
+  }
+  .section-head .num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); }
+  .section-head h2 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 26px; color: var(--ivory); margin-top: 8px; }
+  .section-head p { font-size: 13px; color: rgba(226,212,188,0.6); margin-top: 6px; }
+
+  .deck { display: grid; grid-template-columns: repeat(2, auto); gap: 56px 40px; align-items: start; justify-items: center; }
+  @media (max-width: 1100px) { .deck { grid-template-columns: 1fr; } }
+
+  .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .slide-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(214,198,171,0.55); }
+
+  .slide-frame {
+    width: calc(var(--slide-w) * var(--preview-scale));
+    height: calc(var(--slide-h) * var(--preview-scale));
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+    background: var(--ivory);
+  }
+
+  /* ─────────────────────────────────────────────
+     The slide itself (1080×1440, scaled for preview)
+     ───────────────────────────────────────────── */
+  .slide {
+    width: var(--slide-w); height: var(--slide-h);
+    position: relative; overflow: hidden;
+    transform: scale(var(--preview-scale)); transform-origin: top left;
+    background: var(--ivory);
+  }
+  .slide.dark { background: var(--espresso); color: var(--ivory); }
+  .slide.cream { background: var(--cream); }
+
+  /* Grain overlay */
+  .slide::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.65'/></svg>");
+    opacity: 0.035; mix-blend-mode: multiply; z-index: 20;
+  }
+  .slide.dark::after { mix-blend-mode: screen; opacity: 0.05; }
+
+  .bg-img { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 1; }
+  .bg-overlay { position: absolute; inset: 0; z-index: 2; }
+
+  .content { position: relative; z-index: 5; width: 100%; height: 100%; padding: 96px; display: flex; flex-direction: column; }
+
+  /* Type primitives */
+  .eyebrow { font-family: var(--mono); font-size: 30px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--charcoal); font-weight: 500; }
+  .slide.dark .eyebrow, .slide.over-photo .eyebrow { color: rgba(226,212,188,0.72); }
+
+  .display { font-family: var(--display); font-style: italic; font-weight: 400; line-height: 1.0; letter-spacing: -0.015em; color: var(--ink); }
+  .slide.dark .display, .slide.over-photo .display { color: var(--ivory); }
+
+  .body-text { font-family: var(--body); font-size: 32px; line-height: 1.42; color: var(--charcoal); font-weight: 400; max-width: 820px; }
+  .slide.dark .body-text, .slide.over-photo .body-text { color: rgba(226,212,188,0.88); }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px; border-radius: 9999px;
+    border: 1.5px solid var(--sand); font-family: var(--mono); font-size: 18px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--charcoal); background: transparent; font-weight: 500;
+  }
+  .slide.dark .chip, .slide.over-photo .chip { border-color: rgba(226,212,188,0.28); color: var(--cream); }
+  .chip.amber { background: var(--amber); color: var(--ink); border-color: var(--amber); font-weight: 700; }
+
+  .hr { height: 1px; background: var(--sand); width: 100%; opacity: 0.7; }
+  .slide.dark .hr, .slide.over-photo .hr { background: rgba(226,212,188,0.18); opacity: 1; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 16px; padding: 30px 52px; border-radius: 9999px;
+    background: var(--amber); color: var(--ink); font-family: var(--mono); font-size: 26px; letter-spacing: 0.12em;
+    text-transform: uppercase; font-weight: 700; text-decoration: none;
+  }
+  .btn .arrow { font-family: var(--display); font-size: 32px; font-style: normal; }
+
+  /* ─────────────────────────────────────────────
+     TextLayer recreated logo (inline SVG mark + Inter wordmark)
+     colour follows currentColor / set via .tl-logo color
+     ───────────────────────────────────────────── */
+  .tl-logo { display: inline-flex; align-items: center; gap: 0.34em; line-height: 1; }
+  .tl-logo .tl-mark { height: 1.05em; width: auto; display: block; }
+  .tl-logo .tl-mark path { fill: currentColor; }
+
+  /* generic sponsor logo image treatment */
+  .logo-img { display: block; width: auto; object-fit: contain; }
+  .logo-white { filter: brightness(0) invert(1); }     /* force dark logos → white */
+  .logo-black { filter: brightness(0); }               /* force white logos → black */
+
+  /* Partnr wordmark — recreated (crisp on any dark/light ground) */
+  .pm-logo { font-family: var(--body); font-weight: 700; letter-spacing: -0.03em; line-height: 1; display: inline-flex; align-items: baseline; }
+  .pm-logo .d { color: var(--pm-green); }
+
+  /* ════════════════════════════════════════════
+     TEXTLAYER A — "The Question" (dark, blue-injected)
+     ════════════════════════════════════════════ */
+  /* ── A1 "The Hero Mark" — centered, giant logo hero ── */
+  .s-tlA { background: radial-gradient(115% 85% at 50% 33%, #16204a 0%, #0d0d18 50%, #0a0a0e 100%); color: var(--ivory); }
+  .s-tlA .content { justify-content: flex-start; align-items: center; text-align: center; padding-top: 104px; padding-bottom: 104px; }
+  .s-tlA .top-band { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; }
+  .s-tlA .eyebrow { color: rgba(226,212,188,0.74); letter-spacing: 0.3em; }
+  .s-tlA .chip.amber { font-size: 19px; letter-spacing: 0.2em; padding: 12px 28px; }
+  .s-tlA .mid { display: flex; flex-direction: column; align-items: center; gap: 56px; }
+  .s-tlA .below { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+  .s-tlA .tl-logo { color: #fff; font-size: 132px; justify-content: center; filter: drop-shadow(0 0 78px rgba(36,59,255,0.5)); }
+  .s-tlA .q { font-family: var(--display); font-style: italic; font-size: 56px; line-height: 1.2; letter-spacing: -0.01em; color: #fff; max-width: 880px; }
+  .s-tlA .q .hot { color: var(--tl-blue-bright); position: relative; white-space: nowrap; }
+  .s-tlA .q .hot::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0.02em; height: 4px; background: var(--tl-blue); border-radius: 4px; }
+  .s-tlA .attrib { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .s-tlA .attrib .rule { width: 64px; height: 1px; background: rgba(255,255,255,0.28); }
+  .s-tlA .attrib .src { font-family: var(--mono); font-size: 21px; letter-spacing: 0.08em; color: var(--tl-blue-bright); }
+  .s-tlA .valueline { font-family: var(--body); font-size: 27px; line-height: 1.45; color: rgba(226,212,188,0.8); max-width: 720px; }
+  .s-tlA .foot { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .s-tlA .foot .ev { font-family: var(--mono); font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(226,212,188,0.6); }
+  .s-tlA .foot .url { color: #fff; font-weight: 700; }
+
+  /* ── A2 "The Question" — question-led, logo as the sign-off ── */
+  .s-tlA2 { background: radial-gradient(120% 90% at 78% 6%, #131a3a 0%, #0c0c16 46%, #0a0a0e 100%); color: var(--ivory); }
+  .s-tlA2 .glow { position: absolute; inset: 0; z-index: 1; background: radial-gradient(58% 40% at 50% 70%, rgba(36,59,255,0.18) 0%, transparent 70%); }
+  .s-tlA2 .content { position: relative; z-index: 5; justify-content: space-between; }
+  .s-tlA2 .brand { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+  .s-tlA2 .brand .eyebrow { color: rgba(226,212,188,0.74); }
+  .s-tlA2 .chip.amber { font-size: 19px; letter-spacing: 0.2em; padding: 12px 28px; flex-shrink: 0; }
+  .s-tlA2 .q { font-family: var(--display); font-style: italic; font-size: 86px; line-height: 1.16; letter-spacing: -0.02em; color: #fff; }
+  .s-tlA2 .q .hot { color: var(--tl-blue-bright); position: relative; white-space: nowrap; }
+  .s-tlA2 .q .hot::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0.04em; height: 5px; background: var(--tl-blue); border-radius: 4px; }
+  .s-tlA2 .reveal { display: flex; flex-direction: column; align-items: center; gap: 34px; }
+  .s-tlA2 .reveal .tick { width: 92px; height: 6px; background: var(--tl-blue); border-radius: 4px; }
+  .s-tlA2 .reveal .tl-logo { color: #fff; font-size: 110px; justify-content: center; filter: drop-shadow(0 0 70px rgba(36,59,255,0.45)); }
+  .s-tlA2 .reveal .whose { font-family: var(--mono); font-size: 21px; letter-spacing: 0.08em; color: rgba(226,212,188,0.7); }
+  .s-tlA2 .reveal .whose b { color: var(--tl-blue-bright); font-weight: 500; }
+  .s-tlA2 .foot { display: flex; justify-content: center; }
+  .s-tlA2 .foot .ev { font-family: var(--mono); font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(226,212,188,0.6); }
+
+
+  /* ════ ALL-SPONSORS — centered tiered wall (shared) ════ */
+  .s-all1 .content, .s-all2 .content { align-items: center; text-align: center; justify-content: flex-start; }
+  .s-all1 .sub-date, .s-all2 .sub-date { font-family: var(--mono); font-size: 19px; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 16px; }
+  .s-all1 .sub-date { color: rgba(226,212,188,0.5); }
+  .s-all2 .sub-date { color: var(--stone); }
+  .s-all1 .headline, .s-all2 .headline { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 94px; line-height: 1.0; letter-spacing: -0.02em; margin-top: 26px; max-width: 900px; }
+  .s-all1 .wall, .s-all2 .wall { width: 100%; margin: auto 0; display: flex; flex-direction: column; gap: 52px; }
+  .s-all1 .tgroup, .s-all2 .tgroup { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+  .s-all1 .tlabel, .s-all2 .tlabel { display: flex; align-items: center; justify-content: center; gap: 26px; width: 100%; font-family: var(--mono); font-weight: 700; font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; }
+  .s-all1 .tlabel::before, .s-all1 .tlabel::after, .s-all2 .tlabel::before, .s-all2 .tlabel::after { content: ""; height: 1px; flex: 1; max-width: 230px; }
+  .s-all1 .logos, .s-all2 .logos { display: flex; align-items: center; justify-content: center; gap: 64px; flex-wrap: wrap; }
+  .s-all1 .rest .logos, .s-all2 .rest .logos { gap: 50px; flex-wrap: nowrap; }
+  .s-all1 .gold .tl-logo, .s-all2 .gold .tl-logo { font-size: 108px; }
+  .s-all1 .silver .lk, .s-all2 .silver .lk { height: 92px; }
+  .s-all1 .rest .logos img, .s-all2 .rest .logos img { max-height: 52px; max-width: 188px; object-fit: contain; }
+  .s-all1 .rest .logos .mx, .s-all2 .rest .logos .mx { max-height: 86px; }
+  .s-all1 .rest .pm-logo, .s-all2 .rest .pm-logo { font-family: var(--body); font-weight: 700; font-size: 42px; letter-spacing: -0.03em; white-space: nowrap; }
+  .s-all1 .rest .pm-logo .d, .s-all2 .rest .pm-logo .d { color: var(--pm-green); }
+  .s-all1 .foot, .s-all2 .foot { font-family: var(--mono); font-size: 18px; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 8px; }
+
+  /* dark theme */
+  .s-all1 { background: radial-gradient(130% 100% at 50% 0%, #241a12 0%, var(--espresso) 55%, #140e0a 100%); color: var(--ivory); }
+  .s-all1 .eyebrow { color: rgba(226,212,188,0.62); }
+  .s-all1 .tlabel { color: var(--amber); }
+  .s-all1 .tlabel::before, .s-all1 .tlabel::after { background: rgba(226,212,188,0.22); }
+  .s-all1 .gold .tl-logo { color: #fff; }
+  .s-all1 .rest .pm-logo { color: #fff; }
+  .s-all1 .foot { color: rgba(226,212,188,0.55); }
+
+  /* ════════════════════════════════════════════
+     Caption panel (per slide)
+     ════════════════════════════════════════════ */
+  .cap {
+    width: calc(var(--slide-w) * var(--preview-scale));
+    margin-top: 4px; padding: 22px 26px;
+    background: rgba(28,20,16,0.55); border: 1px solid rgba(226,212,188,0.12);
+    border-radius: 10px; color: var(--cream); font-family: var(--body);
+  }
+  .cap .ck { font-family: var(--mono); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--amber); }
+  .cap .cb { margin-top: 12px; font-size: 12.5px; line-height: 1.6; white-space: pre-wrap; color: rgba(226,212,188,0.92); max-height: 200px; overflow: auto; }
+
+  /* ════════════════════════════════════════════
+     Export mode  (?only=<id>)  — isolate one slide at full size
+     ════════════════════════════════════════════ */
+  body.export { background: #fff; }
+  body.export .stage, body.export .stage > *:not(.deck) { all: unset; }
+  body.export .stage-header, body.export .section-head, body.export .slide-label, body.export .cap, body.export .no-print { display: none !important; }
+  body.export .stage { padding: 0; gap: 0; display: block; }
+  body.export .deck { display: block; }
+  body.export .slide-wrap { display: none; }
+  body.export .slide-wrap.show { display: block; }
+  body.export .slide-frame { width: 1080px; height: 1440px; box-shadow: none; }
+  body.export .slide { transform: none; }
+
+  @media print {
+    @page { size: 1080px 1440px; margin: 0; }
+    html, body { background: #fff; }
+    .stage-header, .section-head, .cap, .slide-label, .no-print { display: none !important; }
+    .stage { padding: 0 !important; gap: 0 !important; display: block !important; }
+    .deck { display: block; gap: 0; }
+    .slide-wrap { margin: 0; padding: 0; }
+    .slide-frame { width: 1080px; height: 1440px; box-shadow: none; page-break-after: always; break-after: page; }
+    .slide { transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <header class="stage-header">
+    <div class="kicker">Sponsor social posts · Instagram + LinkedIn</div>
+    <h1>Hacker Cottage Weekend — Sponsor Posts</h1>
+    <p>The two posts Hacker Cottage publishes: the TextLayer Gold announcement and the all-sponsors wall. 1080×1440 (3:4), shown at 46%. The per-sponsor share assets live in <code>sponsors-share.html</code>; captions sit under each slide and in <code>descriptions.md</code>.</p>
+  </header>
+
+  <div class="deck">
+
+  <!-- ══════════════ TEXTLAYER — GOLD ══════════════ -->
+  <div class="section-head no-print" style="grid-column:1 / -1;">
+    <div class="num">01 · TextLayer — Gold sponsor</div>
+    <h2>Two versions — the welcome vs. the question</h2>
+  </div>
+
+  <!-- TEXTLAYER A -->
+  <div class="slide-wrap" data-id="textlayer-A">
+    <div class="slide-frame"><div class="slide s-tlA">
+      <div class="content">
+        <div class="top-band">
+          <div class="eyebrow">Hacker Cottage Weekend</div>
+          <span class="chip amber">Gold Sponsor</span>
+        </div>
+        <div class="mid">
+          <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
+          <div class="q">&ldquo;How do you build AI you can <span class="hot">actually&nbsp;trust?</span>&rdquo;</div>
+          <div class="attrib">
+            <div class="rule"></div>
+            <div class="src">— TextLayer’s question for this year’s attendees</div>
+          </div>
+        </div>
+        <div class="below">
+          <div class="foot">
+            <div class="ev">Hosted by AGI Ventures Canada</div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <div class="slide-label">Version 1 · The welcome</div>
+    <div class="cap"><div class="ck">Caption · IG + LinkedIn</div><div class="cb">How do you build AI you can actually trust?
+
+That is TextLayer’s question for this year’s Hacker Cottage attendees. How would you answer it?
+
+We are proud to welcome TextLayer (textlayer.ai) as the Gold Sponsor of Hacker Cottage Weekend. They build production-grade AI for the enterprise: guardrails, observability, and honest evals. It is the work that makes AI reliable enough to ship and trustworthy enough to keep.
+
+Hacker Cottage Weekend brings 22 of Canada’s best AI builders to a lakeside chalet to build and ship over one weekend. By Sunday, every project ships, and TextLayer’s whole business is making sure what ships can be trusted.
+
+Think in years. Ship this weekend.
+Hacker Cottage Weekend · Aug 28–31, 2026 · St-Sauveur, QC · Hosted by AGI Ventures Canada
+
+Apply at hackercottage.com. Deadline July 15th.</div></div>
+  </div>
+
+  <!-- TEXTLAYER A2 — question-led -->
+  <div class="slide-wrap" data-id="textlayer-A2">
+    <div class="slide-frame"><div class="slide s-tlA2">
+      <div class="glow"></div>
+      <div class="content">
+        <div class="brand">
+          <div class="eyebrow">Hacker Cottage Weekend</div>
+          <span class="chip amber">Gold Sponsor</span>
+        </div>
+        <div class="q">&ldquo;How do you build<br/>AI you can<br/><span class="hot">actually&nbsp;trust?</span>&rdquo;</div>
+        <div class="reveal">
+          <div class="tick"></div>
+          <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
+          <div class="whose"><b>TextLayer’s</b> question for this year’s attendees</div>
+        </div>
+        <div class="foot">
+          <div class="ev">Aug 28–31, 2026 · St-Sauveur, QC</div>
+        </div>
+      </div>
+    </div></div>
+    <div class="slide-label">Version 2 · The question</div>
+    <div class="cap"><div class="ck">Caption · IG + LinkedIn</div><div class="cb">How do you build AI you can actually trust?
+
+That is the question TextLayer, our Gold Sponsor, is bringing to this year’s Hacker Cottage attendees. How would you answer it?
+
+TextLayer builds production-grade AI for the enterprise: guardrails, observability, and honest evals. It is the work that makes AI reliable enough to ship and trustworthy enough to keep.
+
+Hacker Cottage Weekend brings 22 of Canada’s best AI builders to a lakeside chalet to build and ship over one weekend. By Sunday, every project ships.
+
+Think in years. Ship this weekend.
+Hacker Cottage Weekend · Aug 28–31, 2026 · St-Sauveur, QC · Hosted by AGI Ventures Canada
+
+Apply at hackercottage.com. Deadline July 15th.</div></div>
+  </div>
+
+  <!-- ══════════════ ALL-SPONSORS ══════════════ -->
+  <div class="section-head no-print" style="grid-column:1 / -1;">
+    <div class="num">02 · All sponsors</div>
+    <h2>The sponsor wall</h2>
+  </div>
+
+  <!-- ALL-SPONSORS 1 -->
+  <div class="slide-wrap" data-id="all-sponsors-1">
+    <div class="slide-frame"><div class="slide s-all1 dark">
+      <div class="content">
+        <div class="eyebrow">Hacker Cottage Weekend</div>
+        <div class="sub-date">Aug 28–31, 2026 · St-Sauveur, QC</div>
+        <div class="headline">Thank you to our sponsors.</div>
+        <div class="wall">
+          <div class="tgroup gold">
+            <div class="tlabel"><span>Gold</span></div>
+            <div class="logos"><span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span></div>
+          </div>
+          <div class="tgroup silver">
+            <div class="tlabel"><span>Silver</span></div>
+            <div class="logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz"/></div>
+          </div>
+          <div class="tgroup rest">
+            <div class="tlabel"><span>Supporting Sponsors</span></div>
+            <div class="logos">
+              <img src="assets/extreme-white.png" alt="Extreme Entertainment"/>
+              <img src="assets/ananda-white.png" alt="Ananda Elixirs"/>
+              <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur"/>
+              <span class="pm-logo">Partnr<span class="d">.</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="foot">Hosted by AGI Ventures Canada</div>
+      </div>
+    </div></div>
+    <div class="slide-label">All sponsors · The wall</div>
+    <div class="cap"><div class="ck">Caption · IG + LinkedIn</div><div class="cb">Thank you to our sponsors.
+
+Hacker Cottage Weekend brings 22 of Canada’s best AI builders to a lakeside chalet for one weekend. These are the companies backing them.
+
+Gold: TextLayer
+Silver: Logan Katz
+Supporting Sponsors: Extreme Entertainment · Ananda Elixirs · Mirepoix Traiteur · Partnr Media
+
+Hosted by AGI Ventures Canada. Think in years, ship this weekend.
+
+Apply at hackercottage.com. Deadline July 15th.</div></div>
+  </div>
+
+
+  </div>
+</div>
+
+<script>
+  // Export mode: ?only=<data-id> isolates one slide at full size.
+  (function () {
+    var params = new URLSearchParams(location.search);
+    var only = params.get('only');
+    if (only) {
+      document.body.classList.add('export');
+      var wrap = document.querySelector('.slide-wrap[data-id="' + only + '"]');
+      if (wrap) wrap.classList.add('show');
+    }
+  })();
+</script>
+</body>
+</html>
