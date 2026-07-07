@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hacker Cottage Weekend — Merch Concepts R1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --espresso: #1C1410;
+    --walnut: #2E2117;
+    --cream: #D6C6AB;
+    --ivory: #E2D4BC;
+    --amber: #C8923C;
+    --rust: #A8472B;
+    --bg: #120E0A;
+    --card: #201710;
+    --line: rgba(214,198,171,0.14);
+    --display: 'Space Mono', monospace;
+    --body: 'DM Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ivory); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 56px 24px 80px; }
+
+  /* ── header ── */
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--amber);
+  }
+  h1 {
+    font-family: var(--display); font-style: italic; font-weight: 400;
+    font-size: clamp(30px, 5vw, 44px); margin-top: 14px; color: var(--ivory);
+  }
+  .intro { margin-top: 14px; max-width: 620px; font-size: 15px; line-height: 1.6; color: rgba(226,212,188,0.72); }
+
+  /* ── spec strip ── */
+  .specs {
+    margin-top: 32px; border: 1px solid var(--line); border-radius: 10px;
+    display: grid; grid-template-columns: repeat(4, 1fr); overflow: hidden;
+  }
+  .spec { padding: 16px 18px; border-left: 1px solid var(--line); }
+  .spec:first-child { border-left: none; }
+  .spec .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(226,212,188,0.5); }
+  .spec .v { margin-top: 7px; font-size: 13.5px; line-height: 1.45; color: var(--ivory); }
+  .threads { display: flex; gap: 10px; margin-top: 9px; flex-wrap: wrap; }
+  .thread { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10.5px; color: rgba(226,212,188,0.75); }
+  .dot { width: 13px; height: 13px; border-radius: 50%; border: 1px solid rgba(226,212,188,0.25); }
+
+  /* ── sections ── */
+  .section { margin-top: 64px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+  .sec-head .num { font-family: var(--mono); font-size: 12px; color: var(--amber); letter-spacing: 0.15em; }
+  .sec-head h2 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 24px; }
+  .sec-head .note { margin-left: auto; font-family: var(--mono); font-size: 11px; color: rgba(226,212,188,0.45); letter-spacing: 0.06em; text-align: right; }
+  .sec-blurb { margin-top: 12px; font-size: 14px; color: rgba(226,212,188,0.6); max-width: 640px; line-height: 1.55; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 24px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } .specs { grid-template-columns: 1fr 1fr; } .spec { border-top: 1px solid var(--line); } }
+
+  /* ── cards ── */
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+
+  .mock { position: relative; aspect-ratio: 1212 / 690; overflow: hidden; background: #fff; }
+  .mock img { position: absolute; inset: 0; width: 100%; height: auto; display: block; }
+  .art {
+    position: absolute; transform-origin: center;
+    mix-blend-mode: multiply; opacity: 0.94;
+    filter: drop-shadow(0.6px 0.9px 0px rgba(60,45,30,0.28)) drop-shadow(-0.4px -0.4px 0.3px rgba(255,255,255,0.5));
+  }
+  .art svg { width: 100%; height: auto; display: block; }
+  /* light thread on dark fabric: normal blend */
+  .art.light { mix-blend-mode: normal; opacity: 0.97; filter: drop-shadow(0.7px 1px 0.4px rgba(0,0,0,0.5)); }
+
+  .swatchrow { display: flex; border-top: 1px solid var(--line); }
+  .swatch {
+    flex: 0 0 44%; display: flex; align-items: center; justify-content: center; padding: 18px 14px;
+    background:
+      repeating-linear-gradient(63deg, rgba(120,100,75,0.06) 0 1.5px, rgba(255,255,255,0.05) 1.5px 3px),
+      #D6C6AB;
+    min-height: 130px;
+  }
+  .swatch.dark {
+    background:
+      repeating-linear-gradient(63deg, rgba(0,0,0,0.16) 0 1.5px, rgba(255,255,255,0.05) 1.5px 3px),
+      #2A1E14;
+  }
+  .swatch svg { width: 82%; height: auto; max-height: 110px; }
+  .meta { padding: 16px 18px 18px; flex: 1; }
+  .meta h3 { font-family: var(--display); font-weight: 700; font-size: 15.5px; color: var(--ivory); letter-spacing: 0.01em; }
+  .meta p { margin-top: 7px; font-size: 13px; line-height: 1.5; color: rgba(226,212,188,0.65); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
+  .chip {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; color: rgba(226,212,188,0.7);
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .chip .dot { width: 8px; height: 8px; }
+  .chip.flag { border-color: rgba(168,71,43,0.5); color: #d08a6e; }
+
+  /* swatch-only cards (back placements, tumbler) */
+  .swatch.hero { flex: 1; min-height: 210px; }
+  .swatch.hero svg { max-height: 170px; width: 72%; }
+
+  /* ── tumbler ── */
+  .tumbler-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 24px; }
+  @media (max-width: 760px) { .tumbler-grid { grid-template-columns: 1fr; } }
+  .tumbler-stage { display: flex; align-items: center; justify-content: center; padding: 26px 10px 20px; background: linear-gradient(180deg, #191209, #14100C); }
+  .tumbler-stage svg { height: 300px; width: auto; }
+
+  footer {
+    margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(226,212,188,0.45);
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ design symbols (single source of truth) ════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+
+    <!-- 1 · the mark: crossed-gable A-frame, cursor door -->
+    <symbol id="d-mark" viewBox="0 0 200 160">
+      <g stroke="#1C1410" stroke-width="10" stroke-linecap="round" fill="none">
+        <line x1="34" y1="138" x2="113" y2="10"/>
+        <line x1="166" y1="138" x2="87" y2="10"/>
+        <line x1="16" y1="138" x2="184" y2="138"/>
+      </g>
+      <rect x="87" y="92" width="26" height="46" rx="2" fill="#C8923C"/>
+    </symbol>
+
+    <!-- 2 · wordmark -->
+    <symbol id="d-wordmark" viewBox="0 0 300 130">
+      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">HACKER</text>
+      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">COTTAGE</text>
+      <line x1="52" y1="103" x2="112" y2="103" stroke="#C8923C" stroke-width="3"/>
+      <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#1C1410">WEEKEND</text>
+      <line x1="188" y1="103" x2="248" y2="103" stroke="#C8923C" stroke-width="3"/>
+    </symbol>
+
+    <!-- 3 · prompt -->
+    <symbol id="d-prompt" viewBox="0 0 320 40">
+      <text x="0" y="30" font-family="'Space Mono',monospace" font-weight="400" font-size="34" fill="#1C1410">hacker_cottage</text>
+      <rect x="292" y="4" width="17" height="30" fill="#C8923C"/>
+    </symbol>
+
+    <!-- 4 · back arch: hackercottage.com -->
+    <symbol id="d-backarch" viewBox="0 0 260 70">
+      <path id="archpath" d="M 10 60 Q 130 20 250 60" fill="none"/>
+      <text font-family="'Space Mono',monospace" font-weight="400" font-size="21" fill="#1C1410">
+        <textPath href="#archpath" startOffset="50%" text-anchor="middle">hackercottage.com</textPath>
+      </text>
+    </symbol>
+
+    <!-- 5 · think in years -->
+    <symbol id="d-think" viewBox="0 0 340 84">
+      <text x="170" y="30" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="26" letter-spacing="1" fill="#1C1410">THINK IN YEARS.</text>
+      <text x="170" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-style="italic" font-size="30" fill="#C8923C">SHIP THIS WEEKEND.</text>
+    </symbol>
+
+    <!-- 6 · badge -->
+    <symbol id="d-badge" viewBox="0 0 220 220">
+      <circle cx="110" cy="110" r="104" fill="none" stroke="#1C1410" stroke-width="5"/>
+      <circle cx="110" cy="110" r="70" fill="none" stroke="#1C1410" stroke-width="2.5"/>
+      <path id="badgetop" d="M 27.3 140.1 A 88 88 0 1 1 192.7 140.1" fill="none"/>
+      <text font-family="'Space Mono',monospace" font-weight="700" font-size="20" letter-spacing="2.4" fill="#1C1410">
+        <textPath href="#badgetop" startOffset="50%" text-anchor="middle">HACKER COTTAGE WEEKEND</textPath>
+      </text>
+      <rect x="104" y="191" width="12" height="12" transform="rotate(45 110 197)" fill="#C8923C"/>
+      <!-- center scene -->
+      <g stroke="#1C1410" stroke-width="5.5" stroke-linecap="round" fill="none">
+        <line x1="84" y1="128" x2="118" y2="72"/>
+        <line x1="140" y1="128" x2="106" y2="72"/>
+      </g>
+      <rect x="106" y="108" width="12" height="20" rx="1" fill="#C8923C"/>
+      <g stroke="#A8472B" stroke-width="4" stroke-linecap="round" fill="none">
+        <path d="M 62 128 L 70 110 L 78 128"/>
+        <path d="M 146 128 L 154 110 L 162 128"/>
+      </g>
+      <line x1="50" y1="128" x2="174" y2="128" stroke="#1C1410" stroke-width="4" stroke-linecap="round"/>
+      <text x="110" y="156" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="14" letter-spacing="1.5" fill="#1C1410">AUG 28–31</text>
+    </symbol>
+
+    <!-- 7 · lockup: mark + stacked wordmark -->
+    <symbol id="d-lockup" viewBox="0 0 320 110">
+      <g stroke="#1C1410" stroke-width="8" stroke-linecap="round" fill="none">
+        <line x1="20" y1="92" x2="76" y2="10"/>
+        <line x1="116" y1="92" x2="60" y2="10"/>
+        <line x1="8" y1="92" x2="128" y2="92"/>
+      </g>
+      <rect x="60" y="64" width="17" height="28" rx="1.5" fill="#C8923C"/>
+      <text x="148" y="46" font-family="'Space Mono',monospace" font-weight="700" font-size="34" letter-spacing="1" fill="#1C1410">HACKER</text>
+      <text x="148" y="84" font-family="'Space Mono',monospace" font-weight="700" font-size="34" letter-spacing="1" fill="#1C1410">COTTAGE</text>
+    </symbol>
+
+    <!-- 8 · self-closing tag -->
+    <symbol id="d-tag" viewBox="0 0 240 90">
+      <text x="10" y="68" font-family="'Space Mono',monospace" font-weight="700" font-size="64" fill="#1C1410">&lt;</text>
+      <g stroke="#C8923C" stroke-width="7" stroke-linecap="round" fill="none">
+        <line x1="66" y1="66" x2="103" y2="8"/>
+        <line x1="128" y1="66" x2="91" y2="8"/>
+        <line x1="58" y1="66" x2="136" y2="66"/>
+      </g>
+      <text x="146" y="68" font-family="'Space Mono',monospace" font-weight="700" font-size="64" fill="#1C1410">/&gt;</text>
+    </symbol>
+
+    <!-- 9 · wifi pine -->
+    <symbol id="d-wifipine" viewBox="0 0 140 150">
+      <circle cx="70" cy="16" r="7" fill="#C8923C"/>
+      <g stroke="#1C1410" stroke-width="9" stroke-linecap="round" fill="none">
+        <path d="M 48 52 A 31 31 0 0 1 92 52"/>
+        <path d="M 34 82 A 51 51 0 0 1 106 82"/>
+        <path d="M 20 112 A 71 71 0 0 1 120 112"/>
+      </g>
+      <rect x="61" y="112" width="18" height="26" rx="2" fill="#1C1410"/>
+    </symbol>
+
+    <!-- 10 · git cabin -->
+    <symbol id="d-git" viewBox="0 0 320 110">
+      <g stroke="#1C1410" stroke-width="6" stroke-linecap="round" fill="none">
+        <line x1="20" y1="86" x2="300" y2="86"/>
+        <path d="M 92 86 C 118 86 118 38 148 38 L 172 38 C 202 38 202 86 228 86" />
+      </g>
+      <circle cx="52" cy="86" r="10" fill="#1C1410"/>
+      <circle cx="160" cy="86" r="10" fill="#1C1410"/>
+      <circle cx="268" cy="86" r="10" fill="#1C1410"/>
+      <g stroke="#C8923C" stroke-width="5.5" stroke-linecap="round" fill="none">
+        <line x1="143" y1="52" x2="160" y2="24"/>
+        <line x1="177" y1="52" x2="160" y2="24"/>
+        <line x1="138" y1="52" x2="182" y2="52"/>
+      </g>
+    </symbol>
+
+    <!-- 11 · one of 22 -->
+    <symbol id="d-numbered" viewBox="0 0 200 80">
+      <text x="100" y="52" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="52" fill="#1C1410">07<tspan fill="#C8923C">/</tspan>22</text>
+      <text x="100" y="72" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="12" letter-spacing="4" fill="#1C1410">ONE OF TWENTY-TWO</text>
+    </symbol>
+
+    <!-- 12 · ascii cottage -->
+    <symbol id="d-ascii" viewBox="0 0 170 110">
+      <text font-family="'Space Mono',monospace" font-weight="700" font-size="30" fill="#1C1410">
+        <tspan x="49" y="30">/\</tspan>
+        <tspan x="31" y="62">/</tspan><tspan x="85" y="62">\</tspan>
+        <tspan x="13" y="94">/_</tspan><tspan x="49" y="94" fill="#C8923C">[]</tspan><tspan x="85" y="94">_\</tspan>
+      </text>
+    </symbol>
+
+    <!-- 13 · loading bar -->
+    <symbol id="d-loading" viewBox="0 0 320 60">
+      <text x="0" y="40" font-family="'Space Mono',monospace" font-weight="400" font-size="30" fill="#1C1410">[</text>
+      <g fill="#C8923C">
+        <rect x="22" y="16" width="16" height="26"/><rect x="42" y="16" width="16" height="26"/>
+        <rect x="62" y="16" width="16" height="26"/><rect x="82" y="16" width="16" height="26"/>
+        <rect x="102" y="16" width="16" height="26"/><rect x="122" y="16" width="16" height="26"/>
+        <rect x="142" y="16" width="16" height="26"/><rect x="162" y="16" width="16" height="26"/>
+      </g>
+      <g fill="none" stroke="#1C1410" stroke-width="2">
+        <rect x="182" y="16" width="16" height="26"/><rect x="202" y="16" width="16" height="26"/>
+      </g>
+      <text x="222" y="40" font-family="'Space Mono',monospace" font-weight="400" font-size="30" fill="#1C1410">]</text>
+      <text x="244" y="40" font-family="'Space Mono',monospace" font-weight="400" font-size="22" fill="#1C1410">82%</text>
+    </symbol>
+
+    <!-- 14 · coordinates -->
+    <symbol id="d-coords" viewBox="0 0 280 90">
+      <g stroke="#C8923C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M 70 42 L 104 10 L 130 34 L 150 16 L 186 42"/>
+      </g>
+      <text x="140" y="76" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="26" letter-spacing="1" fill="#1C1410">45.89°N 74.17°W</text>
+    </symbol>
+
+    <!-- 15 · the cursor -->
+    <symbol id="d-cursor" viewBox="0 0 60 80">
+      <rect x="12" y="10" width="36" height="60" rx="3" fill="#C8923C"/>
+    </symbol>
+
+    <!-- cream variants for dark fabric -->
+    <symbol id="d-mark-cream" viewBox="0 0 200 160">
+      <g stroke="#E2D4BC" stroke-width="10" stroke-linecap="round" fill="none">
+        <line x1="34" y1="138" x2="113" y2="10"/>
+        <line x1="166" y1="138" x2="87" y2="10"/>
+        <line x1="16" y1="138" x2="184" y2="138"/>
+      </g>
+      <rect x="87" y="92" width="26" height="46" rx="2" fill="#C8923C"/>
+    </symbol>
+    <symbol id="d-wordmark-cream" viewBox="0 0 300 130">
+      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#E2D4BC">HACKER</text>
+      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#E2D4BC">COTTAGE</text>
+      <line x1="52" y1="103" x2="112" y2="103" stroke="#C8923C" stroke-width="3"/>
+      <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#E2D4BC">WEEKEND</text>
+      <line x1="188" y1="103" x2="248" y2="103" stroke="#C8923C" stroke-width="3"/>
+    </symbol>
+    <symbol id="d-think-rust" viewBox="0 0 340 84">
+      <text x="170" y="30" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="26" letter-spacing="1" fill="#1C1410">THINK IN YEARS.</text>
+      <text x="170" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-style="italic" font-size="30" fill="#A8472B">SHIP THIS WEEKEND.</text>
+    </symbol>
+    <symbol id="d-wordmark-tonal" viewBox="0 0 300 130">
+      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#B5A183">HACKER</text>
+      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#B5A183">COTTAGE</text>
+      <line x1="52" y1="103" x2="112" y2="103" stroke="#B5A183" stroke-width="3"/>
+      <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#B5A183">WEEKEND</text>
+      <line x1="188" y1="103" x2="248" y2="103" stroke="#B5A183" stroke-width="3"/>
+    </symbol>
+
+    <!-- tumbler bodies -->
+    <symbol id="tumbler-cream" viewBox="0 0 120 260">
+      <path d="M 18 34 L 24 244 Q 24 254 34 254 L 86 254 Q 96 254 96 244 L 102 34 Z" fill="#D6C6AB"/>
+      <rect x="14" y="18" width="92" height="18" rx="6" fill="#C3B295"/>
+      <rect x="20" y="8" width="80" height="14" rx="5" fill="#CDBC9F"/>
+      <path d="M 26 40 L 30 240 Q 30 248 36 248 L 44 248 L 38 40 Z" fill="rgba(255,255,255,0.28)"/>
+    </symbol>
+    <symbol id="tumbler-espresso" viewBox="0 0 120 260">
+      <path d="M 18 34 L 24 244 Q 24 254 34 254 L 86 254 Q 96 254 96 244 L 102 34 Z" fill="#2A1E14"/>
+      <rect x="14" y="18" width="92" height="18" rx="6" fill="#1C1410"/>
+      <rect x="20" y="8" width="80" height="14" rx="5" fill="#241A10"/>
+      <path d="M 26 40 L 30 240 Q 30 248 36 248 L 44 248 L 38 40 Z" fill="rgba(255,255,255,0.10)"/>
+    </symbol>
+
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <div class="eyebrow">Hacker Cottage Weekend · Merch · Round 1</div>
+  <h1>Hat concepts</h1>
+  <p class="intro">Fifteen embroidery concepts for the tan dad cap, plus tumbler adaptations. Every design here respects real embroidery limits: bold shapes, satin-stitch friendly text, and one to three thread colors. Mockups are concept previews. Final artwork gets digitized by the embroiderer.</p>
+
+  <div class="specs">
+    <div class="spec">
+      <div class="k">Stitch area</div>
+      <div class="v">Cap front: 100 × 55 mm max. Back arch: 90 × 35 mm. Side: 50 × 30 mm.</div>
+    </div>
+    <div class="spec">
+      <div class="k">Text floor</div>
+      <div class="v">5 mm letter height minimum. Strokes 1 mm or thicker.</div>
+    </div>
+    <div class="spec">
+      <div class="k">Thread palette</div>
+      <div class="threads">
+        <span class="thread"><span class="dot" style="background:#1C1410"></span>espresso</span>
+        <span class="thread"><span class="dot" style="background:#C8923C"></span>amber</span>
+        <span class="thread"><span class="dot" style="background:#A8472B"></span>rust</span>
+        <span class="thread"><span class="dot" style="background:#E2D4BC"></span>cream</span>
+      </div>
+    </div>
+    <div class="spec">
+      <div class="k">Rule of thumb</div>
+      <div class="v">Fewer colors reads sharper on fabric and costs less per unit.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 01 SIMPLE ═══════════ -->
+  <div class="section">
+    <div class="sec-head">
+      <span class="num">01</span>
+      <h2>Simple</h2>
+      <span class="note">low stitch count · safe picks</span>
+    </div>
+    <p class="sec-blurb">Quiet designs that work on day one. Any of these could be the default run.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:27%; top:31%; width:17%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 200 160"><use href="#d-mark"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 200 160"><use href="#d-mark"/></svg></div>
+          <div class="meta">
+            <h3>The mark</h3>
+            <p>A proposed logo: an A-frame with crossed gables, Norwegian style, and a cursor for a door. The door is the only second color.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">38 × 32 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:22%; top:29%; width:27%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 300 130"><use href="#d-wordmark"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 300 130"><use href="#d-wordmark"/></svg></div>
+          <div class="meta">
+            <h3>The wordmark</h3>
+            <p>Space Mono, stacked, with WEEKEND tracked wide between two amber rules. The classic team-hat answer.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">72 × 31 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:22%; top:34%; width:28%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 320 40"><use href="#d-prompt"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 320 40"><use href="#d-prompt"/></svg></div>
+          <div class="meta">
+            <h3>The prompt</h3>
+            <p>Lowercase, one line, with a blinking amber cursor. The quietest flex in the set: you know or you ask.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">75 × 9 mm</span>
+              <span class="chip">front, set low</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="swatchrow" style="border-top:none; flex:1;">
+          <div class="swatch hero"><svg viewBox="0 0 260 70"><use href="#d-backarch"/></svg></div>
+          <div class="meta">
+            <h3>The back arch</h3>
+            <p>hackercottage.com arched over the strap opening. Pairs with any front design, or stands alone on an otherwise blank hat.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span>1 thread</span>
+              <span class="chip">80 × 20 mm</span>
+              <span class="chip">back of hat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════ 02 STANDARD ═══════════ -->
+  <div class="section">
+    <div class="sec-head">
+      <span class="num">02</span>
+      <h2>Standard</h2>
+      <span class="note">statement pieces</span>
+    </div>
+    <p class="sec-blurb">More stitch work, more presence. These carry the event's voice, worn anywhere.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:21.5%; top:31%; width:29%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 340 84"><use href="#d-think"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 340 84"><use href="#d-think"/></svg></div>
+          <div class="meta">
+            <h3>Think in years. Ship this weekend.</h3>
+            <p>The event's whole philosophy in two lines. Quiet first line, loud second line in amber italic.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">88 × 22 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:27.5%; top:29%; width:20%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 220 220"><use href="#d-badge"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 220 220"><use href="#d-badge"/></svg></div>
+          <div class="meta">
+            <h3>The badge</h3>
+            <p>Park-badge ring with the A-frame, two pines, and the dates. Also the strongest candidate for a woven patch if we want caps and jackets to share one asset.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span><span class="dot" style="background:#A8472B"></span>3 threads</span>
+              <span class="chip">Ø 50 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:22%; top:29%; width:28%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 320 110"><use href="#d-lockup"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 320 110"><use href="#d-lockup"/></svg></div>
+          <div class="meta">
+            <h3>The lockup</h3>
+            <p>Mark plus wordmark, side by side. The most conventional logo treatment, and the easiest to reuse on tote bags, tees, and stickers later.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">82 × 28 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:25%; top:31%; width:22%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 240 90"><use href="#d-tag"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 240 90"><use href="#d-tag"/></svg></div>
+          <div class="meta">
+            <h3>&lt;cottage/&gt;</h3>
+            <p>The cottage as a self-closing tag, building on the code brackets already on the website. Builders read it instantly.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">60 × 23 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════ 03 EXTRA CREATIVE ═══════════ -->
+  <div class="section">
+    <div class="sec-head">
+      <span class="num">03</span>
+      <h2>Extra creative</h2>
+      <span class="note">wild cards</span>
+    </div>
+    <p class="sec-blurb">Out-there options. Each one starts a conversation, which is most of what a hat is for.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:28.5%; top:30%; width:13%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 140 150"><use href="#d-wifipine"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 140 150"><use href="#d-wifipine"/></svg></div>
+          <div class="meta">
+            <h3>Full bars</h3>
+            <p>A pine tree drawn as wifi arcs, with an amber signal dot at the top. Cabin in the woods, fiber in the walls. My favorite of the wild cards.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">32 × 34 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:23%; top:31.5%; width:26%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 320 110"><use href="#d-git"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 320 110"><use href="#d-git"/></svg></div>
+          <div class="meta">
+            <h3>Merge at the cottage</h3>
+            <p>A commit graph where the feature branch passes through an A-frame before merging back to main. Merge conflicts get resolved by the fireplace.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">85 × 25 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="swatchrow" style="border-top:none; flex:1;">
+          <div class="swatch hero"><svg viewBox="0 0 200 80"><use href="#d-numbered"/></svg></div>
+          <div class="meta">
+            <h3>One of twenty-two</h3>
+            <p>Each hat is numbered on the back: 01/22 through 22/22. Your number is your spot in the cohort. Costs more per unit since every hat is a unique run, but it turns merch into membership.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">55 × 20 mm</span>
+              <span class="chip">back of hat</span>
+              <span class="chip flag">22 unique runs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:28.5%; top:36.5%; width:15%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 170 110"><use href="#d-ascii"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 170 110"><use href="#d-ascii"/></svg></div>
+          <div class="meta">
+            <h3>ASCII cottage</h3>
+            <p>The cottage drawn in actual characters, embroidered as typed. Reads as texture from afar and as a joke up close.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">40 × 26 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:22.5%; top:33%; width:28%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 320 60"><use href="#d-loading"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 320 60"><use href="#d-loading"/></svg></div>
+          <div class="meta">
+            <h3>Almost shipped</h3>
+            <p>A progress bar stuck at 82%. Every builder knows the last 18% is the weekend.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">80 × 12 mm</span>
+              <span class="chip">front, set low</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:23.5%; top:31%; width:25%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 280 90"><use href="#d-coords"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 280 90"><use href="#d-coords"/></svg></div>
+          <div class="meta">
+            <h3>The coordinates</h3>
+            <p>A ridgeline over the chalet's coordinates. Only people who were there know why these numbers matter.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">70 × 20 mm</span>
+              <span class="chip">front center</span>
+              <span class="chip flag">verify coords first</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:32%; top:36%; width:4.7%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 60 80"><use href="#d-cursor"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 60 80" style="width:22%"><use href="#d-cursor"/></svg></div>
+          <div class="meta">
+            <h3>The cursor</h3>
+            <p>A single amber block. A cursor waiting for input, dead center on a blank hat. The boldest move is the smallest stitch count in the set.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#C8923C"></span>1 thread</span>
+              <span class="chip">12 × 16 mm</span>
+              <span class="chip">front center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════ 04 TUMBLER ═══════════ -->
+  <div class="section">
+    <div class="sec-head">
+      <span class="num">04</span>
+      <h2>Tumbler</h2>
+      <span class="note">laser engraved · single color</span>
+    </div>
+    <p class="sec-blurb">Engraving is one color by nature, so these are the designs that survive the translation. Schematic previews, drawn to proportion.</p>
+    <div class="tumbler-grid">
+
+      <div class="card">
+        <div class="tumbler-stage">
+          <svg viewBox="0 0 120 260">
+            <use href="#tumbler-cream"/>
+            <text x="63" y="52" font-family="'Space Mono',monospace" font-weight="700" font-size="13.5" fill="#4a3a26" transform="rotate(90 63 52)" letter-spacing="1">HACKER COTTAGE</text>
+          </svg>
+        </div>
+        <div class="meta" style="border-top:1px solid var(--line)">
+          <h3>The spine</h3>
+          <p>Wordmark running vertically, like a book spine. Visible across a room when the tumbler sits on a desk.</p>
+          <div class="chips"><span class="chip">engrave</span><span class="chip">cream body</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tumbler-stage">
+          <svg viewBox="0 0 120 260">
+            <use href="#tumbler-espresso"/>
+            <g transform="translate(60 140) scale(0.4) translate(-110 -110)">
+              <circle cx="110" cy="110" r="100" fill="none" stroke="#E8DCC4" stroke-width="8"/>
+              <g stroke="#E8DCC4" stroke-width="9" stroke-linecap="round" fill="none">
+                <line x1="78" y1="142" x2="116" y2="78"/>
+                <line x1="142" y1="142" x2="104" y2="78"/>
+              </g>
+              <rect x="102" y="118" width="15" height="24" rx="1" fill="#E8DCC4"/>
+              <g stroke="#E8DCC4" stroke-width="7" stroke-linecap="round" fill="none">
+                <path d="M 52 142 L 62 120 L 72 142"/>
+                <path d="M 148 142 L 158 120 L 168 142"/>
+              </g>
+              <line x1="38" y1="142" x2="182" y2="142" stroke="#E8DCC4" stroke-width="7" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+        <div class="meta" style="border-top:1px solid var(--line)">
+          <h3>The badge, engraved</h3>
+          <p>The park badge translates cleanly to a single engraved color on the espresso body. Ring text optional at this size.</p>
+          <div class="chips"><span class="chip">engrave</span><span class="chip">espresso body</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tumbler-stage">
+          <svg viewBox="0 0 120 260">
+            <use href="#tumbler-cream"/>
+            <text x="60" y="64" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="8.5" fill="#4a3a26" letter-spacing="0.5">THINK IN YEARS</text>
+            <text x="60" y="80" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-style="italic" font-size="8.5" fill="#4a3a26" letter-spacing="0.5">SHIP THIS WEEKEND</text>
+            <line x1="34" y1="94" x2="86" y2="94" stroke="#4a3a26" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="meta" style="border-top:1px solid var(--line)">
+          <h3>The reminder</h3>
+          <p>Both lines near the rim, so you read it every time you drink. A slow phrase on a fast morning.</p>
+          <div class="chips"><span class="chip">engrave</span><span class="chip">cream body</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════ 05 COLORWAYS ═══════════ -->
+  <div class="section">
+    <div class="sec-head">
+      <span class="num">05</span>
+      <h2>Colorways</h2>
+      <span class="note">same designs · other fabrics</span>
+    </div>
+    <p class="sec-blurb">The tan cap is the hero. If we run a second colorway, these hold up.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="mock" style="background:#181210">
+          <img src="assets/hat-espresso.png" alt="" />
+          <span class="art light" style="left:27%; top:31%; width:17%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 200 160"><use href="#d-mark-cream"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch dark"><svg viewBox="0 0 200 160"><use href="#d-mark-cream"/></svg></div>
+          <div class="meta">
+            <h3>Espresso cap, cream mark</h3>
+            <p>Inverted palette for the dark colorway. The amber door stays amber on both fabrics.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#E2D4BC"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">espresso fabric</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock" style="background:#181210">
+          <img src="assets/hat-espresso.png" alt="" />
+          <span class="art light" style="left:22%; top:29%; width:27%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 300 130"><use href="#d-wordmark-cream"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch dark"><svg viewBox="0 0 300 130"><use href="#d-wordmark-cream"/></svg></div>
+          <div class="meta">
+            <h3>Espresso cap, cream wordmark</h3>
+            <p>Highest contrast pairing in the set. The one for people who wear black everything.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#E2D4BC"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
+              <span class="chip">espresso fabric</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:21.5%; top:31%; width:29%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 340 84"><use href="#d-think-rust"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 340 84"><use href="#d-think-rust"/></svg></div>
+          <div class="meta">
+            <h3>Rust accent</h3>
+            <p>Any amber accent in the set can swap to rust. Warmer, quieter, more autumn.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#A8472B"></span>2 threads</span>
+              <span class="chip">tan fabric</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mock">
+          <img src="assets/hat-clean.png" alt="" />
+          <span class="art" style="left:22%; top:29%; width:27%; opacity:0.55; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 300 130"><use href="#d-wordmark-tonal"/></svg></span>
+        </div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 300 130" style="opacity:0.75"><use href="#d-wordmark-tonal"/></svg></div>
+          <div class="meta">
+            <h3>Tonal</h3>
+            <p>Tan thread on tan fabric, one shade darker. You only see it when the light catches. The stealth option.</p>
+            <div class="chips">
+              <span class="chip"><span class="dot" style="background:#B5A183"></span>1 thread</span>
+              <span class="chip">tan fabric</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <span>Hacker Cottage Weekend · Aug 28–31, 2026 · St-Sauveur, QC</span>
+    <span>Hosted by AGI Ventures Canada</span>
+  </footer>
+
+</div>
+</body>
+</html>
