@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hacker Cottage Weekend — Demos + After Party Invitations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0e0a07; color: #E2D4BC; font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { min-height: 100vh; padding: 56px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 56px; }
+  .stage-header { text-align: center; color: #D6C6AB; max-width: 720px; }
+  .stage-header .kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: #C8923C; }
+  .stage-header h1 { font-family: "Space Mono", monospace; font-style: italic; font-weight: 400; font-size: 34px; margin-top: 14px; color: #E2D4BC; }
+  .stage-header p { margin-top: 14px; font-size: 14px; color: rgba(226,212,188,0.7); line-height: 1.55; }
+  .concept-title { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(200,146,60,0.9); text-align: center; margin-bottom: 22px; }
+  .deck-hearth, .deck-stub, .deck-golden { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  body.export .concept-title, body.export .stage-header { display: none !important; }
+  body.export { background: #fff; }
+  body.export .stage { padding: 0; gap: 0; display: block; min-height: 0; }
+  body.export .deck-hearth, body.export .deck-stub, body.export .deck-golden { display: block; width: auto; }
+</style>
+<style>
+@scope (.deck-hearth) {
+
+  :scope {
+    --ink: #1A1613;
+    --charcoal: #3D3530;
+    --stone: #9B9286;
+    --sand: #C4B49A;
+    --cream: #D6C6AB;
+    --ivory: #E2D4BC;
+    --amber: #C8923C;
+    --amber-light: #F0DFBE;
+    --rust: #A8472B;
+    --espresso: #1C1410;
+    --walnut: #2E2117;
+
+    --display: "Space Mono", ui-monospace, monospace;
+    --body: "DM Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+
+    --preview-scale: 0.4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0e0a07; color: var(--ivory); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+
+  .stage { min-height: 100vh; padding: 56px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 48px; }
+  .stage-header { text-align: center; color: var(--cream); max-width: 720px; }
+  .stage-header .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); }
+  .stage-header h1 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 34px; margin-top: 14px; color: var(--ivory); }
+
+  .deck { display: grid; grid-template-columns: repeat(2, auto); gap: 48px 40px; align-items: start; justify-items: center; }
+  @media (max-width: 1100px) { .deck { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { :scope { --preview-scale: 0.33; } .stage { padding: 40px 12px 80px; } }
+
+  .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .slide-wrap.size-sq { --w: 1080px; --h: 1080px; }
+  .slide-wrap.size-45 { --w: 1080px; --h: 1350px; }
+  .slide-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(214,198,171,0.55); }
+
+  .slide-frame {
+    width: calc(var(--w) * var(--preview-scale));
+    height: calc(var(--h) * var(--preview-scale));
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+    background: var(--ivory);
+  }
+  .slide {
+    width: var(--w); height: var(--h);
+    position: relative; overflow: hidden;
+    transform: scale(var(--preview-scale)); transform-origin: top left;
+    background: var(--ivory); color: var(--ink);
+  }
+  /* paper tooth */
+  .slide::after {
+    content: "";
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.65'/></svg>");
+    opacity: 0.035; mix-blend-mode: multiply; z-index: 30;
+  }
+  /* whisper vignette — edges a few percent darker, matte */
+  .slide::before {
+    content: "";
+    position: absolute; inset: 0; pointer-events: none; z-index: 2;
+    background:
+      repeating-linear-gradient(180deg, rgba(28,20,16,0.015) 0, rgba(28,20,16,0.015) 1px, rgba(28,20,16,0) 1px, rgba(28,20,16,0) 7px),
+      radial-gradient(130% 130% at 50% 46%, rgba(28,20,16,0) 58%, rgba(28,20,16,0.05) 100%);
+  }
+
+  /* engraved plate mark — square inset clears Luma's ~48px corner rounding */
+  .plate {
+    position: absolute; inset: 64px; z-index: 3; pointer-events: none;
+    border: 1px solid rgba(28,20,16,0.22);
+  }
+  /* second, finer plate line: double-struck plate mark so the card reads engraved, not slide */
+  .plate::after {
+    content: ""; position: absolute; inset: 12px;
+    border: 1px solid rgba(28,20,16,0.11);
+  }
+  .size-45 .plate { inset: 52px; }
+  .size-45 .plate::after { inset: 10px; }
+
+  .content {
+    position: relative; z-index: 5; width: 100%; height: 100%;
+    padding: 96px 80px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; color: var(--espresso);
+  }
+  /* square is composed top-down so the date cluster lands inside the og-image
+     crop band (~y 26-76%); the foot rule + reply resolve the base */
+  .hearth-sq .content { justify-content: flex-start; padding-top: 128px; }
+
+  /* ---------- the formal axis ---------- */
+
+  /* slight counter-rotation: hand-struck, not placed */
+  .seal { display: block; transform: rotate(-3.5deg); }
+
+  .host {
+    margin-top: 22px;
+    font-family: var(--mono); font-weight: 400; font-size: 15px; line-height: 1;
+    letter-spacing: 0.36em; text-indent: 0.36em; text-transform: uppercase;
+    color: rgba(46,33,23,0.72);
+  }
+
+  .display {
+    margin-top: 8px;
+    font-family: var(--display); font-style: italic; font-weight: 400;
+    font-size: 54px; line-height: 1.30; letter-spacing: 0.01em;
+    color: var(--espresso); white-space: nowrap;
+  }
+
+  .wordmark {
+    margin-top: 38px;
+    font-family: var(--display); font-weight: 400; font-size: 40px; line-height: 1.15;
+    letter-spacing: 0.02em; color: var(--espresso); white-space: nowrap;
+  }
+
+  .context {
+    margin-top: 24px;
+    font-family: var(--body); font-weight: 400; font-size: 24px; line-height: 1.52;
+    color: rgba(46,33,23,0.95); max-width: 780px;
+  }
+
+  .rule {
+    margin-top: 22px;
+    width: 76px; height: 1px; background: rgba(28,20,16,0.55);
+  }
+
+  .date {
+    margin-top: 20px;
+    font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1.1;
+    color: var(--espresso); white-space: nowrap;
+  }
+
+  .times {
+    margin-top: 16px;
+    font-family: var(--mono); font-weight: 400; font-size: 22px; line-height: 1;
+    letter-spacing: 0.14em; text-indent: 0.14em;
+    color: var(--espresso); white-space: nowrap;
+  }
+  .times .tdot { padding: 0 0.5em; }
+
+  .place {
+    margin-top: 14px;
+    font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.1;
+    color: rgba(28,20,16,0.9); white-space: nowrap;
+  }
+
+  /* square foot: column settles lower so the plate reads balanced (r4 artdirector) */
+  .hearth-sq .rule-foot { margin-top: 40px; }
+  .hearth-sq .reply { margin-top: 52px; }
+  /* foot rule struck in the seal's ink: warm anchor for the thumbnail */
+  .rule-foot { background: rgba(129,91,36,0.9); }
+  .reply {
+    margin-top: 28px;
+    font-family: var(--mono); font-weight: 400; font-size: 17px; line-height: 1;
+    letter-spacing: 0.34em; text-indent: 0.34em; text-transform: uppercase;
+    color: rgba(46,33,23,0.8);
+  }
+
+  /* reserved microline: drop the lu.ma handle inside this element later */
+  .luma-slot {
+    margin-top: 10px; min-height: 12px;
+    font-family: var(--mono); font-weight: 400; font-size: 17px; line-height: 1.3;
+    letter-spacing: 0.22em; text-indent: 0.22em;
+    color: rgba(28,20,16,0.38);
+  }
+
+  /* ---------- 4:5 sibling: same column let out to occupy the height ---------- */
+  .size-45 .content { padding: 140px 80px; }
+  .size-45 .host { margin-top: 38px; }
+  .size-45 .display { margin-top: 20px; font-size: 60px; }
+  .size-45 .wordmark { margin-top: 56px; }
+  .size-45 .context { margin-top: 48px; }
+  .size-45 .rule { margin-top: 60px; }
+  .size-45 .date { margin-top: 52px; }
+  .size-45 .times { margin-top: 22px; }
+  .size-45 .place { margin-top: 20px; }
+  .size-45 .rule-foot { margin-top: 38px; }
+  .size-45 .reply { margin-top: 38px; }
+  .size-45 .luma-slot { margin-top: 12px; }
+
+  /* Export mode (?only=<id>) */
+
+
+
+
+
+
+
+
+
+
+}
+</style>
+<style>
+@scope (.deck-stub) {
+
+  @font-face {
+    font-family: "Anton";
+    src: url("assets/fonts/anton-400.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+  }
+
+  :scope {
+    --ground: #0C0B09;
+    --hole: #070605;
+    --panel: #11100C;
+    --lime: #CBFF3C;
+    --dlime: #9FC400;
+    --ivory: #E2D4BC;
+    --taupe: #7A6E58;
+    --rust: #B44E2E;
+
+    --display: "Space Mono", ui-monospace, monospace;
+    --body: "DM Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --anton: "Anton", "Arial Narrow", sans-serif;
+
+    --preview-scale: 0.4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0e0a07; color: var(--ivory); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+
+  .stage { min-height: 100vh; padding: 56px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 48px; }
+  .stage-header { text-align: center; color: var(--ivory); max-width: 720px; }
+  .stage-header .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--lime); }
+  .stage-header h1 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 34px; margin-top: 14px; color: var(--ivory); }
+
+  .deck { display: grid; grid-template-columns: repeat(2, auto); gap: 48px 40px; align-items: start; justify-items: center; }
+  @media (max-width: 1100px) { .deck { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { :scope { --preview-scale: 0.33; } .stage { padding: 40px 12px 80px; } }
+
+  .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .slide-wrap.size-sq { --w: 1080px; --h: 1080px; }
+  .slide-wrap.size-45 { --w: 1080px; --h: 1350px; }
+  .slide-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(214,198,171,0.55); }
+
+  .slide-frame {
+    width: calc(var(--w) * var(--preview-scale));
+    height: calc(var(--h) * var(--preview-scale));
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+    background: var(--ground);
+  }
+  .slide {
+    width: var(--w); height: var(--h);
+    position: relative; overflow: hidden;
+    transform: scale(var(--preview-scale)); transform-origin: top left;
+    background: var(--ground); color: var(--ivory);
+  }
+
+  .content { position: relative; z-index: 5; width: 100%; height: 100%; }
+
+  /* ---------- shared ticket furniture ---------- */
+
+  .panel { position: absolute; z-index: 1; background: var(--panel); }
+  .panel::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 90% 70% at 50% 40%, rgba(255,238,196,0.03), transparent 72%);
+  }
+  .panel.tinted::after {
+    content: ""; position: absolute; inset: 0;
+    background: rgba(203,255,60,0.035);
+  }
+
+  .texgrid {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(to right, rgba(226,212,188,0.028) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(to bottom, rgba(226,212,188,0.028) 0 1px, transparent 1px 48px);
+  }
+
+  .grain {
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    opacity: 0.07; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  }
+
+  .hole {
+    position: absolute; z-index: 6;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--hole);
+    box-shadow: inset 0 0 0 1.5px rgba(226,212,188,0.14), 0 0 0 1px rgba(226,212,188,0.08);
+  }
+
+  /* seam as die-cut: hole-colored punched slots between faint score edges */
+  .perf-v {
+    position: absolute; z-index: 4; width: 8px;
+    border-left: 1px solid rgba(203,255,60,0.25);
+    border-right: 1px solid rgba(203,255,60,0.25);
+    background: repeating-linear-gradient(to bottom, var(--hole) 0 6px, transparent 6px 14px);
+  }
+  .perf-h {
+    position: absolute; z-index: 4; height: 8px;
+    border-top: 1px solid rgba(203,255,60,0.25);
+    border-bottom: 1px solid rgba(203,255,60,0.25);
+    background: repeating-linear-gradient(to right, var(--hole) 0 6px, transparent 6px 14px);
+  }
+  .bite {
+    position: absolute; z-index: 6; width: 48px; height: 48px; border-radius: 50%;
+    background: var(--hole); box-shadow: 0 0 0 1.5px rgba(226,212,188,0.10);
+  }
+
+  .headrule { position: absolute; z-index: 5; height: 1px; background: rgba(122,110,88,0.35); }
+
+  .wordmark {
+    position: absolute; z-index: 6; text-align: center;
+    font-family: var(--display); font-weight: 700; font-size: 26px;
+    letter-spacing: 0.05em; color: var(--ivory);
+  }
+  .hostedby {
+    position: absolute; z-index: 6; text-align: center;
+    font-family: var(--mono); font-weight: 400; font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--taupe);
+  }
+
+  .numbox {
+    position: absolute; z-index: 6;
+    border: 1.5px solid var(--rust); color: var(--rust);
+    font-family: var(--mono); font-weight: 700; font-size: 17px; letter-spacing: 0.12em;
+    padding: 13px 18px; display: flex; align-items: baseline; gap: 10px;
+  }
+  .numbox .blank { display: inline-block; width: 60px; border-bottom: 2px solid var(--rust); height: 1em; }
+
+  .hero {
+    position: absolute; z-index: 6;
+    font-family: var(--mono); font-weight: 800; font-size: 50px;
+    letter-spacing: 0.01em; color: var(--ivory); white-space: nowrap;
+  }
+  .subline {
+    position: absolute; z-index: 6;
+    font-family: var(--mono); font-weight: 400; font-size: 21px;
+    line-height: 1.45; color: rgba(226,212,188,0.75); white-space: nowrap;
+  }
+
+  .fields { position: absolute; z-index: 6; display: flex; flex-direction: column; }
+  .frow { border-top: 1px solid rgba(122,110,88,0.30); padding-top: 11px; }
+  .frow .lab {
+    font-family: var(--mono); font-weight: 500; font-size: 13px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: rgba(203,255,60,0.55);
+  }
+  .frow .val {
+    font-family: var(--mono); font-weight: 500; font-size: 28px;
+    letter-spacing: 0.005em; color: var(--ivory); margin-top: 6px; white-space: nowrap;
+  }
+  .frow .val.big { font-size: 46px; font-weight: 700; color: var(--lime); letter-spacing: 0; }
+  .frow .val .slot { display: inline-block; width: 220px; border-bottom: 2px solid rgba(203,255,60,0.7); height: 1em; }
+
+  /* rotated spine acronym: element center is pinned at (left,top), then rotated -90deg,
+     so ink placement stays predictable regardless of text length */
+  .anton-v {
+    position: absolute; z-index: 5;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    font-family: var(--anton); font-weight: 400;
+    letter-spacing: 0.04em; color: rgba(159,196,0,0.28);
+    line-height: 1; white-space: nowrap;
+  }
+  .anton-h {
+    position: absolute; z-index: 5;
+    font-family: var(--anton); font-weight: 400;
+    letter-spacing: 0.04em; color: rgba(159,196,0,0.11);
+    line-height: 0.9; white-space: nowrap;
+  }
+
+  .barcode { position: absolute; z-index: 6; display: flex; align-items: stretch; }
+  .barcode i { display: block; background: var(--lime); height: 100%; }
+  .serial {
+    position: absolute; z-index: 6;
+    font-family: var(--mono); font-weight: 500; font-size: 13px;
+    letter-spacing: 0.24em; color: rgba(226,212,188,0.62); white-space: nowrap;
+  }
+  .fineprint {
+    position: absolute; z-index: 6;
+    font-family: var(--mono); font-weight: 400; font-size: 11px;
+    letter-spacing: 0.14em; color: rgba(122,110,88,0.95); white-space: nowrap;
+  }
+  .rsvp {
+    position: absolute; z-index: 6;
+    font-family: var(--mono); font-weight: 400; font-size: 12px;
+    letter-spacing: 0.2em; color: rgba(122,110,88,0.65); white-space: nowrap;
+  }
+  .rsvp .slot { display: inline-block; width: 150px; border-bottom: 1px solid rgba(122,110,88,0.45); height: 1em; vertical-align: baseline; }
+
+  .overprint {
+    position: absolute; z-index: 1; pointer-events: none;
+    font-family: var(--mono); font-weight: 700; font-size: 20px;
+    letter-spacing: 0.24em; color: var(--lime); opacity: 0.10;
+    mix-blend-mode: screen; white-space: nowrap;
+    -webkit-mask-image: linear-gradient(90deg, transparent 10%, #000 32%, #000 68%, transparent 90%);
+    mask-image: linear-gradient(90deg, transparent 10%, #000 32%, #000 68%, transparent 90%);
+  }
+
+  /* Export mode (?only=<id>) */
+
+
+
+
+
+
+
+
+
+
+}
+</style>
+<style>
+@scope (.deck-golden) {
+
+  @font-face {
+    font-family: "Instrument Serif";
+    src: url("fonts/instrument-serif-regular.ttf") format("truetype");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Instrument Serif";
+    src: url("fonts/instrument-serif-italic.ttf") format("truetype");
+    font-weight: 400; font-style: italic; font-display: block;
+  }
+
+  :scope {
+    --ink: #1A1613;
+    --stone: #9B9286;
+    --ivory: #E2D4BC;
+    --amber: #C8923C;
+    --champagne: #E9CD97;
+
+    --display: "Instrument Serif", serif;
+    --body: "DM Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --wordmark: "Space Mono", ui-monospace, monospace;
+
+    --preview-scale: 0.4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0e0a07; color: var(--ivory); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+
+  .stage { min-height: 100vh; padding: 56px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 48px; }
+  .stage-header { text-align: center; color: var(--ivory); max-width: 720px; }
+  .stage-header .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); }
+  .stage-header h1 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 38px; margin-top: 14px; color: var(--ivory); }
+
+  .deck { display: grid; grid-template-columns: repeat(2, auto); gap: 48px 40px; align-items: start; justify-items: center; }
+  @media (max-width: 1100px) { .deck { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { :scope { --preview-scale: 0.33; } .stage { padding: 40px 12px 80px; } }
+
+  .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .slide-wrap.size-sq { --w: 1080px; --h: 1080px; }
+  .slide-wrap.size-45 { --w: 1080px; --h: 1350px; }
+  .slide-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(214,198,171,0.55); }
+
+  .slide-frame {
+    width: calc(var(--w) * var(--preview-scale));
+    height: calc(var(--h) * var(--preview-scale));
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+    background: #14100C;
+  }
+  .slide {
+    width: var(--w); height: var(--h);
+    position: relative; overflow: hidden;
+    transform: scale(var(--preview-scale)); transform-origin: top left;
+    background: #14100C; color: var(--ivory);
+  }
+
+  /* ============ GOLDEN HOUR ============ */
+
+  /* Layer 1: photo, warmed + darkened toward dusk */
+  .photo {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 1;
+    /* committed dusk grade (round-3 art director): brightness low enough that
+       the kayak hull, dock rail and pool-ladder chrome sink below speculars */
+    filter: brightness(0.58) sepia(0.62) saturate(0.92) contrast(1.16) hue-rotate(-8deg);
+  }
+  /* the source photo cover-fits the square with zero vertical slack, so the
+     dusk recrop is a top-anchored overheight zoom: chairs + dock drop below the
+     title and the stray branch leaves the top-right corner */
+  .golden-sq .photo { height: 100%; object-position: 14% 50%; }
+  .golden-45 .photo { object-position: 30% 50%; }
+
+  .layer { position: absolute; inset: 0; }
+
+  /* Layer 2: multiply — sink the sky into night, amber into the top */
+  .grade-multiply {
+    z-index: 2; mix-blend-mode: multiply;
+    /* dusk sky: violet-leaning near-black at the zenith (round-5: steps the
+       grey-olive sky toward night), amber band at the horizon */
+    background: linear-gradient(188deg,
+      rgba(26,19,28,0.62) 0%,
+      rgba(46,33,23,0.32) 26%,
+      rgba(200,146,60,0.50) 50%,
+      rgba(60,42,28,0.44) 72%,
+      rgba(24,17,13,0.72) 100%);
+  }
+
+  /* Layer 3: screen — fake low sun over the far treeline, glint on the water */
+  .grade-sun {
+    z-index: 3; mix-blend-mode: screen;
+    background: radial-gradient(60% 46% at 76% 50%,
+      rgba(255,224,156,0.72) 0%,
+      rgba(216,152,66,0.36) 22%,
+      rgba(200,146,60,0.14) 36%,
+      transparent 48%);
+  }
+  /* 4:5 sun raised above the treeline (round-3 art director); round-5: bloom
+     refeathered with a long low-alpha tail so no circular edge is detectable
+     against the flat sky */
+  .golden-45 .grade-sun {
+    background: radial-gradient(74% 56% at 74% 40%,
+      rgba(255,224,156,0.50) 0%,
+      rgba(216,152,66,0.27) 18%,
+      rgba(200,146,60,0.12) 32%,
+      rgba(200,146,60,0.05) 46%,
+      rgba(200,146,60,0.02) 58%,
+      transparent 72%);
+  }
+
+  /* Layer 4: multiply vignette */
+  .grade-vignette {
+    z-index: 4; mix-blend-mode: multiply;
+    /* centered on the sun so the left edge and top corners fall into dusk */
+    background: radial-gradient(115% 100% at 68% 44%,
+      transparent 42%,
+      rgba(15,10,7,0.58) 100%);
+  }
+
+  /* Layer 5: ease-out dusk scrim rising from the bottom */
+  .scrim {
+    z-index: 5;
+    /* round-3: cooled a step off espresso and deepened through the 24-48%
+       band so the lifted info block sits on quiet dark water at DM size */
+    background: linear-gradient(to top,
+      rgba(11,9,10,0.90) 0%,
+      rgba(11,9,10,0.83) 8%,
+      rgba(11,9,10,0.74) 16%,
+      rgba(11,9,10,0.64) 24%,
+      rgba(11,9,10,0.57) 30%,
+      rgba(11,9,10,0.50) 36%,
+      rgba(11,9,10,0.44) 42%,
+      rgba(11,9,10,0.36) 48%,
+      rgba(11,9,10,0.26) 54%,
+      rgba(11,9,10,0.16) 60%,
+      rgba(11,9,10,0.07) 66%,
+      rgba(11,9,10,0.00) 73%);
+  }
+  .golden-45 .scrim {
+    background: linear-gradient(to top,
+      rgba(11,9,10,0.90) 0%,
+      rgba(11,9,10,0.82) 7%,
+      rgba(11,9,10,0.71) 14%,
+      rgba(11,9,10,0.60) 21%,
+      rgba(11,9,10,0.50) 27%,
+      rgba(11,9,10,0.40) 33%,
+      rgba(11,9,10,0.30) 39%,
+      rgba(11,9,10,0.20) 45%,
+      rgba(11,9,10,0.11) 51%,
+      rgba(11,9,10,0.04) 57%,
+      rgba(11,9,10,0.00) 63%);
+  }
+
+  /* Layer 5b: text-column scrim — bottom/left-anchored diagonal so every line
+     of type sits on a controlled value; monotonic falloff (no stop cliffs) so
+     it can never read as a plate, and the sun side stays luminous */
+  .scrim-text {
+    z-index: 5;
+    background: linear-gradient(58deg,
+      rgba(24,15,10,0.40) 0%,
+      rgba(24,15,10,0.30) 30%,
+      rgba(24,15,10,0.16) 52%,
+      rgba(24,15,10,0.05) 68%,
+      rgba(24,15,10,0.00) 82%);
+  }
+
+  /* Layer 9: film grain over everything, unifies the composite + dithers the gradients */
+  .grain {
+    z-index: 9; mix-blend-mode: overlay; opacity: 0.07; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+  }
+
+  /* ---- type ---- */
+  .content { position: absolute; inset: 0; z-index: 6; }
+
+  .type-block {
+    position: absolute; left: 88px; right: 88px;
+    display: flex; flex-direction: column; align-items: flex-start;
+  }
+  .golden-sq .type-block { bottom: 299px; }   /* round-5: 7px down repays the taller tagline so the title cap-top holds y>=216; facts end ~y=759, inside the og-crop edge at ~y=822 */
+  .golden-45 .type-block { bottom: 300px; }   /* raised so the title claims part of the sky band */
+
+  /* wordmark rides the dark sky, film-poster style; on the square it stacks
+     top-right, high in the clear sky above the title cap line (round-5
+     adjudication: losing the tag in the 1.91:1 og crop is accepted; the
+     ~55px collision with "gets" at top:262 was worse) */
+  .kicker-top { position: absolute; top: 96px; left: 88px; }
+  .golden-sq .kicker-top { top: 150px; left: auto; right: 88px; text-align: right; }
+
+  .kicker {
+    font-family: var(--wordmark); font-weight: 400;
+    font-size: 21px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--champagne); opacity: 0.85;
+  }
+  .golden-sq .kicker { font-size: 17px; letter-spacing: 0.22em; line-height: 1.75; opacity: 0.8; }
+  .golden-45 .kicker { font-size: 24px; }
+
+  .title {
+    font-family: var(--display); font-style: italic; font-weight: 400;
+    /* explicit liga: Chrome disables ligatures under nonzero letter-spacing,
+       and the italic needs its fi ligature in "first" */
+    font-feature-settings: "liga" 1;
+    font-size: 160px; line-height: 1.03; letter-spacing: -0.01em;
+    color: var(--champagne);
+    text-shadow: 0 1px 2px rgba(15,10,7,0.5), 0 2px 44px rgba(15,10,7,0.35);
+    margin-top: 0;
+  }
+  .golden-45 .title { font-size: 176px; }
+
+  .tagline {
+    font-family: var(--mono); font-weight: 400;
+    /* round-5: +2px per the investor's deal-flow ask; tracking eased to
+       -0.01em so the 46-char first line holds one line inside the 88px
+       margins (0.02em tracking would push it to ~941px against the 904px
+       column and wrap) */
+    font-size: 33px; letter-spacing: -0.01em; line-height: 1.5;
+    color: var(--champagne); opacity: 1;
+    margin-top: 18px;
+    /* round-3: outer glow layers pulled back so no dark plates form over the
+       dock wood now that the grade itself is dusk-deep */
+    text-shadow: 0 1px 2px rgba(15,10,7,0.65), 0 0 16px rgba(15,10,7,0.40), 0 0 36px rgba(15,10,7,0.28);
+  }
+
+  .facts {
+    margin-top: 22px; width: fit-content;
+    border-top: 1px solid rgba(240,220,169,0.40);
+    padding-top: 18px;
+    font-family: var(--mono); font-weight: 400;
+    /* mixed case (cinematic voice; kills the type echo with the stub's
+       all-caps ticket fields); round-3: larger + brighter so the date and
+       times survive the 200px thumbnail */
+    font-size: 26px; letter-spacing: 0.08em; text-transform: none;
+    color: #F0DCA9; line-height: 1.7;
+    text-shadow: 0 1px 2px rgba(15,10,7,0.65), 0 0 16px rgba(15,10,7,0.40), 0 0 36px rgba(15,10,7,0.28);
+  }
+  .facts .k { opacity: 0.88; }
+  .facts .v { opacity: 1; }
+  .facts .sep { opacity: 0.6; padding: 0 0.4em; }
+
+  .baseline-row {
+    /* bottom 96 keeps the 4:5 microline inside the central-86% safe area */
+    position: absolute; left: 88px; right: 88px; bottom: 96px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 17px; letter-spacing: 0.06em;
+    color: var(--champagne);
+  }
+  /* square: hosted-by rides higher, clearly separated from the og-crop edge */
+  .golden-sq .baseline-row { bottom: 150px; }
+  /* round-5: matched to the facts rows' champagne + glow so the credit reads
+     over the dark water and survives thumb400 */
+  .hosted-by {
+    color: #F0DCA9; opacity: 0.96;
+    text-shadow: 0 1px 2px rgba(15,10,7,0.65), 0 0 16px rgba(15,10,7,0.40), 0 0 36px rgba(15,10,7,0.28);
+  }
+  /* reserved microline: drop a lu.ma handle in here later with one edit */
+  .rsvp-slot { opacity: 0.45; min-height: 1em; letter-spacing: 0.14em; }
+
+  /* Export mode (?only=<id>) */
+
+
+
+
+
+
+
+
+
+
+}
+</style>
+<style>
+/* hoisted export-mode rules (cannot live inside @scope) */
+body.export .deck-hearth .stage, body.export .deck-hearth .stage-header { all: unset; }
+body.export .deck-hearth .stage-header, body.export .deck-hearth .slide-label { display: none !important; }
+body.export .deck-hearth .stage { padding: 0; gap: 0; display: block; }
+body.export .deck-hearth .deck { display: block; }
+body.export .deck-hearth .slide-wrap { display: none; }
+body.export .deck-hearth .slide-wrap.show { display: block; }
+body.export .deck-hearth .slide-frame { width: var(--w); height: var(--h); box-shadow: none; }
+body.export .deck-hearth .slide { transform: none; }
+body.export .deck-stub .stage, body.export .deck-stub .stage-header { all: unset; }
+body.export .deck-stub .stage-header, body.export .deck-stub .slide-label { display: none !important; }
+body.export .deck-stub .stage { padding: 0; gap: 0; display: block; }
+body.export .deck-stub .deck { display: block; }
+body.export .deck-stub .slide-wrap { display: none; }
+body.export .deck-stub .slide-wrap.show { display: block; }
+body.export .deck-stub .slide-frame { width: var(--w); height: var(--h); box-shadow: none; }
+body.export .deck-stub .slide { transform: none; }
+body.export .deck-golden .stage, body.export .deck-golden .stage-header { all: unset; }
+body.export .deck-golden .stage-header, body.export .deck-golden .slide-label { display: none !important; }
+body.export .deck-golden .stage { padding: 0; gap: 0; display: block; }
+body.export .deck-golden .deck { display: block; }
+body.export .deck-golden .slide-wrap { display: none; }
+body.export .deck-golden .slide-wrap.show { display: block; }
+body.export .deck-golden .slide-frame { width: var(--w); height: var(--h); box-shadow: none; }
+body.export .deck-golden .slide { transform: none; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <header class="stage-header">
+    <div class="kicker">Invitation · demo day + after party</div>
+    <h1>Demos + After Party</h1>
+    <p>Three invitation banners, each in 1080×1080 (Luma cover) and 1080×1350 (4:5). Sunday, Aug 30 · demos 4:00 PM · party 7:00 PM · St-Sauveur, QC. Luma description lives in luma-description.md; send notes in captions.md.</p>
+  </header>
+
+<div class="deck-hearth">
+  <div class="concept-title">Hearth · engraved invitation</div>
+  <div class="deck">
+<div class="slide-wrap size-sq" data-id="hearth-sq">
+      <div class="slide-frame">
+        <div class="slide hearth-sq">
+          <div class="plate"></div>
+          <div class="content">
+
+            <svg class="seal" width="196" height="196" viewBox="0 0 200 200" role="img" aria-label="Seal: the closing evening, St-Sauveur QC, HC 2026">
+              <defs>
+                <path id="arcTop-sq" d="M 26,100 A 74,74 0 0 1 174,100" fill="none"/>
+                <path id="arcBot-sq" d="M 14,100 A 86,86 0 0 0 186,100" fill="none"/>
+                <filter id="deboss-sq" x="-25%" y="-25%" width="150%" height="150%">
+                  <feDropShadow dx="0" dy="-1.1" stdDeviation="0.5" flood-color="#F8ECD2" flood-opacity="0.6"/>
+                  <feDropShadow dx="0" dy="1.4" stdDeviation="0.8" flood-color="#3E2B10" flood-opacity="0.22"/>
+                </filter>
+              </defs>
+              <circle cx="100" cy="100" r="98" fill="#815B24" opacity="0.10"/>
+              <g filter="url(#deboss-sq)" fill="#815B24">
+                <circle cx="100" cy="100" r="97" fill="none" stroke="#815B24" stroke-width="2.6"/>
+                <circle cx="100" cy="100" r="92.5" fill="none" stroke="#815B24" stroke-width="1.1"/>
+                <text font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12.5" font-weight="500" letter-spacing="2.7" text-anchor="middle">
+                  <textPath href="#arcTop-sq" startOffset="50%">THE CLOSING EVENING</textPath>
+                </text>
+                <text font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12.5" font-weight="500" letter-spacing="3.6" text-anchor="middle">
+                  <textPath href="#arcBot-sq" startOffset="50%">ST-SAUVEUR · QC</textPath>
+                </text>
+                <rect x="-3.1" y="-3.1" width="6.2" height="6.2" transform="translate(20,100) rotate(45) scale(0.72)"/>
+                <rect x="-3.1" y="-3.1" width="6.2" height="6.2" transform="translate(180,100) rotate(45) scale(0.72)"/>
+                <path d="M 77,66 L 100,51 L 123,66" fill="none" stroke="#815B24" stroke-width="1.85" stroke-linejoin="miter" stroke-linecap="round"/>
+                <text x="100" y="108" font-family="'Space Mono', ui-monospace, monospace" font-size="46" font-weight="700" letter-spacing="3" text-anchor="middle">HC</text>
+                <text x="100" y="134" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="500" letter-spacing="3.2" text-anchor="middle">2026</text>
+              </g>
+            </svg>
+
+            <div class="host">Hosted by AGI Ventures Canada</div>
+
+            <div class="display">an evening of demos<br/>&amp; the after party</div>
+
+            <div class="wordmark">Hacker Cottage Weekend</div>
+
+            <div class="context">22 builders spent the weekend building.<br/>Come see what they made, and stay to celebrate.</div>
+
+            <div class="rule"></div>
+
+            <div class="date">Sunday, August 30</div>
+            <div class="times">DEMOS 4:00 PM<span class="tdot">·</span>PARTY 7:00 PM</div>
+            <div class="place">St-Sauveur, QC</div>
+
+            <div class="rule rule-foot"></div>
+
+            <div class="reply">Invite only</div>
+            <div class="luma-slot"><!-- lu.ma handle drops in here --></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">Hearth · Square</div>
+    </div>
+
+    <div class="slide-wrap size-45" data-id="hearth-45">
+      <div class="slide-frame">
+        <div class="slide hearth-45">
+          <div class="plate"></div>
+          <div class="content">
+
+            <svg class="seal" width="228" height="228" viewBox="0 0 200 200" role="img" aria-label="Seal: the closing evening, St-Sauveur QC, HC 2026">
+              <defs>
+                <path id="arcTop-45" d="M 26,100 A 74,74 0 0 1 174,100" fill="none"/>
+                <path id="arcBot-45" d="M 14,100 A 86,86 0 0 0 186,100" fill="none"/>
+                <filter id="deboss-45" x="-25%" y="-25%" width="150%" height="150%">
+                  <feDropShadow dx="0" dy="-1.1" stdDeviation="0.5" flood-color="#F8ECD2" flood-opacity="0.6"/>
+                  <feDropShadow dx="0" dy="1.4" stdDeviation="0.8" flood-color="#3E2B10" flood-opacity="0.22"/>
+                </filter>
+              </defs>
+              <circle cx="100" cy="100" r="98" fill="#815B24" opacity="0.10"/>
+              <g filter="url(#deboss-45)" fill="#815B24">
+                <circle cx="100" cy="100" r="97" fill="none" stroke="#815B24" stroke-width="2.6"/>
+                <circle cx="100" cy="100" r="92.5" fill="none" stroke="#815B24" stroke-width="1.1"/>
+                <text font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12.5" font-weight="500" letter-spacing="2.7" text-anchor="middle">
+                  <textPath href="#arcTop-45" startOffset="50%">THE CLOSING EVENING</textPath>
+                </text>
+                <text font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12.5" font-weight="500" letter-spacing="3.6" text-anchor="middle">
+                  <textPath href="#arcBot-45" startOffset="50%">ST-SAUVEUR · QC</textPath>
+                </text>
+                <rect x="-3.1" y="-3.1" width="6.2" height="6.2" transform="translate(20,100) rotate(45) scale(0.72)"/>
+                <rect x="-3.1" y="-3.1" width="6.2" height="6.2" transform="translate(180,100) rotate(45) scale(0.72)"/>
+                <path d="M 77,66 L 100,51 L 123,66" fill="none" stroke="#815B24" stroke-width="1.85" stroke-linejoin="miter" stroke-linecap="round"/>
+                <text x="100" y="108" font-family="'Space Mono', ui-monospace, monospace" font-size="46" font-weight="700" letter-spacing="3" text-anchor="middle">HC</text>
+                <text x="100" y="134" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="500" letter-spacing="3.2" text-anchor="middle">2026</text>
+              </g>
+            </svg>
+
+            <div class="host">Hosted by AGI Ventures Canada</div>
+
+            <div class="display">an evening of demos<br/>&amp; the after party</div>
+
+            <div class="wordmark">Hacker Cottage Weekend</div>
+
+            <div class="context">22 builders spent the weekend building.<br/>Come see what they made, and stay to celebrate.</div>
+
+            <div class="rule"></div>
+
+            <div class="date">Sunday, August 30</div>
+            <div class="times">DEMOS 4:00 PM<span class="tdot">·</span>PARTY 7:00 PM</div>
+            <div class="place">St-Sauveur, QC</div>
+
+            <div class="rule rule-foot"></div>
+
+            <div class="reply">Invite only</div>
+            <div class="luma-slot"><!-- lu.ma handle drops in here --></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">Hearth · 4:5</div>
+    </div>
+  </div>
+</div>
+<div class="deck-stub">
+  <div class="concept-title">Two Stubs · punched ticket</div>
+  <div class="deck">
+<div class="slide-wrap size-sq" data-id="stub-sq">
+      <div class="slide-frame">
+        <div class="slide stub-sq">
+
+          <!-- panels -->
+          <div class="panel" style="left:0; top:0; width:520px; height:1080px;"></div>
+          <div class="panel tinted" style="left:520px; top:0; width:560px; height:1080px;"></div>
+          <div class="texgrid"></div>
+          <div class="grain"></div>
+
+          <!-- perforation: die-cut seam at x=520, full height so the header band tears too -->
+          <div class="perf-v" style="left:516px; top:0; bottom:0;"></div>
+          <div class="bite" style="left:496px; top:-24px;"></div>
+          <div class="bite" style="left:496px; top:1056px;"></div>
+
+          <div class="content">
+
+            <!-- header band: hole left, NO. box right (mirrors the 4:5 logic) -->
+            <div class="hole" style="left:130px; top:52px;"></div>
+            <div class="wordmark" style="left:0; right:0; top:76px;">Hacker Cottage Weekend</div>
+            <div class="hostedby" style="left:0; right:0; top:118px;">Hosted by AGI Ventures Canada</div>
+            <div class="headrule" style="left:64px; right:64px; top:144px;"></div>
+            <div class="numbox" style="right:64px; top:64px;">NO. <span class="blank"></span></div>
+
+            <!-- hero, torn across the seam -->
+            <div class="hero" style="left:200px; top:220px;">ONE NIGHT.</div>
+            <div class="hero" style="left:560px; top:220px;">TWO STUBS.</div>
+            <div class="subline" style="left:200px; top:296px;">22 builders demo<br/>what they built.</div>
+            <div class="subline" style="left:560px; top:296px;">Then the party<br/>runs late.</div>
+
+            <!-- DEMOS stub -->
+            <div class="anton-v" style="left:132px; top:567px; font-size:132px;">DEMOS</div>
+            <div class="fields" style="left:200px; top:372px; width:288px;">
+              <div class="frow" style="height:78px;"><div class="lab">Event</div><div class="val">THE DEMOS</div></div>
+              <div class="frow" style="height:78px;"><div class="lab">Date</div><div class="val">SUNDAY, AUG 30</div></div>
+              <div class="frow" style="height:96px;"><div class="lab">Demos</div><div class="val big">4:00 PM</div></div>
+              <div class="frow" style="height:78px;"><div class="lab">Lineup</div><div class="val">22 BUILDERS</div></div>
+              <div class="frow" style="height:78px;"><div class="lab">Place</div><div class="val">ST-SAUVEUR, QC</div></div>
+            </div>
+
+            <div class="barcode" style="left:200px; top:812px; width:270px; height:112px;">
+              <i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:6px;margin-right:3px"></i><i style="width:2px;margin-right:2px"></i><i style="width:3px;margin-right:4px"></i><i style="width:5px;margin-right:2px"></i><i style="width:2px;margin-right:3px"></i><i style="width:2px;margin-right:2px"></i><i style="width:4px;margin-right:2px"></i><i style="width:6px;margin-right:4px"></i><i style="width:2px;margin-right:2px"></i><i style="width:3px;margin-right:3px"></i><i style="width:2px;margin-right:2px"></i><i style="width:5px;margin-right:2px"></i><i style="width:2px;margin-right:4px"></i><i style="width:3px;margin-right:2px"></i><i style="width:6px;margin-right:2px"></i><i style="width:2px;margin-right:3px"></i><i style="width:4px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:5px;margin-right:3px"></i><i style="width:2px;margin-right:2px"></i><i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:5px"></i><i style="width:6px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:4px;margin-right:3px"></i><i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:5px;margin-right:4px"></i><i style="width:2px;margin-right:2px"></i><i style="width:6px;margin-right:3px"></i><i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:4px;margin-right:2px"></i><i style="width:2px;margin-right:3px"></i><i style="width:5px;margin-right:2px"></i><i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:6px;"></i>
+            </div>
+            <div class="serial" style="left:200px; top:940px;">SER. HCW-2026-0830</div>
+
+            <!-- PARTY stub -->
+            <div class="anton-v" style="left:948px; top:567px; font-size:132px;">PARTY</div>
+            <div class="fields" style="left:560px; top:372px; width:300px;">
+              <div class="frow" style="height:78px;"><div class="lab">Event</div><div class="val">AFTER PARTY</div></div>
+              <div class="frow" style="height:78px;"><div class="lab">Guest</div><div class="val"><span class="slot"></span></div></div>
+              <div class="frow" style="height:96px;"><div class="lab">Doors</div><div class="val big">7:00 PM</div></div>
+              <div class="frow" style="height:78px;"><div class="lab">Access</div><div class="val">INVITE ONLY</div></div>
+              <div class="frow" style="height:78px;"><div class="lab">Dress</div><div class="val">COME AS YOU ARE</div></div>
+            </div>
+
+            <div class="fineprint" style="left:560px; top:892px;">ADMIT ONE · KEEP THIS STUB</div>
+            <div class="fineprint" style="left:560px; top:916px;">A CHALET IN ST-SAUVEUR, QC</div>
+            <!-- lu.ma slot: replace the span below with the handle, e.g. lu.ma/xyz -->
+            <div class="rsvp" style="left:560px; top:950px;">RSVP · <span class="slot"></span></div>
+
+            <!-- overprint: one short pass riding the seam gutter, masked clear of all copy -->
+            <div class="overprint" style="left:-260px; top:640px; width:1700px; transform: rotate(-32deg); transform-origin: center; text-indent:-25px; -webkit-mask-image: linear-gradient(90deg, transparent 40%, #000 43%, #000 52%, transparent 54.5%); mask-image: linear-gradient(90deg, transparent 40%, #000 43%, #000 52%, transparent 54.5%);">INVITE ONLY // INVITE ONLY // INVITE ONLY // INVITE ONLY // INVITE ONLY</div>
+
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">Two Stubs · Square</div>
+    </div>
+
+    <div class="slide-wrap size-45" data-id="stub-45">
+      <div class="slide-frame">
+        <div class="slide stub-45">
+
+          <!-- panels: DEMOS top / PARTY bottom -->
+          <div class="panel" style="left:0; top:0; width:1080px; height:620px;"></div>
+          <div class="panel tinted" style="left:0; top:620px; width:1080px; height:730px;"></div>
+          <div class="texgrid"></div>
+          <div class="grain"></div>
+
+          <!-- perforation: die-cut seam at y=620 -->
+          <div class="perf-h" style="top:616px; left:0; right:0;"></div>
+          <div class="bite" style="left:-24px; top:596px;"></div>
+          <div class="bite" style="left:1056px; top:596px;"></div>
+
+          <div class="content">
+
+            <!-- header band -->
+            <div class="hole" style="left:100px; top:52px;"></div>
+            <div class="wordmark" style="left:0; right:0; top:76px;">Hacker Cottage Weekend</div>
+            <div class="hostedby" style="left:0; right:0; top:118px;">Hosted by AGI Ventures Canada</div>
+            <div class="headrule" style="left:64px; right:64px; top:144px;"></div>
+            <div class="numbox" style="right:64px; top:48px;">NO. <span class="blank"></span></div>
+
+            <!-- DEMOS stub: headline + one-liner above the field grid -->
+            <div class="hero" style="left:64px; top:190px; font-size:62px;">ONE NIGHT.</div>
+            <div class="subline" style="left:64px; top:286px;">22 builders demo what they built.</div>
+            <div class="anton-h" style="right:64px; top:150px; font-size:172px;">DEMOS</div>
+
+            <div class="fields" style="left:64px; top:372px; width:288px;">
+              <div class="frow" style="height:96px;"><div class="lab">Event</div><div class="val">THE DEMOS</div></div>
+            </div>
+            <div class="fields" style="left:400px; top:372px; width:288px;">
+              <div class="frow" style="height:96px;"><div class="lab">Date</div><div class="val">SUNDAY, AUG 30</div></div>
+            </div>
+            <div class="fields" style="left:736px; top:372px; width:280px;">
+              <div class="frow" style="height:96px;"><div class="lab">Demos</div><div class="val big">4:00 PM</div></div>
+            </div>
+            <div class="fields" style="left:64px; top:468px; width:288px;">
+              <div class="frow" style="height:96px;"><div class="lab">Lineup</div><div class="val">22 BUILDERS</div></div>
+            </div>
+            <div class="fields" style="left:400px; top:468px; width:288px;">
+              <div class="frow" style="height:96px;"><div class="lab">Place</div><div class="val">ST-SAUVEUR, QC</div></div>
+            </div>
+            <!-- rule-only third cell: completes row two of the ruled grid -->
+            <div class="fields" style="left:736px; top:468px; width:280px;">
+              <div class="frow" style="height:96px;"></div>
+            </div>
+
+            <!-- PARTY stub: headline + one-liner above the field grid -->
+            <div class="hero" style="left:64px; top:664px; font-size:62px;">TWO STUBS.</div>
+            <div class="subline" style="left:64px; top:760px;">Then the party runs late.</div>
+
+            <div class="fields" style="left:64px; top:824px; width:288px;">
+              <div class="frow" style="height:96px;"><div class="lab">Event</div><div class="val">AFTER PARTY</div></div>
+            </div>
+            <div class="fields" style="left:400px; top:824px; width:288px;">
+              <div class="frow" style="height:96px;"><div class="lab">Guest</div><div class="val"><span class="slot"></span></div></div>
+            </div>
+            <div class="fields" style="left:736px; top:824px; width:280px;">
+              <div class="frow" style="height:96px;"><div class="lab">Doors</div><div class="val big">7:00 PM</div></div>
+            </div>
+            <div class="fields" style="left:64px; top:920px; width:288px;">
+              <div class="frow" style="height:96px;"><div class="lab">Access</div><div class="val">INVITE ONLY</div></div>
+            </div>
+            <div class="fields" style="left:400px; top:920px; width:288px;">
+              <div class="frow" style="height:96px;"><div class="lab">Dress</div><div class="val">COME AS YOU ARE</div></div>
+            </div>
+            <!-- rule-only third cell: mirrors the DEMOS grid completion -->
+            <div class="fields" style="left:736px; top:920px; width:280px;">
+              <div class="frow" style="height:96px;"></div>
+            </div>
+
+            <!-- PARTY bleeds decisively off the bottom edge -->
+            <div class="anton-h" style="right:64px; top:1240px; font-size:150px;">PARTY</div>
+
+            <div class="barcode" style="left:64px; top:1088px; width:270px; height:100px;">
+              <i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:6px;margin-right:3px"></i><i style="width:2px;margin-right:2px"></i><i style="width:3px;margin-right:4px"></i><i style="width:5px;margin-right:2px"></i><i style="width:2px;margin-right:3px"></i><i style="width:2px;margin-right:2px"></i><i style="width:4px;margin-right:2px"></i><i style="width:6px;margin-right:4px"></i><i style="width:2px;margin-right:2px"></i><i style="width:3px;margin-right:3px"></i><i style="width:2px;margin-right:2px"></i><i style="width:5px;margin-right:2px"></i><i style="width:2px;margin-right:4px"></i><i style="width:3px;margin-right:2px"></i><i style="width:6px;margin-right:2px"></i><i style="width:2px;margin-right:3px"></i><i style="width:4px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:5px;margin-right:3px"></i><i style="width:2px;margin-right:2px"></i><i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:5px"></i><i style="width:6px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:4px;margin-right:3px"></i><i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:5px;margin-right:4px"></i><i style="width:2px;margin-right:2px"></i><i style="width:6px;margin-right:3px"></i><i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:4px;margin-right:2px"></i><i style="width:2px;margin-right:3px"></i><i style="width:5px;margin-right:2px"></i><i style="width:3px;margin-right:2px"></i><i style="width:2px;margin-right:2px"></i><i style="width:6px;"></i>
+            </div>
+            <div class="serial" style="left:400px; top:1100px;">SER. HCW-2026-0830</div>
+            <div class="fineprint" style="left:400px; top:1138px;">ADMIT ONE · KEEP THIS STUB</div>
+            <!-- lu.ma slot: replace the span below with the handle, e.g. lu.ma/xyz -->
+            <div class="rsvp" style="right:64px; top:1100px;">RSVP · <span class="slot"></span></div>
+
+            <!-- overprint: one long pass crossing the seam through the open gutters, masked clear of all copy -->
+            <div class="overprint" style="left:-260px; top:680px; width:1700px; transform: rotate(-32deg); transform-origin: center; -webkit-mask-image: linear-gradient(90deg, transparent 27%, #000 30%, #000 75%, transparent 79%); mask-image: linear-gradient(90deg, transparent 27%, #000 30%, #000 75%, transparent 79%);">INVITE ONLY // INVITE ONLY // INVITE ONLY // INVITE ONLY // INVITE ONLY</div>
+
+          </div>
+        </div>
+      </div>
+      <div class="slide-label">Two Stubs · 4:5</div>
+    </div>
+  </div>
+</div>
+<div class="deck-golden">
+  <div class="concept-title">Golden Hour · dusk poster</div>
+  <div class="deck">
+<div class="slide-wrap size-sq" data-id="golden-sq">
+      <div class="slide-frame">
+        <div class="slide golden-sq">
+          <img class="photo" src="images/chalet-dock.jpg" alt="" />
+          <div class="layer grade-multiply"></div>
+          <div class="layer grade-sun"></div>
+          <div class="layer grade-vignette"></div>
+          <div class="layer scrim"></div>
+          <div class="layer scrim-text"></div>
+          <div class="content">
+            <div class="kicker kicker-top">Hacker Cottage<br/>Weekend</div>
+            <div class="type-block">
+              <h2 class="title">The lake gets<br/>the first look</h2>
+              <div class="tagline">Then you do. 22 builders show a weekend's work<br/>as the light goes down.</div>
+              <div class="facts">
+                <div class="row"><span class="v">Sunday, Aug 30</span><span class="sep">·</span><span class="v">St-Sauveur, QC</span></div>
+                <div class="row"><span class="k">Demos</span> <span class="v">4:00 PM</span><span class="sep">·</span><span class="k">After party</span> <span class="v">7:00 PM</span><span class="sep">·</span><span class="v">Invite only</span></div>
+              </div>
+            </div>
+            <div class="baseline-row">
+              <span class="hosted-by">Hosted by AGI Ventures Canada</span>
+              <span class="rsvp-slot"><!-- reserved: lu.ma handle drops in here --></span>
+            </div>
+          </div>
+          <div class="layer grain"></div>
+        </div>
+      </div>
+      <div class="slide-label">Golden Hour · Square</div>
+    </div>
+
+    <div class="slide-wrap size-45" data-id="golden-45">
+      <div class="slide-frame">
+        <div class="slide golden-45">
+          <img class="photo" src="images/chalet-dock.jpg" alt="" />
+          <div class="layer grade-multiply"></div>
+          <div class="layer grade-sun"></div>
+          <div class="layer grade-vignette"></div>
+          <div class="layer scrim"></div>
+          <div class="layer scrim-text"></div>
+          <div class="content">
+            <div class="kicker kicker-top">Hacker Cottage Weekend</div>
+            <div class="type-block">
+              <h2 class="title">The lake gets<br/>the first look</h2>
+              <div class="tagline">Then you do. 22 builders show a weekend's work<br/>as the light goes down.</div>
+              <div class="facts">
+                <div class="row"><span class="v">Sunday, Aug 30</span><span class="sep">·</span><span class="v">St-Sauveur, QC</span></div>
+                <div class="row"><span class="k">Demos</span> <span class="v">4:00 PM</span><span class="sep">·</span><span class="k">After party</span> <span class="v">7:00 PM</span><span class="sep">·</span><span class="v">Invite only</span></div>
+              </div>
+            </div>
+            <div class="baseline-row">
+              <span class="hosted-by">Hosted by AGI Ventures Canada</span>
+              <span class="rsvp-slot"><!-- reserved: lu.ma handle drops in here --></span>
+            </div>
+          </div>
+          <div class="layer grain"></div>
+        </div>
+      </div>
+      <div class="slide-label">Golden Hour · 4:5</div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+  (function(){
+    var only = new URLSearchParams(location.search).get('only');
+    if (only) {
+      document.body.classList.add('export');
+      var w = document.querySelector('.slide-wrap[data-id="' + only + '"]');
+      if (w) w.classList.add('show');
+    }
+  })();
+</script>
+</body>
+</html>
