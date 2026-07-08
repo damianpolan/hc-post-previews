@@ -65,32 +65,21 @@
   /* ── cards ── */
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
 
-  .mock { position: relative; aspect-ratio: 1212 / 690; overflow: hidden; background: #fff; }
-  .mock img { position: absolute; inset: 0; width: 100%; height: auto; display: block; }
-  .art {
-    position: absolute; transform-origin: center;
-    mix-blend-mode: multiply; opacity: 0.94;
-    filter: drop-shadow(0.6px 0.9px 0px rgba(60,45,30,0.28)) drop-shadow(-0.4px -0.4px 0.3px rgba(255,255,255,0.5));
-  }
-  .art svg { width: 100%; height: auto; display: block; }
-  /* light thread on dark fabric: normal blend */
-  .art.light { mix-blend-mode: normal; opacity: 0.97; filter: drop-shadow(0.7px 1px 0.4px rgba(0,0,0,0.5)); }
-
-  .swatchrow { display: flex; border-top: 1px solid var(--line); }
+  /* each design shown large on the fabric color it stitches onto */
   .swatch {
-    flex: 0 0 44%; display: flex; align-items: center; justify-content: center; padding: 18px 14px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 46px 30px; min-height: 216px;
     background:
-      repeating-linear-gradient(63deg, rgba(120,100,75,0.06) 0 1.5px, rgba(255,255,255,0.05) 1.5px 3px),
+      repeating-linear-gradient(63deg, rgba(120,100,75,0.05) 0 1.5px, rgba(255,255,255,0.05) 1.5px 3px),
       #D6C6AB;
-    min-height: 130px;
   }
   .swatch.dark {
     background:
       repeating-linear-gradient(63deg, rgba(0,0,0,0.16) 0 1.5px, rgba(255,255,255,0.05) 1.5px 3px),
       #2A1E14;
   }
-  .swatch svg { width: 82%; height: auto; max-height: 110px; }
-  .meta { padding: 16px 18px 18px; flex: 1; }
+  .swatch svg { width: auto; height: auto; max-width: 86%; max-height: 148px; }
+  .meta { padding: 18px 20px 20px; border-top: 1px solid var(--line); }
   .meta h3 { font-family: var(--display); font-weight: 700; font-size: 15.5px; color: var(--ivory); letter-spacing: 0.01em; }
   .meta p { margin-top: 7px; font-size: 13px; line-height: 1.5; color: rgba(226,212,188,0.65); }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
@@ -101,10 +90,6 @@
   }
   .chip .dot { width: 8px; height: 8px; }
   .chip.flag { border-color: rgba(168,71,43,0.5); color: #d08a6e; }
-
-  /* swatch-only cards (back placements, tumbler) */
-  .swatch.hero { flex: 1; min-height: 210px; }
-  .swatch.hero svg { max-height: 170px; width: 72%; }
 
   /* ── tumbler ── */
   .tumbler-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 24px; }
@@ -140,9 +125,9 @@
     <symbol id="d-wordmark" viewBox="0 0 300 130">
       <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">HACKER</text>
       <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">COTTAGE</text>
-      <line x1="52" y1="103" x2="112" y2="103" stroke="#C8923C" stroke-width="3"/>
+      <line x1="52" y1="106" x2="79" y2="106" stroke="#C8923C" stroke-width="3"/>
       <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#1C1410">WEEKEND</text>
-      <line x1="188" y1="103" x2="248" y2="103" stroke="#C8923C" stroke-width="3"/>
+      <line x1="221" y1="106" x2="248" y2="106" stroke="#C8923C" stroke-width="3"/>
     </symbol>
 
     <!-- 3 · prompt -->
@@ -168,23 +153,26 @@
     <!-- 6 · badge -->
     <symbol id="d-badge" viewBox="0 0 220 220">
       <circle cx="110" cy="110" r="104" fill="none" stroke="#1C1410" stroke-width="5"/>
-      <circle cx="110" cy="110" r="70" fill="none" stroke="#1C1410" stroke-width="2.5"/>
-      <path id="badgetop" d="M 27.3 140.1 A 88 88 0 1 1 192.7 140.1" fill="none"/>
-      <text font-family="'Space Mono',monospace" font-weight="700" font-size="20" letter-spacing="2.4" fill="#1C1410">
+      <circle cx="110" cy="110" r="79" fill="none" stroke="#1C1410" stroke-width="2"/>
+      <!-- top arc: reads left→right over the crown, kept clear of the center scene -->
+      <path id="badgetop" d="M 23.6 93.2 A 88 88 0 0 1 196.4 93.2" fill="none"/>
+      <text font-family="'Space Mono',monospace" font-weight="700" font-size="12" letter-spacing="1.2" fill="#1C1410">
         <textPath href="#badgetop" startOffset="50%" text-anchor="middle">HACKER COTTAGE WEEKEND</textPath>
       </text>
-      <rect x="104" y="191" width="12" height="12" transform="rotate(45 110 197)" fill="#C8923C"/>
+      <!-- side + bottom diamonds anchor the ring -->
+      <rect x="12.5" y="104" width="11" height="11" transform="rotate(45 18 109.5)" fill="#C8923C"/>
+      <rect x="196.5" y="104" width="11" height="11" transform="rotate(45 202 109.5)" fill="#C8923C"/>
       <!-- center scene -->
       <g stroke="#1C1410" stroke-width="5.5" stroke-linecap="round" fill="none">
-        <line x1="84" y1="128" x2="118" y2="72"/>
-        <line x1="140" y1="128" x2="106" y2="72"/>
+        <line x1="84" y1="126" x2="118" y2="72"/>
+        <line x1="140" y1="126" x2="106" y2="72"/>
       </g>
-      <rect x="106" y="108" width="12" height="20" rx="1" fill="#C8923C"/>
+      <rect x="106" y="106" width="12" height="20" rx="1" fill="#C8923C"/>
       <g stroke="#A8472B" stroke-width="4" stroke-linecap="round" fill="none">
-        <path d="M 62 128 L 70 110 L 78 128"/>
-        <path d="M 146 128 L 154 110 L 162 128"/>
+        <path d="M 62 126 L 70 108 L 78 126"/>
+        <path d="M 146 126 L 154 108 L 162 126"/>
       </g>
-      <line x1="50" y1="128" x2="174" y2="128" stroke="#1C1410" stroke-width="4" stroke-linecap="round"/>
+      <line x1="50" y1="126" x2="174" y2="126" stroke="#1C1410" stroke-width="4" stroke-linecap="round"/>
       <text x="110" y="156" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="14" letter-spacing="1.5" fill="#1C1410">AUG 28–31</text>
     </symbol>
 
@@ -294,9 +282,9 @@
     <symbol id="d-wordmark-cream" viewBox="0 0 300 130">
       <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#E2D4BC">HACKER</text>
       <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#E2D4BC">COTTAGE</text>
-      <line x1="52" y1="103" x2="112" y2="103" stroke="#C8923C" stroke-width="3"/>
+      <line x1="52" y1="106" x2="79" y2="106" stroke="#C8923C" stroke-width="3"/>
       <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#E2D4BC">WEEKEND</text>
-      <line x1="188" y1="103" x2="248" y2="103" stroke="#C8923C" stroke-width="3"/>
+      <line x1="221" y1="106" x2="248" y2="106" stroke="#C8923C" stroke-width="3"/>
     </symbol>
     <symbol id="d-think-rust" viewBox="0 0 340 84">
       <text x="170" y="30" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="26" letter-spacing="1" fill="#1C1410">THINK IN YEARS.</text>
@@ -305,9 +293,9 @@
     <symbol id="d-wordmark-tonal" viewBox="0 0 300 130">
       <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#B5A183">HACKER</text>
       <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#B5A183">COTTAGE</text>
-      <line x1="52" y1="103" x2="112" y2="103" stroke="#B5A183" stroke-width="3"/>
+      <line x1="52" y1="106" x2="79" y2="106" stroke="#B5A183" stroke-width="3"/>
       <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#B5A183">WEEKEND</text>
-      <line x1="188" y1="103" x2="248" y2="103" stroke="#B5A183" stroke-width="3"/>
+      <line x1="221" y1="106" x2="248" y2="106" stroke="#B5A183" stroke-width="3"/>
     </symbol>
 
     <!-- tumbler bodies -->
@@ -331,7 +319,7 @@
 
   <div class="eyebrow">Hacker Cottage Weekend · Merch · Round 1</div>
   <h1>Hat concepts</h1>
-  <p class="intro">Fifteen embroidery concepts for the tan dad cap, plus tumbler adaptations. Every design here respects real embroidery limits: bold shapes, satin-stitch friendly text, and one to three thread colors. Mockups are concept previews. Final artwork gets digitized by the embroiderer.</p>
+  <p class="intro">Fifteen embroidery designs for the tan dad cap, plus tumbler adaptations. Each is shown on the fabric color it would stitch onto. Every design respects real embroidery limits: bold shapes, satin-stitch friendly text, and one to three thread colors. Final artwork gets digitized by the embroiderer.</p>
 
   <div class="specs">
     <div class="spec">
@@ -368,10 +356,6 @@
     <div class="grid">
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:27%; top:31%; width:17%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 200 160"><use href="#d-mark"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 200 160"><use href="#d-mark"/></svg></div>
           <div class="meta">
@@ -387,10 +371,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:22%; top:29%; width:27%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 300 130"><use href="#d-wordmark"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 300 130"><use href="#d-wordmark"/></svg></div>
           <div class="meta">
@@ -406,10 +386,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:22%; top:34%; width:28%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 320 40"><use href="#d-prompt"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 320 40"><use href="#d-prompt"/></svg></div>
           <div class="meta">
@@ -425,8 +401,8 @@
       </div>
 
       <div class="card">
-        <div class="swatchrow" style="border-top:none; flex:1;">
-          <div class="swatch hero"><svg viewBox="0 0 260 70"><use href="#d-backarch"/></svg></div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 260 70"><use href="#d-backarch"/></svg></div>
           <div class="meta">
             <h3>The back arch</h3>
             <p>hackercottage.com arched over the strap opening. Pairs with any front design, or stands alone on an otherwise blank hat.</p>
@@ -453,10 +429,6 @@
     <div class="grid">
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:21.5%; top:31%; width:29%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 340 84"><use href="#d-think"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 340 84"><use href="#d-think"/></svg></div>
           <div class="meta">
@@ -472,10 +444,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:27.5%; top:29%; width:20%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 220 220"><use href="#d-badge"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 220 220"><use href="#d-badge"/></svg></div>
           <div class="meta">
@@ -491,10 +459,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:22%; top:29%; width:28%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 320 110"><use href="#d-lockup"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 320 110"><use href="#d-lockup"/></svg></div>
           <div class="meta">
@@ -510,10 +474,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:25%; top:31%; width:22%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 240 90"><use href="#d-tag"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 240 90"><use href="#d-tag"/></svg></div>
           <div class="meta">
@@ -542,10 +502,6 @@
     <div class="grid">
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:28.5%; top:30%; width:13%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 140 150"><use href="#d-wifipine"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 140 150"><use href="#d-wifipine"/></svg></div>
           <div class="meta">
@@ -561,10 +517,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:23%; top:31.5%; width:26%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 320 110"><use href="#d-git"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 320 110"><use href="#d-git"/></svg></div>
           <div class="meta">
@@ -580,8 +532,8 @@
       </div>
 
       <div class="card">
-        <div class="swatchrow" style="border-top:none; flex:1;">
-          <div class="swatch hero"><svg viewBox="0 0 200 80"><use href="#d-numbered"/></svg></div>
+        <div class="swatchrow">
+          <div class="swatch"><svg viewBox="0 0 200 80"><use href="#d-numbered"/></svg></div>
           <div class="meta">
             <h3>One of twenty-two</h3>
             <p>Each hat is numbered on the back: 01/22 through 22/22. Your number is your spot in the cohort. Costs more per unit since every hat is a unique run, but it turns merch into membership.</p>
@@ -596,10 +548,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:28.5%; top:36.5%; width:15%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 170 110"><use href="#d-ascii"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 170 110"><use href="#d-ascii"/></svg></div>
           <div class="meta">
@@ -615,10 +563,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:22.5%; top:33%; width:28%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 320 60"><use href="#d-loading"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 320 60"><use href="#d-loading"/></svg></div>
           <div class="meta">
@@ -634,10 +578,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:23.5%; top:31%; width:25%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 280 90"><use href="#d-coords"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 280 90"><use href="#d-coords"/></svg></div>
           <div class="meta">
@@ -654,12 +594,8 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:32%; top:36%; width:4.7%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 60 80"><use href="#d-cursor"/></svg></span>
-        </div>
         <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 60 80" style="width:22%"><use href="#d-cursor"/></svg></div>
+          <div class="swatch"><svg viewBox="0 0 60 80" style="max-height:118px"><use href="#d-cursor"/></svg></div>
           <div class="meta">
             <h3>The cursor</h3>
             <p>A single amber block. A cursor waiting for input, dead center on a blank hat. The boldest move is the smallest stitch count in the set.</p>
@@ -755,10 +691,6 @@
     <div class="grid">
 
       <div class="card">
-        <div class="mock" style="background:#181210">
-          <img src="assets/hat-espresso.png" alt="" />
-          <span class="art light" style="left:27%; top:31%; width:17%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 200 160"><use href="#d-mark-cream"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch dark"><svg viewBox="0 0 200 160"><use href="#d-mark-cream"/></svg></div>
           <div class="meta">
@@ -773,10 +705,6 @@
       </div>
 
       <div class="card">
-        <div class="mock" style="background:#181210">
-          <img src="assets/hat-espresso.png" alt="" />
-          <span class="art light" style="left:22%; top:29%; width:27%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 300 130"><use href="#d-wordmark-cream"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch dark"><svg viewBox="0 0 300 130"><use href="#d-wordmark-cream"/></svg></div>
           <div class="meta">
@@ -791,10 +719,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:21.5%; top:31%; width:29%; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 340 84"><use href="#d-think-rust"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 340 84"><use href="#d-think-rust"/></svg></div>
           <div class="meta">
@@ -809,10 +733,6 @@
       </div>
 
       <div class="card">
-        <div class="mock">
-          <img src="assets/hat-clean.png" alt="" />
-          <span class="art" style="left:22%; top:29%; width:27%; opacity:0.55; transform: perspective(700px) rotateY(-16deg) rotateX(5deg) rotate(-6deg);"><svg viewBox="0 0 300 130"><use href="#d-wordmark-tonal"/></svg></span>
-        </div>
         <div class="swatchrow">
           <div class="swatch"><svg viewBox="0 0 300 130" style="opacity:0.75"><use href="#d-wordmark-tonal"/></svg></div>
           <div class="meta">
