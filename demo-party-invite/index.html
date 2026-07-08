@@ -707,6 +707,276 @@
 }
 </style>
 <style>
+@scope (.deck-lakeside) {
+
+  @font-face {
+    font-family: "Instrument Serif";
+    src: url("fonts/instrument-serif-regular.ttf") format("truetype");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Instrument Serif";
+    src: url("fonts/instrument-serif-italic.ttf") format("truetype");
+    font-weight: 400; font-style: italic; font-display: block;
+  }
+
+  :scope {
+    --ink: #1A1613;
+    --stone: #9B9286;
+    --ivory: #E2D4BC;
+    --cream: #D6C6AB;
+    --amber: #C8923C;
+    --champagne: #E9CD97;
+
+    --display: "Instrument Serif", serif;
+    --body: "DM Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --wordmark: "Space Mono", ui-monospace, monospace;
+
+    --preview-scale: 0.4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0e0a07; color: var(--ivory); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+
+  .stage { min-height: 100vh; padding: 56px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 48px; }
+  .stage-header { text-align: center; color: var(--ivory); max-width: 720px; }
+  .stage-header .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); }
+  .stage-header h1 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 38px; margin-top: 14px; color: var(--ivory); }
+
+  .deck { display: grid; grid-template-columns: repeat(2, auto); gap: 48px 40px; align-items: start; justify-items: center; }
+  @media (max-width: 1100px) { .deck { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { :scope { --preview-scale: 0.33; } .stage { padding: 40px 12px 80px; } }
+
+  .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .slide-wrap.size-sq { --w: 1080px; --h: 1080px; }
+  .slide-wrap.size-45 { --w: 1080px; --h: 1350px; }
+  .slide-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(214,198,171,0.55); }
+
+  .slide-frame {
+    width: calc(var(--w) * var(--preview-scale));
+    height: calc(var(--h) * var(--preview-scale));
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+    background: #14100C;
+  }
+  .slide {
+    width: var(--w); height: var(--h);
+    position: relative; overflow: hidden;
+    transform: scale(var(--preview-scale)); transform-origin: top left;
+    background: #14100C; color: var(--ivory);
+  }
+
+  /* ============ GOLDEN HOUR ============ */
+
+  /* Layer 1: photo, warmed + darkened toward dusk */
+  .photo {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 1;
+    /* committed dusk grade (round-3 art director): brightness low enough that
+       the kayak hull, dock rail and pool-ladder chrome sink below speculars */
+    filter: brightness(0.58) sepia(0.62) saturate(0.92) contrast(1.16) hue-rotate(-8deg);
+  }
+  /* the source photo cover-fits the square with zero vertical slack, so the
+     dusk recrop is a top-anchored overheight zoom: chairs + dock drop below the
+     title and the stray branch leaves the top-right corner */
+  .lakeside-sq .photo { height: 100%; object-position: 14% 50%; }
+  .lakeside-45 .photo { object-position: 30% 50%; }
+
+  .layer { position: absolute; inset: 0; }
+
+  /* Layer 2: multiply — sink the sky into night, amber into the top */
+  .grade-multiply {
+    z-index: 2; mix-blend-mode: multiply;
+    /* dusk sky: violet-leaning near-black at the zenith (round-5: steps the
+       grey-olive sky toward night), amber band at the horizon */
+    background: linear-gradient(188deg,
+      rgba(26,19,28,0.62) 0%,
+      rgba(46,33,23,0.32) 26%,
+      rgba(200,146,60,0.50) 50%,
+      rgba(60,42,28,0.44) 72%,
+      rgba(24,17,13,0.72) 100%);
+  }
+
+  /* Layer 3: screen — fake low sun over the far treeline, glint on the water */
+  .grade-sun {
+    z-index: 3; mix-blend-mode: screen;
+    background: radial-gradient(60% 46% at 76% 50%,
+      rgba(255,224,156,0.72) 0%,
+      rgba(216,152,66,0.36) 22%,
+      rgba(200,146,60,0.14) 36%,
+      transparent 48%);
+  }
+  /* 4:5 sun raised above the treeline (round-3 art director); round-5: bloom
+     refeathered with a long low-alpha tail so no circular edge is detectable
+     against the flat sky */
+  .lakeside-45 .grade-sun {
+    background: radial-gradient(74% 56% at 74% 40%,
+      rgba(255,224,156,0.50) 0%,
+      rgba(216,152,66,0.27) 18%,
+      rgba(200,146,60,0.12) 32%,
+      rgba(200,146,60,0.05) 46%,
+      rgba(200,146,60,0.02) 58%,
+      transparent 72%);
+  }
+
+  /* Layer 4: multiply vignette */
+  .grade-vignette {
+    z-index: 4; mix-blend-mode: multiply;
+    /* centered on the sun so the left edge and top corners fall into dusk */
+    background: radial-gradient(115% 100% at 68% 44%,
+      transparent 42%,
+      rgba(15,10,7,0.58) 100%);
+  }
+
+  /* Layer 5: ease-out dusk scrim rising from the bottom */
+  .scrim {
+    z-index: 5;
+    /* round-3: cooled a step off espresso and deepened through the 24-48%
+       band so the lifted info block sits on quiet dark water at DM size */
+    background: linear-gradient(to top,
+      rgba(11,9,10,0.90) 0%,
+      rgba(11,9,10,0.83) 8%,
+      rgba(11,9,10,0.74) 16%,
+      rgba(11,9,10,0.64) 24%,
+      rgba(11,9,10,0.57) 30%,
+      rgba(11,9,10,0.50) 36%,
+      rgba(11,9,10,0.44) 42%,
+      rgba(11,9,10,0.36) 48%,
+      rgba(11,9,10,0.26) 54%,
+      rgba(11,9,10,0.16) 60%,
+      rgba(11,9,10,0.07) 66%,
+      rgba(11,9,10,0.00) 73%);
+  }
+  .lakeside-45 .scrim {
+    background: linear-gradient(to top,
+      rgba(11,9,10,0.90) 0%,
+      rgba(11,9,10,0.82) 7%,
+      rgba(11,9,10,0.71) 14%,
+      rgba(11,9,10,0.60) 21%,
+      rgba(11,9,10,0.50) 27%,
+      rgba(11,9,10,0.40) 33%,
+      rgba(11,9,10,0.30) 39%,
+      rgba(11,9,10,0.20) 45%,
+      rgba(11,9,10,0.11) 51%,
+      rgba(11,9,10,0.04) 57%,
+      rgba(11,9,10,0.00) 63%);
+  }
+
+  /* Layer 5b: text-column scrim — bottom/left-anchored diagonal so every line
+     of type sits on a controlled value; monotonic falloff (no stop cliffs) so
+     it can never read as a plate, and the sun side stays luminous */
+  .scrim-text {
+    z-index: 5;
+    background: linear-gradient(58deg,
+      rgba(24,15,10,0.40) 0%,
+      rgba(24,15,10,0.30) 30%,
+      rgba(24,15,10,0.16) 52%,
+      rgba(24,15,10,0.05) 68%,
+      rgba(24,15,10,0.00) 82%);
+  }
+
+  /* Layer 9: film grain over everything, unifies the composite + dithers the gradients */
+  .grain {
+    z-index: 9; mix-blend-mode: overlay; opacity: 0.07; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+  }
+
+  /* ---- type ---- */
+  .content { position: absolute; inset: 0; z-index: 6; }
+
+  .type-block {
+    position: absolute; left: 88px; right: 88px;
+    display: flex; flex-direction: column; align-items: flex-start;
+  }
+  .lakeside-sq .type-block { bottom: 299px; }   /* round-5: 7px down repays the taller tagline so the title cap-top holds y>=216; facts end ~y=759, inside the og-crop edge at ~y=822 */
+  .lakeside-45 .type-block { bottom: 300px; }   /* raised so the title claims part of the sky band */
+
+  /* wordmark rides the dark sky, film-poster style; on the square it stacks
+     top-right, high in the clear sky above the title cap line (round-5
+     adjudication: losing the tag in the 1.91:1 og crop is accepted; the
+     ~55px collision with "gets" at top:262 was worse) */
+  .kicker-top { position: absolute; top: 96px; left: 88px; }
+  .lakeside-sq .kicker-top { top: 150px; left: auto; right: 88px; text-align: right; }
+
+  .kicker {
+    font-family: var(--wordmark); font-weight: 700;
+    font-size: 21px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--ivory); opacity: 0.92;
+  }
+  .lakeside-sq .kicker { font-size: 17px; letter-spacing: 0.22em; line-height: 1.75; opacity: 0.8; }
+  .lakeside-45 .kicker { font-size: 24px; }
+
+  /* option 4: the house display voice (site headline = Space Mono italic) */
+  .title {
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-style: italic; font-weight: 400;
+    font-size: 94px; line-height: 1.16; letter-spacing: 0;
+    color: var(--ivory);
+    text-shadow: 0 1px 2px rgba(15,10,7,0.5), 0 2px 44px rgba(15,10,7,0.35);
+    margin-top: 0;
+  }
+  .lakeside-45 .title { font-size: 98px; }
+  /* the site's amber title-rule ties the poster to the brand at a glance */
+  .title-rule { width: 110px; height: 5px; background: #C8923C; margin-top: 28px; }
+
+  .tagline {
+    font-family: var(--body); font-weight: 400;
+    font-size: 34px; letter-spacing: 0; line-height: 1.5;
+    color: rgba(226,212,188,0.94); opacity: 1;
+    margin-top: 26px;
+    /* round-3: outer glow layers pulled back so no dark plates form over the
+       dock wood now that the grade itself is dusk-deep */
+    text-shadow: 0 1px 2px rgba(15,10,7,0.65), 0 0 16px rgba(15,10,7,0.40), 0 0 36px rgba(15,10,7,0.28);
+  }
+
+  .facts {
+    margin-top: 24px; width: fit-content;
+    border-top: 1px solid rgba(200,146,60,0.75);
+    padding-top: 18px;
+    font-family: var(--mono); font-weight: 500;
+    /* option 4: house label voice, JetBrains caps tracked like the site */
+    font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--cream); line-height: 1.85;
+    text-shadow: 0 1px 2px rgba(15,10,7,0.65), 0 0 16px rgba(15,10,7,0.40), 0 0 36px rgba(15,10,7,0.28);
+  }
+  .facts .k { color: #C8923C; opacity: 1; }
+  .facts .v { opacity: 1; }
+  .facts .sep { opacity: 0.5; padding: 0 0.5em; }
+
+  .baseline-row {
+    /* bottom 96 keeps the 4:5 microline inside the central-86% safe area */
+    position: absolute; left: 88px; right: 88px; bottom: 96px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 17px; letter-spacing: 0.06em;
+    color: var(--cream);
+  }
+  /* square: hosted-by rides higher, clearly separated from the og-crop edge */
+  .lakeside-sq .baseline-row { bottom: 150px; }
+  /* round-5: matched to the facts rows' champagne + glow so the credit reads
+     over the dark water and survives thumb400 */
+  .hosted-by {
+    color: var(--cream); opacity: 0.96;
+    text-shadow: 0 1px 2px rgba(15,10,7,0.65), 0 0 16px rgba(15,10,7,0.40), 0 0 36px rgba(15,10,7,0.28);
+  }
+  /* reserved microline: drop a lu.ma handle in here later with one edit */
+  .rsvp-slot { opacity: 0.45; min-height: 1em; letter-spacing: 0.14em; }
+
+  /* Export mode (?only=<id>) */
+
+
+
+
+
+
+
+
+
+
+}
+</style>
+<style>
 /* hoisted export-mode rules (cannot live inside @scope) */
 body.export .deck-hearth .stage, body.export .deck-hearth .stage-header { all: unset; }
 body.export .deck-hearth .stage-header, body.export .deck-hearth .slide-label { display: none !important; }
@@ -732,6 +1002,14 @@ body.export .deck-golden .slide-wrap { display: none; }
 body.export .deck-golden .slide-wrap.show { display: block; }
 body.export .deck-golden .slide-frame { width: var(--w); height: var(--h); box-shadow: none; }
 body.export .deck-golden .slide { transform: none; }
+body.export .deck-lakeside .stage, body.export .deck-lakeside .stage-header { all: unset; }
+body.export .deck-lakeside .stage-header, body.export .deck-lakeside .slide-label { display: none !important; }
+body.export .deck-lakeside .stage { padding: 0; gap: 0; display: block; }
+body.export .deck-lakeside .deck { display: block; }
+body.export .deck-lakeside .slide-wrap { display: none; }
+body.export .deck-lakeside .slide-wrap.show { display: block; }
+body.export .deck-lakeside .slide-frame { width: var(--w); height: var(--h); box-shadow: none; }
+body.export .deck-lakeside .slide { transform: none; }
 </style>
 </head>
 <body>
@@ -740,11 +1018,11 @@ body.export .deck-golden .slide { transform: none; }
   <header class="stage-header">
     <div class="kicker">Invitation · demo day + after party</div>
     <h1>Demos + After Party</h1>
-    <p>Three invitation banners, each in 1080×1080 (Luma cover) and 1080×1350 (4:5). Sunday, Aug 30 · demos 5:00 PM · party 8:00 PM · St-Sauveur, QC. Luma description lives in luma-description.md; send notes in captions.md.</p>
+    <p>Four invitation options, each in 1080×1080 (Luma cover) and 1080×1350 (4:5). Option 4 answers "what would 3 with 1 branding look like": the Golden Hour photo re-typeset in the site's brand. Sunday, Aug 30 · demos 5:00 PM · party 8:00 PM · St-Sauveur, QC.</p>
   </header>
 
 <div class="deck-hearth">
-  <div class="concept-title">Hearth · engraved invitation</div>
+  <div class="concept-title">1 · Hearth · engraved invitation</div>
   <div class="deck">
 <div class="slide-wrap size-sq" data-id="hearth-sq">
       <div class="slide-frame">
@@ -864,7 +1142,7 @@ body.export .deck-golden .slide { transform: none; }
   </div>
 </div>
 <div class="deck-stub">
-  <div class="concept-title">Two Stubs · punched ticket</div>
+  <div class="concept-title">2 · Two Stubs · punched ticket</div>
   <div class="deck">
 <div class="slide-wrap size-sq" data-id="stub-sq">
       <div class="slide-frame">
@@ -1030,7 +1308,7 @@ body.export .deck-golden .slide { transform: none; }
   </div>
 </div>
 <div class="deck-golden">
-  <div class="concept-title">Golden Hour · dusk poster</div>
+  <div class="concept-title">3 · Golden Hour · dusk poster</div>
   <div class="deck">
 <div class="slide-wrap size-sq" data-id="golden-sq">
       <div class="slide-frame">
@@ -1090,6 +1368,72 @@ body.export .deck-golden .slide { transform: none; }
         </div>
       </div>
       <div class="slide-label">Golden Hour · 4:5</div>
+    </div>
+  </div>
+</div>
+<div class="deck-lakeside">
+  <div class="concept-title">4 · Golden Hour in house brand (3 with 1 branding)</div>
+  <div class="deck">
+<div class="slide-wrap size-sq" data-id="lakeside-sq">
+      <div class="slide-frame">
+        <div class="slide lakeside-sq">
+          <img class="photo" src="images/chalet-dock.jpg" alt="" />
+          <div class="layer grade-multiply"></div>
+          <div class="layer grade-sun"></div>
+          <div class="layer grade-vignette"></div>
+          <div class="layer scrim"></div>
+          <div class="layer scrim-text"></div>
+          <div class="content">
+            <div class="kicker kicker-top">Hacker Cottage<br/>Weekend</div>
+            <div class="type-block">
+              <h2 class="title">Demos & the<br/>after party</h2>
+              <div class="title-rule"></div>
+              <div class="tagline">22 builders show what they built in a weekend.</div>
+              <div class="facts">
+                <div class="row"><span class="v">Sunday, Aug 30</span><span class="sep">·</span><span class="v">St-Sauveur, QC</span></div>
+                <div class="row"><span class="k">Demos</span> <span class="v">5:00 PM</span><span class="sep">·</span><span class="k">After party</span> <span class="v">8:00 PM</span><span class="sep">·</span><span class="v">Invite only</span></div>
+              </div>
+            </div>
+            <div class="baseline-row">
+              <span class="hosted-by">Hosted by AGI Ventures Canada</span>
+              <span class="rsvp-slot"><!-- reserved: lu.ma handle drops in here --></span>
+            </div>
+          </div>
+          <div class="layer grain"></div>
+        </div>
+      </div>
+      <div class="slide-label">Option 4 · Square</div>
+    </div>
+
+    <div class="slide-wrap size-45" data-id="lakeside-45">
+      <div class="slide-frame">
+        <div class="slide lakeside-45">
+          <img class="photo" src="images/chalet-dock.jpg" alt="" />
+          <div class="layer grade-multiply"></div>
+          <div class="layer grade-sun"></div>
+          <div class="layer grade-vignette"></div>
+          <div class="layer scrim"></div>
+          <div class="layer scrim-text"></div>
+          <div class="content">
+            <div class="kicker kicker-top">Hacker Cottage Weekend</div>
+            <div class="type-block">
+              <h2 class="title">Demos & the<br/>after party</h2>
+              <div class="title-rule"></div>
+              <div class="tagline">22 builders show what they built in a weekend.</div>
+              <div class="facts">
+                <div class="row"><span class="v">Sunday, Aug 30</span><span class="sep">·</span><span class="v">St-Sauveur, QC</span></div>
+                <div class="row"><span class="k">Demos</span> <span class="v">5:00 PM</span><span class="sep">·</span><span class="k">After party</span> <span class="v">8:00 PM</span><span class="sep">·</span><span class="v">Invite only</span></div>
+              </div>
+            </div>
+            <div class="baseline-row">
+              <span class="hosted-by">Hosted by AGI Ventures Canada</span>
+              <span class="rsvp-slot"><!-- reserved: lu.ma handle drops in here --></span>
+            </div>
+          </div>
+          <div class="layer grain"></div>
+        </div>
+      </div>
+      <div class="slide-label">Option 4 · 4:5</div>
     </div>
   </div>
 </div>
