@@ -893,20 +893,16 @@
   .lakeside-sq .type-block { bottom: 299px; }   /* round-5: 7px down repays the taller tagline so the title cap-top holds y>=216; facts end ~y=759, inside the og-crop edge at ~y=822 */
   .lakeside-45 .type-block { bottom: 300px; }   /* raised so the title claims part of the sky band */
 
-  /* wordmark rides the dark sky, film-poster style; on the square it stacks
-     top-right, high in the clear sky above the title cap line (round-5
-     adjudication: losing the tag in the 1.91:1 og crop is accepted; the
-     ~55px collision with "gets" at top:262 was worse) */
+  /* wordmark rides the dark sky, film-poster style, top-left on both sizes
+     (the title now sits lower-left so the top-left sky is clear) */
   .kicker-top { position: absolute; top: 96px; left: 88px; }
-  .lakeside-sq .kicker-top { top: 150px; left: auto; right: 88px; text-align: right; }
 
   .kicker {
     font-family: var(--wordmark); font-weight: 700;
     font-size: 21px; letter-spacing: 0.32em; text-transform: uppercase;
     color: var(--ivory); opacity: 0.92;
   }
-  .lakeside-sq .kicker { font-size: 17px; letter-spacing: 0.22em; line-height: 1.75; opacity: 0.8; }
-  .lakeside-45 .kicker { font-size: 24px; }
+  .lakeside-sq .kicker, .lakeside-45 .kicker { font-size: 24px; }
 
   /* option 4: the house display voice (site headline = Space Mono italic) */
   .title {
@@ -1384,7 +1380,7 @@ body.export .deck-lakeside .slide { transform: none; }
           <div class="layer scrim"></div>
           <div class="layer scrim-text"></div>
           <div class="content">
-            <div class="kicker kicker-top">Hacker Cottage<br/>Weekend</div>
+            <div class="kicker kicker-top">Hacker Cottage Weekend</div>
             <div class="type-block">
               <h2 class="title">Demos & the<br/>after party</h2>
               <div class="title-rule"></div>
