@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hacker Cottage Weekend — Merch Concepts R1</title>
+<title>Hacker Cottage Weekend — Merch Production Layouts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -36,7 +36,7 @@
     font-family: var(--display); font-style: italic; font-weight: 400;
     font-size: clamp(30px, 5vw, 44px); margin-top: 14px; color: var(--ivory);
   }
-  .intro { margin-top: 14px; max-width: 620px; font-size: 15px; line-height: 1.6; color: rgba(226,212,188,0.72); }
+  .intro { margin-top: 14px; max-width: 650px; font-size: 15px; line-height: 1.6; color: rgba(226,212,188,0.72); }
 
   /* ── spec strip ── */
   .specs {
@@ -47,61 +47,85 @@
   .spec:first-child { border-left: none; }
   .spec .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(226,212,188,0.5); }
   .spec .v { margin-top: 7px; font-size: 13.5px; line-height: 1.45; color: var(--ivory); }
-  .threads { display: flex; gap: 10px; margin-top: 9px; flex-wrap: wrap; }
-  .thread { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10.5px; color: rgba(226,212,188,0.75); }
-  .dot { width: 13px; height: 13px; border-radius: 50%; border: 1px solid rgba(226,212,188,0.25); }
 
   /* ── sections ── */
-  .section { margin-top: 64px; }
+  .section { margin-top: 68px; }
   .sec-head { display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
   .sec-head .num { font-family: var(--mono); font-size: 12px; color: var(--amber); letter-spacing: 0.15em; }
   .sec-head h2 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 24px; }
   .sec-head .note { margin-left: auto; font-family: var(--mono); font-size: 11px; color: rgba(226,212,188,0.45); letter-spacing: 0.06em; text-align: right; }
-  .sec-blurb { margin-top: 12px; font-size: 14px; color: rgba(226,212,188,0.6); max-width: 640px; line-height: 1.55; }
-  .refrow { display: flex; gap: 16px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
-  .refrow img { width: 52px; height: 52px; border-radius: 10px; flex: none; box-shadow: 0 0 0 1px var(--line); }
-  .refrow .sec-blurb { margin-top: 0; }
+  .sec-blurb { margin-top: 12px; font-size: 14px; color: rgba(226,212,188,0.62); max-width: 680px; line-height: 1.55; }
 
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 24px; }
+  /* ── the set (building blocks) ── */
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 24px; }
   @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } .specs { grid-template-columns: 1fr 1fr; } .spec { border-top: 1px solid var(--line); } }
 
-  /* ── cards ── */
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
-
-  /* each design shown large on the fabric color it stitches onto */
   .swatch {
     display: flex; align-items: center; justify-content: center;
-    padding: 46px 30px; min-height: 216px;
+    padding: 44px 30px; min-height: 210px; color: var(--espresso);
     background:
       repeating-linear-gradient(63deg, rgba(120,100,75,0.05) 0 1.5px, rgba(255,255,255,0.05) 1.5px 3px),
       #D6C6AB;
   }
   .swatch.dark {
+    color: #FFFFFF;
     background:
-      repeating-linear-gradient(63deg, rgba(0,0,0,0.16) 0 1.5px, rgba(255,255,255,0.05) 1.5px 3px),
-      #2A1E14;
+      repeating-linear-gradient(63deg, rgba(0,0,0,0.22) 0 1.5px, rgba(255,255,255,0.035) 1.5px 3px),
+      #0E0B08;
   }
-  .swatch svg { width: auto; height: auto; max-width: 86%; max-height: 148px; }
-  .meta { padding: 18px 20px 20px; border-top: 1px solid var(--line); }
-  .meta h3 { font-family: var(--display); font-weight: 700; font-size: 15.5px; color: var(--ivory); letter-spacing: 0.01em; }
-  .meta p { margin-top: 7px; font-size: 13px; line-height: 1.5; color: rgba(226,212,188,0.65); }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
+  .swatch svg { width: auto; height: auto; max-width: 84%; max-height: 150px; }
+  .swatch img.agiv { width: 58%; max-width: 210px; height: auto; }
+  .meta { padding: 16px 20px 18px; border-top: 1px solid var(--line); }
+  .meta h3 { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--ivory); letter-spacing: 0.01em; }
+  .meta p { margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: rgba(226,212,188,0.62); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
   .chip {
     font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
     padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; color: rgba(226,212,188,0.7);
     display: inline-flex; align-items: center; gap: 5px;
   }
-  .chip .dot { width: 8px; height: 8px; }
-  .chip.flag { border-color: rgba(168,71,43,0.5); color: #d08a6e; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(226,212,188,0.25); }
 
-  /* ── tumbler ── */
-  .tumbler-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 24px; }
-  @media (max-width: 760px) { .tumbler-grid { grid-template-columns: 1fr; } }
-  .tumbler-stage { display: flex; align-items: center; justify-content: center; padding: 26px 10px 20px; background: linear-gradient(180deg, #191209, #14100C); }
-  .tumbler-stage svg { height: 300px; width: auto; }
+  /* ── print: product callout row ── */
+  .product-head { margin-top: 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .product-tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--espresso); background: var(--amber); padding: 5px 11px; border-radius: 999px; font-weight: 700;
+  }
+  .product-note { font-family: var(--mono); font-size: 11px; color: rgba(226,212,188,0.5); letter-spacing: 0.05em; }
+
+  /* ── tumbler: two tall stages side by side ── */
+  .tumbler-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 22px; }
+  @media (max-width: 620px) { .tumbler-grid { grid-template-columns: 1fr; } }
+  .stage { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .stage .field {
+    display: flex; align-items: center; justify-content: center; padding: 44px 24px;
+    min-height: 200px; color: var(--espresso);
+    background:
+      repeating-linear-gradient(63deg, rgba(120,100,75,0.05) 0 1.5px, rgba(255,255,255,0.05) 1.5px 3px),
+      #D6C6AB;
+  }
+  .stage .field.dark { color: #FFFFFF; background: radial-gradient(120% 78% at 50% 34%, #241a12 0%, #0B0805 80%); }
+  .stage .field svg { width: auto; height: auto; max-height: 430px; max-width: 86%; }
+  .stage .cap { padding: 13px 18px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; color: rgba(226,212,188,0.6); }
+
+  /* ── cap placements ── */
+  .placement { margin-top: 30px; }
+  .placement-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .placement-head .loc { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); }
+  .placement-head .pl { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--ivory); }
+  .placement-head .desc { margin-left: auto; font-size: 12.5px; color: rgba(226,212,188,0.55); text-align: right; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 14px; }
+  @media (max-width: 620px) { .pair { grid-template-columns: 1fr; } .placement-head .desc { display: none; } }
+  .pair .card .swatch { min-height: 176px; padding: 34px 26px; }
+  .pair .card .swatch svg { max-height: 112px; }
+  .pair .card .swatch.strap svg, .pair .card .swatch.strap img.agiv { max-height: 58px; width: 50%; }
+  .subcap { padding: 11px 16px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; color: rgba(226,212,188,0.55); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .subcap b { color: var(--ivory); font-weight: 700; }
 
   footer {
-    margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line);
+    margin-top: 84px; padding-top: 24px; border-top: 1px solid var(--line);
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
     font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
     color: rgba(226,212,188,0.45);
@@ -114,228 +138,7 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
 
-    <!-- 1 · the mark: crossed-gable A-frame, cursor door -->
-    <symbol id="d-mark" viewBox="0 0 200 160">
-      <g stroke="#1C1410" stroke-width="10" stroke-linecap="round" fill="none">
-        <line x1="34" y1="138" x2="113" y2="10"/>
-        <line x1="166" y1="138" x2="87" y2="10"/>
-        <line x1="16" y1="138" x2="184" y2="138"/>
-      </g>
-      <rect x="87" y="92" width="26" height="46" rx="2" fill="#C8923C"/>
-    </symbol>
-
-    <!-- 2 · wordmark -->
-    <symbol id="d-wordmark" viewBox="0 0 300 130">
-      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">HACKER</text>
-      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">COTTAGE</text>
-      <line x1="52" y1="106" x2="79" y2="106" stroke="#C8923C" stroke-width="3"/>
-      <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#1C1410">WEEKEND</text>
-      <line x1="221" y1="106" x2="248" y2="106" stroke="#C8923C" stroke-width="3"/>
-    </symbol>
-
-    <!-- 3 · prompt -->
-    <symbol id="d-prompt" viewBox="0 0 320 40">
-      <text x="0" y="30" font-family="'Space Mono',monospace" font-weight="400" font-size="34" fill="#1C1410">hacker_cottage</text>
-      <rect x="292" y="4" width="17" height="30" fill="#C8923C"/>
-    </symbol>
-
-    <!-- co-branded wordmark: AGIV in place of WEEKEND, same amber-rule treatment -->
-    <symbol id="d-wordmark-agiv" viewBox="0 0 300 130">
-      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">HACKER</text>
-      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">COTTAGE</text>
-      <line x1="52" y1="106" x2="106" y2="106" stroke="#C8923C" stroke-width="3"/>
-      <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#1C1410">AGIV</text>
-      <line x1="194" y1="106" x2="248" y2="106" stroke="#C8923C" stroke-width="3"/>
-    </symbol>
-
-    <!-- co-branded wordmark: actual AGIV logo framed by the amber rules -->
-    <symbol id="d-wordmark-agiv-logo" viewBox="0 0 300 130">
-      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">HACKER</text>
-      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">COTTAGE</text>
-      <line x1="52" y1="106" x2="106" y2="106" stroke="#C8923C" stroke-width="3"/>
-      <image x="121" y="96.8" width="58" height="18.4" href="data:image/png;base64,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" preserveAspectRatio="xMidYMid meet"/>
-      <line x1="194" y1="106" x2="248" y2="106" stroke="#C8923C" stroke-width="3"/>
-    </symbol>
-
-    <!-- 4 · back arch: hackercottage.com -->
-    <symbol id="d-backarch" viewBox="0 0 260 70">
-      <path id="archpath" d="M 10 60 Q 130 20 250 60" fill="none"/>
-      <text font-family="'Space Mono',monospace" font-weight="400" font-size="21" fill="#1C1410">
-        <textPath href="#archpath" startOffset="50%" text-anchor="middle">hackercottage.com</textPath>
-      </text>
-    </symbol>
-
-    <!-- 5 · think in years -->
-    <symbol id="d-think" viewBox="0 0 340 84">
-      <text x="170" y="30" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="26" letter-spacing="1" fill="#1C1410">THINK IN YEARS.</text>
-      <text x="170" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-style="italic" font-size="30" fill="#C8923C">SHIP THIS WEEKEND.</text>
-    </symbol>
-
-    <!-- 6 · badge -->
-    <symbol id="d-badge" viewBox="0 0 220 220">
-      <circle cx="110" cy="110" r="104" fill="none" stroke="#1C1410" stroke-width="5"/>
-      <circle cx="110" cy="110" r="79" fill="none" stroke="#1C1410" stroke-width="2"/>
-      <!-- top arc: reads left→right over the crown, kept clear of the center scene -->
-      <path id="badgetop" d="M 23.6 93.2 A 88 88 0 0 1 196.4 93.2" fill="none"/>
-      <text font-family="'Space Mono',monospace" font-weight="700" font-size="12" letter-spacing="1.2" fill="#1C1410">
-        <textPath href="#badgetop" startOffset="50%" text-anchor="middle">HACKER COTTAGE WEEKEND</textPath>
-      </text>
-      <!-- side + bottom diamonds anchor the ring -->
-      <rect x="12.5" y="104" width="11" height="11" transform="rotate(45 18 109.5)" fill="#C8923C"/>
-      <rect x="196.5" y="104" width="11" height="11" transform="rotate(45 202 109.5)" fill="#C8923C"/>
-      <!-- center scene -->
-      <g stroke="#1C1410" stroke-width="5.5" stroke-linecap="round" fill="none">
-        <line x1="84" y1="126" x2="118" y2="72"/>
-        <line x1="140" y1="126" x2="106" y2="72"/>
-      </g>
-      <rect x="106" y="106" width="12" height="20" rx="1" fill="#C8923C"/>
-      <g stroke="#A8472B" stroke-width="4" stroke-linecap="round" fill="none">
-        <path d="M 62 126 L 70 108 L 78 126"/>
-        <path d="M 146 126 L 154 108 L 162 126"/>
-      </g>
-      <line x1="50" y1="126" x2="174" y2="126" stroke="#1C1410" stroke-width="4" stroke-linecap="round"/>
-      <text x="110" y="156" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="14" letter-spacing="1.5" fill="#1C1410">AUG 28–31</text>
-    </symbol>
-
-    <!-- 7 · lockup: mark + stacked wordmark -->
-    <symbol id="d-lockup" viewBox="0 0 320 110">
-      <g stroke="#1C1410" stroke-width="8" stroke-linecap="round" fill="none">
-        <line x1="20" y1="92" x2="76" y2="10"/>
-        <line x1="116" y1="92" x2="60" y2="10"/>
-        <line x1="8" y1="92" x2="128" y2="92"/>
-      </g>
-      <rect x="60" y="64" width="17" height="28" rx="1.5" fill="#C8923C"/>
-      <text x="148" y="46" font-family="'Space Mono',monospace" font-weight="700" font-size="34" letter-spacing="1" fill="#1C1410">HACKER</text>
-      <text x="148" y="84" font-family="'Space Mono',monospace" font-weight="700" font-size="34" letter-spacing="1" fill="#1C1410">COTTAGE</text>
-    </symbol>
-
-    <!-- 8 · self-closing tag -->
-    <symbol id="d-tag" viewBox="0 0 240 90">
-      <text x="10" y="68" font-family="'Space Mono',monospace" font-weight="700" font-size="64" fill="#1C1410">&lt;</text>
-      <g stroke="#C8923C" stroke-width="7" stroke-linecap="round" fill="none">
-        <line x1="66" y1="66" x2="103" y2="8"/>
-        <line x1="128" y1="66" x2="91" y2="8"/>
-        <line x1="58" y1="66" x2="136" y2="66"/>
-      </g>
-      <text x="146" y="68" font-family="'Space Mono',monospace" font-weight="700" font-size="64" fill="#1C1410">/&gt;</text>
-    </symbol>
-
-    <!-- 9 · wifi pine -->
-    <symbol id="d-wifipine" viewBox="0 0 140 150">
-      <circle cx="70" cy="16" r="7" fill="#C8923C"/>
-      <g stroke="#1C1410" stroke-width="9" stroke-linecap="round" fill="none">
-        <path d="M 48 52 A 31 31 0 0 1 92 52"/>
-        <path d="M 34 82 A 51 51 0 0 1 106 82"/>
-        <path d="M 20 112 A 71 71 0 0 1 120 112"/>
-      </g>
-      <rect x="61" y="112" width="18" height="26" rx="2" fill="#1C1410"/>
-    </symbol>
-
-    <!-- 10 · git cabin -->
-    <symbol id="d-git" viewBox="0 0 320 110">
-      <g stroke="#1C1410" stroke-width="6" stroke-linecap="round" fill="none">
-        <line x1="20" y1="86" x2="300" y2="86"/>
-        <path d="M 92 86 C 118 86 118 38 148 38 L 172 38 C 202 38 202 86 228 86" />
-      </g>
-      <circle cx="52" cy="86" r="10" fill="#1C1410"/>
-      <circle cx="160" cy="86" r="10" fill="#1C1410"/>
-      <circle cx="268" cy="86" r="10" fill="#1C1410"/>
-      <g stroke="#C8923C" stroke-width="5.5" stroke-linecap="round" fill="none">
-        <line x1="143" y1="52" x2="160" y2="24"/>
-        <line x1="177" y1="52" x2="160" y2="24"/>
-        <line x1="138" y1="52" x2="182" y2="52"/>
-      </g>
-    </symbol>
-
-    <!-- 11 · one of 22 -->
-    <symbol id="d-numbered" viewBox="0 0 200 80">
-      <text x="100" y="52" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="52" fill="#1C1410">07<tspan fill="#C8923C">/</tspan>22</text>
-      <text x="100" y="72" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="12" letter-spacing="4" fill="#1C1410">ONE OF TWENTY-TWO</text>
-    </symbol>
-
-    <!-- 12 · ascii cottage -->
-    <symbol id="d-ascii" viewBox="0 0 170 110">
-      <text font-family="'Space Mono',monospace" font-weight="700" font-size="30" fill="#1C1410">
-        <tspan x="49" y="30">/\</tspan>
-        <tspan x="31" y="62">/</tspan><tspan x="85" y="62">\</tspan>
-        <tspan x="13" y="94">/_</tspan><tspan x="49" y="94" fill="#C8923C">[]</tspan><tspan x="85" y="94">_\</tspan>
-      </text>
-    </symbol>
-
-    <!-- 13 · loading bar -->
-    <symbol id="d-loading" viewBox="0 0 320 60">
-      <text x="0" y="40" font-family="'Space Mono',monospace" font-weight="400" font-size="30" fill="#1C1410">[</text>
-      <g fill="#C8923C">
-        <rect x="22" y="16" width="16" height="26"/><rect x="42" y="16" width="16" height="26"/>
-        <rect x="62" y="16" width="16" height="26"/><rect x="82" y="16" width="16" height="26"/>
-        <rect x="102" y="16" width="16" height="26"/><rect x="122" y="16" width="16" height="26"/>
-        <rect x="142" y="16" width="16" height="26"/><rect x="162" y="16" width="16" height="26"/>
-      </g>
-      <g fill="none" stroke="#1C1410" stroke-width="2">
-        <rect x="182" y="16" width="16" height="26"/><rect x="202" y="16" width="16" height="26"/>
-      </g>
-      <text x="222" y="40" font-family="'Space Mono',monospace" font-weight="400" font-size="30" fill="#1C1410">]</text>
-      <text x="244" y="40" font-family="'Space Mono',monospace" font-weight="400" font-size="22" fill="#1C1410">82%</text>
-    </symbol>
-
-    <!-- 14 · coordinates -->
-    <symbol id="d-coords" viewBox="0 0 280 90">
-      <g stroke="#C8923C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
-        <path d="M 70 42 L 104 10 L 130 34 L 150 16 L 186 42"/>
-      </g>
-      <text x="140" y="76" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="26" letter-spacing="1" fill="#1C1410">45.89°N 74.17°W</text>
-    </symbol>
-
-    <!-- 15 · the cursor -->
-    <symbol id="d-cursor" viewBox="0 0 60 80">
-      <rect x="12" y="10" width="36" height="60" rx="3" fill="#C8923C"/>
-    </symbol>
-
-    <!-- cream variants for dark fabric -->
-    <symbol id="d-mark-cream" viewBox="0 0 200 160">
-      <g stroke="#E2D4BC" stroke-width="10" stroke-linecap="round" fill="none">
-        <line x1="34" y1="138" x2="113" y2="10"/>
-        <line x1="166" y1="138" x2="87" y2="10"/>
-        <line x1="16" y1="138" x2="184" y2="138"/>
-      </g>
-      <rect x="87" y="92" width="26" height="46" rx="2" fill="#C8923C"/>
-    </symbol>
-    <symbol id="d-wordmark-cream" viewBox="0 0 300 130">
-      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#E2D4BC">HACKER</text>
-      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#E2D4BC">COTTAGE</text>
-      <line x1="52" y1="106" x2="79" y2="106" stroke="#C8923C" stroke-width="3"/>
-      <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#E2D4BC">WEEKEND</text>
-      <line x1="221" y1="106" x2="248" y2="106" stroke="#C8923C" stroke-width="3"/>
-    </symbol>
-    <symbol id="d-think-rust" viewBox="0 0 340 84">
-      <text x="170" y="30" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="26" letter-spacing="1" fill="#1C1410">THINK IN YEARS.</text>
-      <text x="170" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-style="italic" font-size="30" fill="#A8472B">SHIP THIS WEEKEND.</text>
-    </symbol>
-    <symbol id="d-wordmark-tonal" viewBox="0 0 300 130">
-      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#B5A183">HACKER</text>
-      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#B5A183">COTTAGE</text>
-      <line x1="52" y1="106" x2="79" y2="106" stroke="#B5A183" stroke-width="3"/>
-      <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#B5A183">WEEKEND</text>
-      <line x1="221" y1="106" x2="248" y2="106" stroke="#B5A183" stroke-width="3"/>
-    </symbol>
-
-    <!-- tumbler bodies -->
-    <symbol id="tumbler-cream" viewBox="0 0 120 260">
-      <path d="M 18 34 L 24 244 Q 24 254 34 254 L 86 254 Q 96 254 96 244 L 102 34 Z" fill="#D6C6AB"/>
-      <rect x="14" y="18" width="92" height="18" rx="6" fill="#C3B295"/>
-      <rect x="20" y="8" width="80" height="14" rx="5" fill="#CDBC9F"/>
-      <path d="M 26 40 L 30 240 Q 30 248 36 248 L 44 248 L 38 40 Z" fill="rgba(255,255,255,0.28)"/>
-    </symbol>
-    <symbol id="tumbler-espresso" viewBox="0 0 120 260">
-      <path d="M 18 34 L 24 244 Q 24 254 34 254 L 86 254 Q 96 254 96 244 L 102 34 Z" fill="#2A1E14"/>
-      <rect x="14" y="18" width="92" height="18" rx="6" fill="#1C1410"/>
-      <rect x="20" y="8" width="80" height="14" rx="5" fill="#241A10"/>
-      <path d="M 26 40 L 30 240 Q 30 248 36 248 L 44 248 L 38 40 Z" fill="rgba(255,255,255,0.10)"/>
-    </symbol>
-
-    <!-- ═══ cabin icon (from the site's browser-tab favicon) ═══ -->
-    <!-- hero cabin — palette matched to the favicon: honey logs, blue windows, yellow knob -->
-    <!-- threads: dark-brown #5A3A24, roof #7E5233, log #96603C, tan #C7AE8C, blue #67B8CB, yellow #F2D45B -->
+    <!-- ═══ cabin (favicon palette): honey logs, blue windows, yellow knob ═══ -->
     <symbol id="d-cabin" viewBox="0 0 200 190">
       <rect x="149" y="40" width="15" height="32" fill="#7E5233" stroke="#5A3A24" stroke-width="2"/>
       <rect x="146" y="37" width="21" height="8" rx="2" fill="#7E5233" stroke="#5A3A24" stroke-width="2"/>
@@ -365,47 +168,90 @@
       <line x1="18" y1="176" x2="182" y2="176" stroke="#5A3A24" stroke-width="3.5" stroke-linecap="round"/>
     </symbol>
 
-    <!-- monoline cabin: single espresso thread -->
-    <symbol id="d-cabin-line" viewBox="0 0 200 175">
-      <g fill="none" stroke="#1C1410" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
-        <path d="M 100 20 L 24 88 L 176 88 Z"/>
-        <rect x="34" y="88" width="132" height="76"/>
-        <line x1="34" y1="113" x2="166" y2="113"/><line x1="34" y1="139" x2="166" y2="139"/>
-        <rect x="52" y="116" width="30" height="30"/>
-        <line x1="67" y1="116" x2="67" y2="146"/><line x1="52" y1="131" x2="82" y2="131"/>
-        <path d="M 116 164 L 116 132 Q 116 122 128 122 Q 140 122 140 132 L 140 164"/>
+    <!-- cabin, night version: cream structure + amber-glowing openings (for the black tumbler) -->
+    <symbol id="d-cabin-glow" viewBox="0 0 200 190">
+      <g fill="none" stroke="#EADCC4" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="149" y="40" width="15" height="32"/>
+        <path d="M 100 20 L 12 96 L 188 96 Z"/>
+        <rect x="30" y="97" width="140" height="79"/>
+        <line x1="31" y1="110" x2="169" y2="110"/><line x1="31" y1="123" x2="169" y2="123"/><line x1="31" y1="136" x2="169" y2="136"/><line x1="31" y1="149" x2="169" y2="149"/><line x1="31" y1="162" x2="169" y2="162"/>
+        <line x1="18" y1="176" x2="182" y2="176"/>
       </g>
+      <rect x="45" y="113" width="28" height="28" fill="#E8A63A"/>
+      <line x1="59" y1="113" x2="59" y2="141" stroke="#1C1410" stroke-width="2.4"/><line x1="45" y1="127" x2="73" y2="127" stroke="#1C1410" stroke-width="2.4"/>
+      <rect x="127" y="113" width="28" height="28" fill="#E8A63A"/>
+      <line x1="141" y1="113" x2="141" y2="141" stroke="#1C1410" stroke-width="2.4"/><line x1="127" y1="127" x2="155" y2="127" stroke="#1C1410" stroke-width="2.4"/>
+      <path d="M 86 176 L 86 140 Q 86 125 100 125 Q 114 125 114 140 L 114 176 Z" fill="#E8A63A"/>
+      <rect x="92" y="132" width="16" height="16" rx="4" fill="#F2D45B"/>
+      <circle cx="108" cy="162" r="2.8" fill="#1C1410"/>
     </symbol>
 
-    <!-- cabin + wordmark lockup -->
-    <symbol id="d-cabin-lockup" viewBox="0 0 360 150">
-      <g transform="translate(8 6) scale(0.72)"><use href="#d-cabin"/></g>
-      <text x="205" y="62" font-family="'Space Mono',monospace" font-weight="700" font-size="34" letter-spacing="1" fill="#1C1410">HACKER</text>
-      <text x="205" y="100" font-family="'Space Mono',monospace" font-weight="700" font-size="34" letter-spacing="1" fill="#1C1410">COTTAGE</text>
-      <line x1="208" y1="117" x2="223" y2="117" stroke="#C8923C" stroke-width="3"/>
-      <text x="283" y="123" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="15" letter-spacing="6" fill="#1C1410">WEEKEND</text>
-      <line x1="343" y1="117" x2="358" y2="117" stroke="#C8923C" stroke-width="3"/>
+    <!-- co-branded wordmark: AGIV logo (graphite) framed by amber rules -->
+    <symbol id="d-wordmark-agiv-logo" viewBox="0 0 300 130">
+      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">HACKER</text>
+      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">COTTAGE</text>
+      <line x1="52" y1="106" x2="106" y2="106" stroke="#C8923C" stroke-width="3"/>
+      <image x="121" y="96.8" width="58" height="18.4" href="data:image/png;base64,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" preserveAspectRatio="xMidYMid meet"/>
+      <line x1="194" y1="106" x2="248" y2="106" stroke="#C8923C" stroke-width="3"/>
     </symbol>
 
-    <!-- cabin badge -->
-    <symbol id="d-cabin-badge" viewBox="0 0 220 220">
-      <circle cx="110" cy="110" r="104" fill="none" stroke="#1C1410" stroke-width="5"/>
-      <circle cx="110" cy="110" r="79" fill="none" stroke="#1C1410" stroke-width="2"/>
-      <path id="cbtop" d="M 23.6 93.2 A 88 88 0 0 1 196.4 93.2" fill="none"/>
-      <text font-family="'Space Mono',monospace" font-weight="700" font-size="12" letter-spacing="1" fill="#1C1410"><textPath href="#cbtop" startOffset="50%" text-anchor="middle">HACKER COTTAGE WEEKEND</textPath></text>
-      <rect x="12.5" y="104" width="11" height="11" transform="rotate(45 18 109.5)" fill="#C8923C"/>
-      <rect x="196.5" y="104" width="11" height="11" transform="rotate(45 202 109.5)" fill="#C8923C"/>
-      <g transform="translate(63 58) scale(0.42)"><use href="#d-cabin"/></g>
-      <text x="110" y="182" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="13" letter-spacing="1.5" fill="#1C1410">AUG 28–31</text>
+    <!-- co-branded wordmark, dark field: ivory type + ivory AGIV logo + amber rules -->
+    <symbol id="d-wordmark-agiv-logo-dark" viewBox="0 0 300 130">
+      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#EADCC4">HACKER</text>
+      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#EADCC4">COTTAGE</text>
+      <line x1="52" y1="106" x2="106" y2="106" stroke="#D3A24E" stroke-width="3"/>
+      <image x="121" y="96.8" width="58" height="18.4" href="data:image/png;base64,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" preserveAspectRatio="xMidYMid meet"/>
+      <line x1="194" y1="106" x2="248" y2="106" stroke="#D3A24E" stroke-width="3"/>
     </symbol>
 
-    <!-- browser tab: the favicon in a chrome tab -->
-    <symbol id="d-cabin-tab" viewBox="0 0 330 150">
-      <line x1="8" y1="104" x2="322" y2="104" stroke="#1C1410" stroke-width="3"/>
-      <path d="M 16 104 c 8 0 10 -3 13 -11 l 14 -50 q 3 -12 16 -12 l 214 0 q 13 0 16 12 l 14 50 c 3 8 5 11 13 11 z" fill="#D6C6AB" stroke="#1C1410" stroke-width="3" stroke-linejoin="round"/>
-      <g transform="translate(50 42) scale(0.30)"><use href="#d-cabin"/></g>
-      <text x="122" y="79" font-family="'Space Mono',monospace" font-weight="400" font-size="15" fill="#1C1410">hackercottage.com</text>
-      <g stroke="#1C1410" stroke-width="2" stroke-linecap="round"><line x1="288" y1="66" x2="296" y2="74"/><line x1="296" y1="66" x2="288" y2="74"/></g>
+    <!-- co-branded wordmark, text: AGIV set in the wordmark treatment -->
+    <symbol id="d-wordmark-agiv" viewBox="0 0 300 130">
+      <text x="150" y="40" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">HACKER</text>
+      <text x="150" y="84" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="42" letter-spacing="2" fill="#1C1410">COTTAGE</text>
+      <line x1="52" y1="106" x2="106" y2="106" stroke="#C8923C" stroke-width="3"/>
+      <text x="150" y="112" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="17" letter-spacing="8" fill="#1C1410">AGIV</text>
+      <line x1="194" y1="106" x2="248" y2="106" stroke="#C8923C" stroke-width="3"/>
+    </symbol>
+
+    <!-- think in years (branded, two-tone) — for the set reference -->
+    <symbol id="d-think" viewBox="0 0 340 84">
+      <text x="170" y="30" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="26" letter-spacing="1" fill="#1C1410">THINK IN YEARS.</text>
+      <text x="170" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-style="italic" font-size="30" fill="#C8923C">SHIP THIS WEEKEND.</text>
+    </symbol>
+
+    <!-- think in years, single thread (currentColor) — the cap front -->
+    <symbol id="d-think-mono" viewBox="0 0 340 84">
+      <text x="170" y="30" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="26" letter-spacing="1" fill="currentColor">THINK IN YEARS.</text>
+      <text x="170" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-style="italic" font-size="30" fill="currentColor">SHIP THIS WEEKEND.</text>
+    </symbol>
+
+    <!-- cap back, curved around the strap gap (currentColor) -->
+    <symbol id="d-back-arch" viewBox="0 0 340 104">
+      <path id="bapath" d="M 26 90 Q 170 22 314 90" fill="none"/>
+      <text font-family="'Space Mono',monospace" font-weight="700" font-size="23" letter-spacing="1" fill="currentColor">
+        <textPath href="#bapath" startOffset="50%" text-anchor="middle">HACKER COTTAGE 2026</textPath>
+      </text>
+    </symbol>
+
+    <!-- cap back, straight (currentColor) -->
+    <symbol id="d-back-straight" viewBox="0 0 340 48">
+      <text x="170" y="34" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="23" letter-spacing="1.5" fill="currentColor">HACKER COTTAGE 2026</text>
+    </symbol>
+
+    <!-- ═══ composed: tumbler stack (light field) ═══ -->
+    <!-- nested <use> MUST carry explicit width/height = the symbol's viewBox, else it
+         defaults to 100% of THIS 280×320 viewport and renders oversized -->
+    <symbol id="tumbler-stack" viewBox="0 0 280 320">
+      <g transform="translate(66 14) scale(0.74)"><use href="#d-cabin" width="200" height="190"/></g>
+      <rect x="135.5" y="167.5" width="9" height="9" transform="rotate(45 140 172)" fill="#C8923C"/>
+      <g transform="translate(17 192) scale(0.82)"><use href="#d-wordmark-agiv-logo" width="300" height="130"/></g>
+    </symbol>
+
+    <!-- ═══ composed: tumbler stack (dark field) ═══ -->
+    <symbol id="tumbler-stack-dark" viewBox="0 0 280 320">
+      <g transform="translate(66 14) scale(0.74)"><use href="#d-cabin-glow" width="200" height="190"/></g>
+      <rect x="135.5" y="167.5" width="9" height="9" transform="rotate(45 140 172)" fill="#D3A24E"/>
+      <g transform="translate(17 192) scale(0.82)"><use href="#d-wordmark-agiv-logo-dark" width="300" height="130"/></g>
     </symbol>
 
   </defs>
@@ -413,569 +259,202 @@
 
 <div class="wrap">
 
-  <div class="eyebrow">Hacker Cottage Weekend · Merch · Round 1</div>
-  <h1>Hat concepts</h1>
-  <p class="intro">Twenty-two embroidery designs for the tan dad cap, plus tumbler adaptations. Each is shown on the fabric color it would stitch onto. Every design respects real embroidery limits: bold shapes, satin-stitch friendly text, and one to three thread colors. Final artwork gets digitized by the embroiderer.</p>
+  <div class="eyebrow">Hacker Cottage Weekend · Merch · Production layouts</div>
+  <h1>Two products, ready to print</h1>
+  <p class="intro">The four marks we are running are up top. Below, they are placed onto the two products: a black tumbler, and a black dad cap stitched in pure white thread. Every layout is shown twice, once on a beige reference so you can read it, and once on the real product color.</p>
 
   <div class="specs">
     <div class="spec">
-      <div class="k">Stitch area</div>
-      <div class="v">Cap front: 100 × 55 mm max. Back arch: 90 × 35 mm. Side: 50 × 30 mm.</div>
+      <div class="k">Cap</div>
+      <div class="v">Black dad cap. Pure white embroidery, single thread.</div>
     </div>
     <div class="spec">
-      <div class="k">Text floor</div>
-      <div class="v">5 mm letter height minimum. Strokes 1 mm or thicker.</div>
+      <div class="k">Tumbler</div>
+      <div class="v">Black body. Cabin over the co-branded wordmark, stacked.</div>
     </div>
     <div class="spec">
-      <div class="k">Thread palette</div>
-      <div class="threads">
-        <span class="thread"><span class="dot" style="background:#1C1410"></span>espresso</span>
-        <span class="thread"><span class="dot" style="background:#C8923C"></span>amber</span>
-        <span class="thread"><span class="dot" style="background:#A8472B"></span>rust</span>
-        <span class="thread"><span class="dot" style="background:#E2D4BC"></span>cream</span>
-      </div>
+      <div class="k">Cap areas</div>
+      <div class="v">Front 100 × 55 mm. Back arch 90 × 35 mm. Strap 45 × 12 mm.</div>
     </div>
     <div class="spec">
-      <div class="k">Rule of thumb</div>
-      <div class="v">Fewer colors reads sharper on fabric and costs less per unit.</div>
+      <div class="k">Reads best</div>
+      <div class="v">Bold shapes, 5 mm letter floor, one color per surface.</div>
     </div>
   </div>
 
-  <!-- ═══════════ 01 SIMPLE ═══════════ -->
+  <!-- ═══════════ THE SET ═══════════ -->
   <div class="section">
     <div class="sec-head">
-      <span class="num">01</span>
-      <h2>Simple</h2>
-      <span class="note">low stitch count · safe picks</span>
+      <span class="num">00</span>
+      <h2>The set</h2>
+      <span class="note">the four marks we build on</span>
     </div>
-    <p class="sec-blurb">Quiet designs that work on day one. Any of these could be the default run.</p>
-    <div class="grid">
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 200 160"><use href="#d-mark"/></svg></div>
-          <div class="meta">
-            <h3>The mark</h3>
-            <p>A proposed logo: an A-frame with crossed gables, Norwegian style, and a cursor for a door. The door is the only second color.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">38 × 32 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 300 130"><use href="#d-wordmark"/></svg></div>
-          <div class="meta">
-            <h3>The wordmark</h3>
-            <p>Space Mono, stacked, with WEEKEND tracked wide between two amber rules. The classic team-hat answer.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">72 × 31 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 300 130"><use href="#d-wordmark-agiv"/></svg></div>
-          <div class="meta">
-            <h3>Wordmark, AGIV (text)</h3>
-            <p>The stacked wordmark with AGIV set in Space Mono where WEEKEND sits, same amber rules. Reads as a joint production with the host.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">72 × 31 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 300 130"><use href="#d-wordmark-agiv-logo"/></svg></div>
-          <div class="meta">
-            <h3>Wordmark, AGIV (logo)</h3>
-            <p>The same lockup with AGI Ventures Canada's actual logo framed by the amber rules, instead of the letters set in type.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">72 × 31 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 320 40"><use href="#d-prompt"/></svg></div>
-          <div class="meta">
-            <h3>The prompt</h3>
-            <p>Lowercase, one line, with a blinking amber cursor. The quietest flex in the set: you know or you ask.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">75 × 9 mm</span>
-              <span class="chip">front, set low</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 260 70"><use href="#d-backarch"/></svg></div>
-          <div class="meta">
-            <h3>The back arch</h3>
-            <p>hackercottage.com arched over the strap opening. Pairs with any front design, or stands alone on an otherwise blank hat.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span>1 thread</span>
-              <span class="chip">80 × 20 mm</span>
-              <span class="chip">back of hat</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ═══════════ 02 THE CABIN ═══════════ -->
-  <div class="section">
-    <div class="sec-head">
-      <span class="num">02</span>
-      <h2>The cabin</h2>
-      <span class="note">from the site's tab icon</span>
-    </div>
-    <div class="refrow">
-      <img src="data:image/png;base64,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" alt="the site's browser-tab icon" width="52" height="52" />
-      <p class="sec-blurb">The icon in the site's browser tab is a little log cabin. It is the most literal piece of brand we have, and it makes a warm embroidery. Here it is rebuilt as thread in the icon's own colors, plus a few takes on the same idea.</p>
-    </div>
+    <p class="sec-blurb">These are the finalists. Everything on the products below is composed from these four. Shown here on the tan reference swatch.</p>
     <div class="grid">
 
       <div class="card">
         <div class="swatch"><svg viewBox="0 0 200 190"><use href="#d-cabin"/></svg></div>
         <div class="meta">
           <h3>The cabin</h3>
-          <p>The tab icon rebuilt for thread in its own colors: honey-brown logs, blue windows, a yellow doorknob. Warm and solid, the most literal way to wear the brand.</p>
-          <div class="chips">
-            <span class="chip"><span class="dot" style="background:#5A3A24"></span><span class="dot" style="background:#7E5233"></span><span class="dot" style="background:#96603C"></span><span class="dot" style="background:#C7AE8C"></span><span class="dot" style="background:#67B8CB"></span><span class="dot" style="background:#F2D45B"></span>6 threads</span>
-            <span class="chip">42 × 40 mm</span>
-            <span class="chip">front center</span>
-            <span class="chip flag">higher stitch count</span>
-          </div>
+          <p>The site favicon, redrawn for stitching. Honey logs, lit windows, a yellow knob.</p>
+          <div class="chips"><span class="chip">icon</span><span class="chip">6 threads</span></div>
         </div>
       </div>
 
       <div class="card">
-        <div class="swatch"><svg viewBox="0 0 200 175"><use href="#d-cabin-line"/></svg></div>
+        <div class="swatch"><svg viewBox="0 0 300 130"><use href="#d-wordmark-agiv-logo"/></svg></div>
         <div class="meta">
-          <h3>The cabin, one line</h3>
-          <p>The same cabin as a single outline. One thread, low stitch count, crisp on any fabric. The everyday version.</p>
-          <div class="chips">
-            <span class="chip"><span class="dot" style="background:#1C1410"></span>1 thread</span>
-            <span class="chip">40 × 35 mm</span>
-            <span class="chip">front center</span>
-          </div>
+          <h3>Wordmark, AGIV (logo)</h3>
+          <p>HACKER COTTAGE with the AGI Ventures Canada logo set in graphite where the third line sits, framed by the amber rules.</p>
+          <div class="chips"><span class="chip"><span class="dot" style="background:#1C1410"></span>espresso</span><span class="chip"><span class="dot" style="background:#55504A"></span>graphite</span><span class="chip"><span class="dot" style="background:#C8923C"></span>amber</span></div>
         </div>
       </div>
 
       <div class="card">
-        <div class="swatch"><svg viewBox="0 0 360 150"><use href="#d-cabin-lockup"/></svg></div>
+        <div class="swatch"><svg viewBox="0 0 300 130"><use href="#d-wordmark-agiv"/></svg></div>
         <div class="meta">
-          <h3>Cabin lockup</h3>
-          <p>The cabin with the full wordmark. The primary logo if the cabin becomes the mark, and it reuses cleanly on totes, tees, and stickers.</p>
-          <div class="chips">
-            <span class="chip"><span class="dot" style="background:#5A3A24"></span><span class="dot" style="background:#7E5233"></span><span class="dot" style="background:#96603C"></span><span class="dot" style="background:#C7AE8C"></span><span class="dot" style="background:#67B8CB"></span><span class="dot" style="background:#F2D45B"></span>6 threads</span>
-            <span class="chip">92 × 34 mm</span>
-            <span class="chip">front center</span>
-          </div>
+          <h3>Wordmark, AGIV (text)</h3>
+          <p>The same lockup with AGIV set in Space Mono. One less color, cleanest to stitch.</p>
+          <div class="chips"><span class="chip"><span class="dot" style="background:#1C1410"></span>espresso</span><span class="chip"><span class="dot" style="background:#C8923C"></span>amber</span></div>
         </div>
       </div>
 
       <div class="card">
-        <div class="swatch"><svg viewBox="0 0 220 220"><use href="#d-cabin-badge"/></svg></div>
+        <div class="swatch"><svg viewBox="0 0 340 84"><use href="#d-think"/></svg></div>
         <div class="meta">
-          <h3>Cabin badge</h3>
-          <p>The cabin dropped into the park-badge ring. Same ring as the A-frame badge, so the two share one patch template.</p>
-          <div class="chips">
-            <span class="chip"><span class="dot" style="background:#5A3A24"></span><span class="dot" style="background:#7E5233"></span><span class="dot" style="background:#96603C"></span><span class="dot" style="background:#C7AE8C"></span><span class="dot" style="background:#67B8CB"></span><span class="dot" style="background:#F2D45B"></span>6 threads</span>
-            <span class="chip">Ø 50 mm</span>
-            <span class="chip">front center</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatch"><svg viewBox="0 0 330 150"><use href="#d-cabin-tab"/></svg></div>
-        <div class="meta">
-          <h3>In a tab</h3>
-          <p>The favicon sitting in a browser tab, hackercottage.com and all. For the crowd that gets it on sight.</p>
-          <div class="chips">
-            <span class="chip"><span class="dot" style="background:#5A3A24"></span><span class="dot" style="background:#7E5233"></span><span class="dot" style="background:#96603C"></span><span class="dot" style="background:#C7AE8C"></span><span class="dot" style="background:#67B8CB"></span><span class="dot" style="background:#F2D45B"></span>6 threads</span>
-            <span class="chip">62 × 28 mm</span>
-            <span class="chip">front, set low</span>
-          </div>
+          <h3>Think in years. Ship this weekend.</h3>
+          <p>The event line. Regular over bold italic carries the emphasis, so it holds up in a single thread too.</p>
+          <div class="chips"><span class="chip"><span class="dot" style="background:#1C1410"></span>espresso</span><span class="chip"><span class="dot" style="background:#C8923C"></span>amber</span></div>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- ═══════════ 03 STANDARD ═══════════ -->
+  <!-- ═══════════ 01 TUMBLER ═══════════ -->
   <div class="section">
     <div class="sec-head">
-      <span class="num">03</span>
-      <h2>Standard</h2>
-      <span class="note">statement pieces</span>
-    </div>
-    <p class="sec-blurb">More stitch work, more presence. These carry the event's voice, worn anywhere.</p>
-    <div class="grid">
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 340 84"><use href="#d-think"/></svg></div>
-          <div class="meta">
-            <h3>Think in years. Ship this weekend.</h3>
-            <p>The event's whole philosophy in two lines. Quiet first line, loud second line in amber italic.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">88 × 22 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 220 220"><use href="#d-badge"/></svg></div>
-          <div class="meta">
-            <h3>The badge</h3>
-            <p>Park-badge ring with the A-frame, two pines, and the dates. Also the strongest candidate for a woven patch if we want caps and jackets to share one asset.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span><span class="dot" style="background:#A8472B"></span>3 threads</span>
-              <span class="chip">Ø 50 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 320 110"><use href="#d-lockup"/></svg></div>
-          <div class="meta">
-            <h3>The lockup</h3>
-            <p>Mark plus wordmark, side by side. The most conventional logo treatment, and the easiest to reuse on tote bags, tees, and stickers later.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">82 × 28 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 240 90"><use href="#d-tag"/></svg></div>
-          <div class="meta">
-            <h3>&lt;cottage/&gt;</h3>
-            <p>The cottage as a self-closing tag, building on the code brackets already on the website. Builders read it instantly.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">60 × 23 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ═══════════ 04 EXTRA CREATIVE ═══════════ -->
-  <div class="section">
-    <div class="sec-head">
-      <span class="num">04</span>
-      <h2>Extra creative</h2>
-      <span class="note">wild cards</span>
-    </div>
-    <p class="sec-blurb">Out-there options. Each one starts a conversation, which is most of what a hat is for.</p>
-    <div class="grid">
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 140 150"><use href="#d-wifipine"/></svg></div>
-          <div class="meta">
-            <h3>Full bars</h3>
-            <p>A pine tree drawn as wifi arcs, with an amber signal dot at the top. Cabin in the woods, fiber in the walls. My favorite of the wild cards.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">32 × 34 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 320 110"><use href="#d-git"/></svg></div>
-          <div class="meta">
-            <h3>Merge at the cottage</h3>
-            <p>A commit graph where the feature branch passes through an A-frame before merging back to main. Merge conflicts get resolved by the fireplace.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">85 × 25 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 200 80"><use href="#d-numbered"/></svg></div>
-          <div class="meta">
-            <h3>One of twenty-two</h3>
-            <p>Each hat is numbered on the back: 01/22 through 22/22. Your number is your spot in the cohort. Costs more per unit since every hat is a unique run, but it turns merch into membership.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">55 × 20 mm</span>
-              <span class="chip">back of hat</span>
-              <span class="chip flag">22 unique runs</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 170 110"><use href="#d-ascii"/></svg></div>
-          <div class="meta">
-            <h3>ASCII cottage</h3>
-            <p>The cottage drawn in actual characters, embroidered as typed. Reads as texture from afar and as a joke up close.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">40 × 26 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 320 60"><use href="#d-loading"/></svg></div>
-          <div class="meta">
-            <h3>Almost shipped</h3>
-            <p>A progress bar stuck at 82%. Every builder knows the last 18% is the weekend.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">80 × 12 mm</span>
-              <span class="chip">front, set low</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 280 90"><use href="#d-coords"/></svg></div>
-          <div class="meta">
-            <h3>The coordinates</h3>
-            <p>A ridgeline over the chalet's coordinates. Only people who were there know why these numbers matter.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">70 × 20 mm</span>
-              <span class="chip">front center</span>
-              <span class="chip flag">verify coords first</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 60 80" style="max-height:118px"><use href="#d-cursor"/></svg></div>
-          <div class="meta">
-            <h3>The cursor</h3>
-            <p>A single amber block. A cursor waiting for input, dead center on a blank hat. The boldest move is the smallest stitch count in the set.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#C8923C"></span>1 thread</span>
-              <span class="chip">12 × 16 mm</span>
-              <span class="chip">front center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ═══════════ 05 TUMBLER ═══════════ -->
-  <div class="section">
-    <div class="sec-head">
-      <span class="num">05</span>
+      <span class="num">01</span>
       <h2>Tumbler</h2>
-      <span class="note">laser engraved · single color</span>
+      <span class="note">one print · wraps the face</span>
     </div>
-    <p class="sec-blurb">Engraving is one color by nature, so these are the designs that survive the translation. Schematic previews, drawn to proportion.</p>
+    <p class="sec-blurb">A single tall lockup: the cabin up top, the co-branded wordmark below, centered and stacked. Left is the artwork on a beige reference. Right is adapted for the black body, where the cabin glows and the type turns to ivory.</p>
+
+    <div class="product-head">
+      <span class="product-tag">Tumbler · black</span>
+      <span class="product-note">same composition, two color ways</span>
+    </div>
+
     <div class="tumbler-grid">
-
-      <div class="card">
-        <div class="tumbler-stage">
-          <svg viewBox="0 0 120 260">
-            <use href="#tumbler-cream"/>
-            <text x="63" y="52" font-family="'Space Mono',monospace" font-weight="700" font-size="13.5" fill="#4a3a26" transform="rotate(90 63 52)" letter-spacing="1">HACKER COTTAGE</text>
-          </svg>
-        </div>
-        <div class="meta" style="border-top:1px solid var(--line)">
-          <h3>The spine</h3>
-          <p>Wordmark running vertically, like a book spine. Visible across a room when the tumbler sits on a desk.</p>
-          <div class="chips"><span class="chip">engrave</span><span class="chip">cream body</span></div>
-        </div>
+      <div class="stage">
+        <div class="field"><svg viewBox="0 0 280 320"><use href="#tumbler-stack"/></svg></div>
+        <div class="cap">Reference · artwork colors</div>
       </div>
-
-      <div class="card">
-        <div class="tumbler-stage">
-          <svg viewBox="0 0 120 260">
-            <use href="#tumbler-espresso"/>
-            <g transform="translate(60 140) scale(0.4) translate(-110 -110)">
-              <circle cx="110" cy="110" r="100" fill="none" stroke="#E8DCC4" stroke-width="8"/>
-              <g stroke="#E8DCC4" stroke-width="9" stroke-linecap="round" fill="none">
-                <line x1="78" y1="142" x2="116" y2="78"/>
-                <line x1="142" y1="142" x2="104" y2="78"/>
-              </g>
-              <rect x="102" y="118" width="15" height="24" rx="1" fill="#E8DCC4"/>
-              <g stroke="#E8DCC4" stroke-width="7" stroke-linecap="round" fill="none">
-                <path d="M 52 142 L 62 120 L 72 142"/>
-                <path d="M 148 142 L 158 120 L 168 142"/>
-              </g>
-              <line x1="38" y1="142" x2="182" y2="142" stroke="#E8DCC4" stroke-width="7" stroke-linecap="round"/>
-            </g>
-          </svg>
-        </div>
-        <div class="meta" style="border-top:1px solid var(--line)">
-          <h3>The badge, engraved</h3>
-          <p>The park badge translates cleanly to a single engraved color on the espresso body. Ring text optional at this size.</p>
-          <div class="chips"><span class="chip">engrave</span><span class="chip">espresso body</span></div>
-        </div>
+      <div class="stage">
+        <div class="field dark"><svg viewBox="0 0 280 320"><use href="#tumbler-stack-dark"/></svg></div>
+        <div class="cap">On the black tumbler · glowing cabin, ivory type</div>
       </div>
-
-      <div class="card">
-        <div class="tumbler-stage">
-          <svg viewBox="0 0 120 260">
-            <use href="#tumbler-cream"/>
-            <text x="60" y="64" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="400" font-size="8.5" fill="#4a3a26" letter-spacing="0.5">THINK IN YEARS</text>
-            <text x="60" y="80" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-style="italic" font-size="8.5" fill="#4a3a26" letter-spacing="0.5">SHIP THIS WEEKEND</text>
-            <line x1="34" y1="94" x2="86" y2="94" stroke="#4a3a26" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="meta" style="border-top:1px solid var(--line)">
-          <h3>The reminder</h3>
-          <p>Both lines near the rim, so you read it every time you drink. A slow phrase on a fast morning.</p>
-          <div class="chips"><span class="chip">engrave</span><span class="chip">cream body</span></div>
-        </div>
-      </div>
-
     </div>
   </div>
 
-  <!-- ═══════════ 06 COLORWAYS ═══════════ -->
+  <!-- ═══════════ 02 DAD CAP ═══════════ -->
   <div class="section">
     <div class="sec-head">
-      <span class="num">06</span>
-      <h2>Colorways</h2>
-      <span class="note">same designs · other fabrics</span>
+      <span class="num">02</span>
+      <h2>Dad cap</h2>
+      <span class="note">black cap · pure white thread</span>
     </div>
-    <p class="sec-blurb">The tan cap is the hero. If we run a second colorway, these hold up.</p>
-    <div class="grid">
+    <p class="sec-blurb">Three placements, one white thread throughout. Left of each pair is the beige reference so you can read the shapes. Right is the design as it stitches: pure white on the black cap.</p>
 
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch dark"><svg viewBox="0 0 200 160"><use href="#d-mark-cream"/></svg></div>
-          <div class="meta">
-            <h3>Espresso cap, cream mark</h3>
-            <p>Inverted palette for the dark colorway. The amber door stays amber on both fabrics.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#E2D4BC"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">espresso fabric</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch dark"><svg viewBox="0 0 300 130"><use href="#d-wordmark-cream"/></svg></div>
-          <div class="meta">
-            <h3>Espresso cap, cream wordmark</h3>
-            <p>Highest contrast pairing in the set. The one for people who wear black everything.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#E2D4BC"></span><span class="dot" style="background:#C8923C"></span>2 threads</span>
-              <span class="chip">espresso fabric</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch dark"><svg viewBox="0 0 200 190"><use href="#d-cabin"/></svg></div>
-          <div class="meta">
-            <h3>Espresso cap, cabin</h3>
-            <p>The same cabin on an espresso hat. The honey logs and blue windows read warm against the dark fabric. The coziest hat in the set.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#5A3A24"></span><span class="dot" style="background:#7E5233"></span><span class="dot" style="background:#96603C"></span><span class="dot" style="background:#C7AE8C"></span><span class="dot" style="background:#67B8CB"></span><span class="dot" style="background:#F2D45B"></span>6 threads</span>
-              <span class="chip">espresso fabric</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 340 84"><use href="#d-think-rust"/></svg></div>
-          <div class="meta">
-            <h3>Rust accent</h3>
-            <p>Any amber accent in the set can swap to rust. Warmer, quieter, more autumn.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#1C1410"></span><span class="dot" style="background:#A8472B"></span>2 threads</span>
-              <span class="chip">tan fabric</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="swatchrow">
-          <div class="swatch"><svg viewBox="0 0 300 130" style="opacity:0.75"><use href="#d-wordmark-tonal"/></svg></div>
-          <div class="meta">
-            <h3>Tonal</h3>
-            <p>Tan thread on tan fabric, one shade darker. You only see it when the light catches. The stealth option.</p>
-            <div class="chips">
-              <span class="chip"><span class="dot" style="background:#B5A183"></span>1 thread</span>
-              <span class="chip">tan fabric</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="product-head">
+      <span class="product-tag">Dad cap · black</span>
+      <span class="product-note">front · back · strap</span>
     </div>
+
+    <!-- FRONT -->
+    <div class="placement">
+      <div class="placement-head">
+        <span class="loc">Front</span>
+        <span class="pl">Think in years. Ship this weekend.</span>
+        <span class="desc">Centered on the cap front, two lines.</span>
+      </div>
+      <div class="pair">
+        <div class="card">
+          <div class="swatch"><svg viewBox="0 0 340 84"><use href="#d-think-mono"/></svg></div>
+          <div class="subcap"><span>Reference</span><span><b>espresso</b> on beige</span></div>
+        </div>
+        <div class="card">
+          <div class="swatch dark"><svg viewBox="0 0 340 84"><use href="#d-think-mono"/></svg></div>
+          <div class="subcap"><span>As stitched</span><span><b>white</b> on black</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACK, CURVED -->
+    <div class="placement">
+      <div class="placement-head">
+        <span class="loc">Back · curved</span>
+        <span class="pl">Hacker Cottage 2026</span>
+        <span class="desc">Arced above the strap gap.</span>
+      </div>
+      <div class="pair">
+        <div class="card">
+          <div class="swatch"><svg viewBox="0 0 340 104"><use href="#d-back-arch"/></svg></div>
+          <div class="subcap"><span>Reference</span><span><b>espresso</b> on beige</span></div>
+        </div>
+        <div class="card">
+          <div class="swatch dark"><svg viewBox="0 0 340 104"><use href="#d-back-arch"/></svg></div>
+          <div class="subcap"><span>As stitched</span><span><b>white</b> on black</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACK, STRAIGHT -->
+    <div class="placement">
+      <div class="placement-head">
+        <span class="loc">Back · straight</span>
+        <span class="pl">Hacker Cottage 2026</span>
+        <span class="desc">Straight set, if you skip the arc.</span>
+      </div>
+      <div class="pair">
+        <div class="card">
+          <div class="swatch"><svg viewBox="0 0 340 48"><use href="#d-back-straight"/></svg></div>
+          <div class="subcap"><span>Reference</span><span><b>espresso</b> on beige</span></div>
+        </div>
+        <div class="card">
+          <div class="swatch dark"><svg viewBox="0 0 340 48"><use href="#d-back-straight"/></svg></div>
+          <div class="subcap"><span>As stitched</span><span><b>white</b> on black</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STRAP -->
+    <div class="placement">
+      <div class="placement-head">
+        <span class="loc">Strap</span>
+        <span class="pl">AGIV logo</span>
+        <span class="desc">On the adjustable back strap.</span>
+      </div>
+      <div class="pair">
+        <div class="card">
+          <div class="swatch strap"><img class="agiv" src="data:image/png;base64,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" alt="AGIV logo" /></div>
+          <div class="subcap"><span>Reference</span><span><b>espresso</b> on beige</span></div>
+        </div>
+        <div class="card">
+          <div class="swatch strap dark"><img class="agiv" src="data:image/png;base64,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" alt="AGIV logo" /></div>
+          <div class="subcap"><span>As stitched</span><span><b>white</b> on black</span></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <footer>
-    <span>Hacker Cottage Weekend · Aug 28–31, 2026 · St-Sauveur, QC</span>
+    <span>Hacker Cottage Weekend · Aug 28–31, 2026</span>
     <span>Hosted by AGI Ventures Canada</span>
   </footer>
 
 </div>
+
 </body>
 </html>
