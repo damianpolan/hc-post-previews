@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hacker Cottage Weekend — On-site Event Banner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1A1613;
+    --charcoal: #3D3530;
+    --stone: #9B9286;
+    --sand: #C4B49A;
+    --cream: #D6C6AB;
+    --ivory: #E2D4BC;
+    --amber: #C8923C;
+    --amber-light: #F0DFBE;
+    --champagne: #E9CD97;
+    --rust: #A8472B;
+    --espresso: #1C1410;
+    --walnut: #2E2117;
+
+    --display: "Space Mono", ui-monospace, monospace;
+    --body: "DM Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+
+    /* Roll-up banners are tall: this canvas is 1080×2540, the exact ratio of a
+       standard 850×2000 mm retractable stand (≈33"×79"). */
+    --preview-scale: 0.3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0e0a07; color: var(--ivory); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+
+  /* ── Preview stage (hidden in export) ── */
+  .stage { min-height: 100vh; padding: 56px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 44px; }
+  .stage-header { text-align: center; color: var(--cream); max-width: 760px; }
+  .stage-header .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); }
+  .stage-header h1 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 32px; margin-top: 14px; color: var(--ivory); }
+  .stage-header p { margin-top: 14px; font-size: 13.5px; color: rgba(226,212,188,0.7); line-height: 1.6; }
+  .stage-header code { font-family: var(--mono); font-size: 12px; color: var(--amber-light); }
+
+  .deck { display: grid; grid-template-columns: repeat(2, auto); gap: 40px; align-items: start; justify-items: center; }
+  @media (max-width: 900px) { .deck { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { :root { --preview-scale: 0.26; } .stage { padding: 40px 10px 80px; } }
+
+  .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .slide-wrap.size-banner { --w: 1080px; --h: 2540px; }
+  .slide-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(214,198,171,0.55); }
+
+  .slide-frame {
+    width: calc(var(--w) * var(--preview-scale));
+    height: calc(var(--h) * var(--preview-scale));
+    position: relative; overflow: hidden;
+    box-shadow: 0 30px 80px -24px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+    background: var(--espresso);
+  }
+  .slide {
+    width: var(--w); height: var(--h);
+    position: relative; overflow: hidden;
+    transform: scale(var(--preview-scale)); transform-origin: top left;
+    background: var(--espresso); color: var(--ivory);
+  }
+
+  /* Fine paper/print grain — unifies photo + flat panels so nothing looks pasted */
+  .grain {
+    position: absolute; inset: 0; z-index: 40; pointer-events: none;
+    opacity: 0.05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+  }
+
+  /* ══════════ Shared type + sponsor-wall furniture ══════════ */
+  .kicker {
+    font-family: var(--mono); font-weight: 500; font-size: 25px;
+    letter-spacing: 0.32em; text-indent: 0.32em; text-transform: uppercase; color: var(--champagne);
+  }
+  .wordmark {
+    font-family: var(--display); font-weight: 700;
+    font-size: 156px; line-height: 0.98; letter-spacing: -0.02em;
+  }
+  .title-rule { width: 132px; height: 7px; background: var(--amber); border-radius: 2px; }
+  .slogan {
+    font-family: var(--display); font-style: italic; font-weight: 400;
+    font-size: 50px; line-height: 1.2;
+  }
+  .dateline {
+    font-family: var(--mono); font-weight: 500; font-size: 28px;
+    letter-spacing: 0.2em; text-indent: 0.2em; text-transform: uppercase; color: var(--cream);
+  }
+
+  .sponsors { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .sponsors-cap {
+    display: flex; align-items: center; justify-content: center; gap: 32px; width: 100%;
+    font-family: var(--mono); font-weight: 700; font-size: 22px;
+    letter-spacing: 0.36em; text-indent: 0.36em; text-transform: uppercase;
+  }
+  .sponsors-cap::before, .sponsors-cap::after { content: ""; height: 1px; flex: 1; max-width: 120px; }
+
+  .tier { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; }
+  .tier-label {
+    display: flex; align-items: center; justify-content: center; gap: 30px; width: 100%;
+    font-family: var(--mono); font-weight: 700; font-size: 21px;
+    letter-spacing: 0.34em; text-indent: 0.34em; text-transform: uppercase; color: var(--amber);
+  }
+  .tier-label::before, .tier-label::after { content: ""; height: 1px; flex: 1; max-width: 150px; background: rgba(226,212,188,0.24); }
+  .tier-logos { display: flex; align-items: center; justify-content: center; gap: 72px; flex-wrap: wrap; }
+  .tl-logo { display: inline-flex; align-items: center; line-height: 1; color: #fff; font-size: 100px; filter: drop-shadow(0 0 40px rgba(255,255,255,0.06)); }
+  .tl-logo .tl-mark { height: 1.05em; width: auto; display: block; }
+  .tl-logo .tl-mark path { fill: currentColor; }
+  .lk { height: 82px; width: auto; }
+  .tier-logos.support { gap: 60px; }
+  .tier-logos.support img { max-height: 50px; max-width: 210px; object-fit: contain; }
+  .tier-logos.support img.mx { max-height: 84px; }
+  .pm-logo { font-family: var(--body); font-weight: 700; font-size: 44px; letter-spacing: -0.03em; line-height: 1; display: inline-flex; align-items: baseline; color: #fff; }
+  .pm-logo .d { color: #18C667; }
+  .logo-white { filter: brightness(0) invert(1); }   /* force a dark logo to white */
+
+  .url { font-family: var(--display); font-weight: 700; font-size: 34px; letter-spacing: 0.02em; color: var(--amber-light); }
+
+  /* ══════════════════════════════════════════════════════════
+     CONCEPT A — "The Sign"  (type-forward espresso · framed photo band)
+     ══════════════════════════════════════════════════════════ */
+  .cA {
+    /* warm radial behind the wordmark, settling to deep espresso at the edges */
+    background: radial-gradient(125% 55% at 50% 26%, #2a1e13 0%, #1C1410 44%, #150e08 100%);
+  }
+  .cA .plate { position: absolute; inset: 46px; z-index: 20; pointer-events: none; border: 1.5px solid rgba(226,212,188,0.18); }
+  .cA .plate::after { content: ""; position: absolute; inset: 13px; border: 1px solid rgba(226,212,188,0.10); }
+
+  /* flexbox column: head pinned top, photo band auto-centered, sponsors pinned bottom —
+     robust against wordmark height so nothing can collide */
+  .cA .content { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 166px 92px 140px; }
+
+  .cA .head { display: flex; flex-direction: column; align-items: center; }
+  .cA .wordmark { margin-top: 40px; color: var(--ivory); text-shadow: 0 2px 30px rgba(0,0,0,0.35); }
+  .cA .title-rule { margin-top: 42px; }
+  .cA .slogan { margin-top: 38px; color: var(--ivory); }
+  .cA .dateline { margin-top: 36px; }
+
+  /* the framed photo band — the cabin as a warm 'window', amber-hairlined */
+  .cA .band { margin: auto 0; width: 100%; height: 466px; position: relative; overflow: hidden; }
+  .cA .band img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%;
+    filter: brightness(0.9) saturate(1.04) contrast(1.03) sepia(0.12) hue-rotate(-6deg); }
+  .cA .band .frame { position: absolute; inset: 0; border: 1.5px solid rgba(200,146,60,0.6);
+    box-shadow: inset 0 0 70px rgba(15,10,7,0.55); }
+  .cA .band .frame::after { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(226,212,188,0.14); }
+
+  .cA .sponsors { gap: 56px; }
+  .cA .sponsors-cap { color: rgba(226,212,188,0.6); }
+  .cA .sponsors-cap::before, .cA .sponsors-cap::after { background: rgba(226,212,188,0.2); }
+  .cA .url { margin-top: 52px; }
+
+  /* ══════════════════════════════════════════════════════════
+     CONCEPT B — "Golden Hour"  (dusk lake full-bleed · frosted base)
+     ══════════════════════════════════════════════════════════ */
+  .cB { background: #14100C; }
+  .cB .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 44%; z-index: 1;
+    /* daytime lake → dusk: the multi-layer grade below finishes the job */
+    filter: brightness(0.6) sepia(0.6) saturate(0.94) contrast(1.16) hue-rotate(-8deg);
+  }
+  .cB .layer { position: absolute; inset: 0; }
+  /* sink the sky to night at the zenith, amber at the horizon band */
+  .cB .grade-multiply { z-index: 2; mix-blend-mode: multiply;
+    background: linear-gradient(186deg, rgba(26,19,28,0.68) 0%, rgba(46,33,23,0.32) 24%,
+      rgba(200,146,60,0.40) 46%, rgba(60,42,28,0.42) 66%, rgba(20,14,10,0.88) 100%); }
+  /* low sun glinting over the open water — core kept below the type so the date reads */
+  .cB .grade-sun { z-index: 3; mix-blend-mode: screen;
+    background: radial-gradient(48% 24% at 64% 58%, rgba(255,224,156,0.6) 0%, rgba(216,152,66,0.26) 26%,
+      rgba(200,146,60,0.08) 44%, transparent 60%); }
+  .cB .grade-vignette { z-index: 4; mix-blend-mode: multiply;
+    background: radial-gradient(120% 82% at 60% 40%, transparent 40%, rgba(15,10,7,0.62) 100%); }
+  /* dusk scrim rising from the base — carries the frosted sponsor band */
+  .cB .scrim { z-index: 5;
+    background: linear-gradient(to top, rgba(11,9,10,0.97) 0%, rgba(11,9,10,0.95) 26%, rgba(11,9,10,0.86) 34%,
+      rgba(11,9,10,0.62) 42%, rgba(11,9,10,0.34) 50%, rgba(11,9,10,0.12) 58%, rgba(11,9,10,0) 66%); }
+  /* soft top veil: holds the kicker, wordmark, slogan + date on controlled value
+     without reading as a plate (monotonic falloff through 42%) */
+  .cB .scrim-head { z-index: 5;
+    background: linear-gradient(to bottom, rgba(11,9,10,0.5) 0%, rgba(11,9,10,0.30) 18%, rgba(11,9,10,0.26) 32%,
+      rgba(11,9,10,0.20) 42%, rgba(11,9,10,0.07) 52%, rgba(11,9,10,0) 62%); }
+
+  .cB .plate { position: absolute; inset: 46px; z-index: 20; pointer-events: none; border: 1.5px solid rgba(233,205,151,0.26); }
+  .cB .plate::after { content: ""; position: absolute; inset: 13px; border: 1px solid rgba(233,205,151,0.13); }
+
+  .cB .content { position: absolute; inset: 0; z-index: 10; }
+  .cB .kicker { position: absolute; top: 128px; left: 0; right: 0; text-align: center; opacity: 0.9;
+    text-shadow: 0 1px 10px rgba(15,10,7,0.7); }
+  .cB .headline { position: absolute; left: 92px; right: 92px; top: 252px; text-align: center; }
+  .cB .wordmark { color: var(--champagne); text-shadow: 0 2px 3px rgba(15,10,7,0.65), 0 4px 44px rgba(15,10,7,0.55); }
+  .cB .title-rule { margin: 44px auto 0; }
+  .cB .slogan { margin-top: 40px; color: var(--ivory); text-shadow: 0 2px 5px rgba(11,9,10,0.85), 0 0 24px rgba(11,9,10,0.6); }
+  .cB .dateline { margin-top: 38px; text-shadow: 0 2px 5px rgba(11,9,10,0.9), 0 0 22px rgba(11,9,10,0.65); }
+
+  .cB .sponsors { position: absolute; left: 92px; right: 92px; top: 1636px; gap: 58px; }
+  .cB .sponsors-cap { color: rgba(233,205,151,0.62); }
+  .cB .sponsors-cap::before, .cB .sponsors-cap::after { background: rgba(233,205,151,0.24); }
+  .cB .foot { position: absolute; left: 0; right: 0; bottom: 138px; text-align: center; }
+
+  /* ══════════ Export mode (?only=<id>) ══════════ */
+  body.export { background: #fff; }
+  body.export .stage, body.export .stage > *:not(.deck) { all: unset; }
+  body.export .stage-header, body.export .slide-label { display: none !important; }
+  body.export .stage { padding: 0; gap: 0; display: block; }
+  body.export .deck { display: block; }
+  body.export .slide-wrap { display: none; }
+  body.export .slide-wrap.show { display: block; }
+  body.export .slide-frame { width: var(--w); height: var(--h); box-shadow: none; }
+  body.export .slide { transform: none; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <header class="stage-header">
+    <div class="kicker" style="text-indent:0">On-site event banner · retractable stand</div>
+    <h1>Hacker Cottage Weekend — Banner</h1>
+    <p>Proportioned for a standard <code>850 × 2000 mm</code> (≈33"×79") roll-up stand, designed at <code>1080 × 2540</code> and shown at 30%. Two concepts to choose from. Print export runs at 2× via <code>?only=&lt;id&gt;</code>. Keep critical type clear of the bottom ~90&nbsp;px (base cassette).</p>
+  </header>
+
+  <div class="deck">
+
+    <!-- ══════════ CONCEPT A — THE SIGN ══════════ -->
+    <div class="slide-wrap size-banner" data-id="sign">
+      <div class="slide-frame"><div class="slide cA">
+        <div class="plate"></div>
+        <div class="content">
+          <div class="head">
+            <div class="kicker">Hosted by AGI Ventures Canada</div>
+            <div class="wordmark">Hacker<br/>Cottage<br/>Weekend</div>
+            <div class="title-rule"></div>
+            <div class="slogan">Think in years.<br/>Ship this weekend.</div>
+            <div class="dateline">Aug 28–31, 2026 · St-Sauveur, QC</div>
+          </div>
+
+          <div class="band">
+            <img src="assets/chalet-02.jpg" alt="" />
+            <div class="frame"></div>
+          </div>
+
+          <div class="sponsors">
+            <div class="sponsors-cap">Proudly supported by</div>
+            <div class="tier">
+              <div class="tier-label"><span>Gold</span></div>
+              <div class="tier-logos">
+                <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
+              </div>
+            </div>
+            <div class="tier">
+              <div class="tier-label"><span>Silver</span></div>
+              <div class="tier-logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz" /></div>
+            </div>
+            <div class="tier">
+              <div class="tier-label"><span>Supporting</span></div>
+              <div class="tier-logos support">
+                <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
+                <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
+                <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
+                <span class="pm-logo">Partnr<span class="d">.</span></span>
+              </div>
+            </div>
+            <div class="url">hackercottage.com</div>
+          </div>
+        </div>
+        <div class="grain"></div>
+      </div></div>
+      <div class="slide-label">Concept A · The Sign</div>
+    </div>
+
+    <!-- ══════════ CONCEPT B — GOLDEN HOUR ══════════ -->
+    <div class="slide-wrap size-banner" data-id="golden">
+      <div class="slide-frame"><div class="slide cB">
+        <img class="photo" src="assets/chalet-dock.jpg" alt="" />
+        <div class="layer grade-multiply"></div>
+        <div class="layer grade-sun"></div>
+        <div class="layer grade-vignette"></div>
+        <div class="layer scrim"></div>
+        <div class="layer scrim-head"></div>
+        <div class="plate"></div>
+
+        <div class="content">
+          <div class="kicker">Hosted by AGI Ventures Canada</div>
+
+          <div class="headline">
+            <div class="wordmark">Hacker<br/>Cottage<br/>Weekend</div>
+            <div class="title-rule"></div>
+            <div class="slogan">Think in years.<br/>Ship this weekend.</div>
+            <div class="dateline">Aug 28–31, 2026 · St-Sauveur, QC</div>
+          </div>
+
+          <div class="sponsors">
+            <div class="sponsors-cap">Proudly supported by</div>
+            <div class="tier">
+              <div class="tier-label"><span>Gold</span></div>
+              <div class="tier-logos">
+                <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
+              </div>
+            </div>
+            <div class="tier">
+              <div class="tier-label"><span>Silver</span></div>
+              <div class="tier-logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz" /></div>
+            </div>
+            <div class="tier">
+              <div class="tier-label"><span>Supporting</span></div>
+              <div class="tier-logos support">
+                <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
+                <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
+                <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
+                <span class="pm-logo">Partnr<span class="d">.</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <div class="url">hackercottage.com</div>
+          </div>
+        </div>
+        <div class="grain"></div>
+      </div></div>
+      <div class="slide-label">Concept B · Golden Hour</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Export mode: ?only=<data-id> isolates one banner at full size for 2× PNG capture.
+  (function () {
+    var only = new URLSearchParams(location.search).get('only');
+    if (only) {
+      document.body.classList.add('export');
+      var wrap = document.querySelector('.slide-wrap[data-id="' + only + '"]');
+      if (wrap) wrap.classList.add('show');
+    }
+  })();
+</script>
+</body>
+</html>
