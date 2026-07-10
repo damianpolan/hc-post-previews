@@ -194,7 +194,9 @@
   .cB .slogan { margin-top: 40px; color: var(--ivory); text-shadow: 0 2px 5px rgba(11,9,10,0.85), 0 0 24px rgba(11,9,10,0.6); }
   .cB .dateline { margin-top: 38px; text-shadow: 0 2px 5px rgba(11,9,10,0.9), 0 0 22px rgba(11,9,10,0.65); }
 
-  .cB .sponsors { position: absolute; left: 92px; right: 92px; top: 1636px; gap: 58px; }
+  /* left/right + inherited width:100% would over-constrain and shove the block
+     off-centre; pin full-width and inset with padding so centring is true */
+  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1636px; padding: 0 92px; gap: 58px; }
   .cB .sponsors-cap { color: rgba(233,205,151,0.62); }
   .cB .sponsors-cap::before, .cB .sponsors-cap::after { background: rgba(233,205,151,0.24); }
   .cB .foot { position: absolute; left: 0; right: 0; bottom: 138px; text-align: center; }
