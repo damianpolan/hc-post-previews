@@ -185,7 +185,7 @@
       <rect x="124" y="141" width="34" height="4" fill="#5A3A24"/>
       <path d="M 86 176 L 86 140 Q 86 125 100 125 Q 114 125 114 140 L 114 176 Z" fill="#5A3A24" stroke="#5A3A24" stroke-width="2.5"/>
       <rect x="92" y="132" width="16" height="16" rx="4" fill="#67B8CB" stroke="#4A2F1C" stroke-width="1.4"/>
-      <circle cx="108" cy="162" r="2.8" fill="#F2D45B"/>
+      <circle cx="108" cy="162" r="2.1" fill="#F2D45B"/>
       <line x1="18" y1="176" x2="182" y2="176" stroke="#5A3A24" stroke-width="3.5" stroke-linecap="round"/>
     </symbol>
 
@@ -193,19 +193,25 @@
          strokes; window panes, the door light and the knob are solid fills. All detail
          is unengraved gaps: pane gaps read as mullions (~1 mm at print size), and the
          log lines stop at the window and door edges because in one color anything
-         passing behind an opening would show through it. -->
+         passing behind an opening would show through it. The chimney is two side
+         lines ending on the roof slope (y = 20 + (x-100)*76/88) so nothing crosses
+         the roofline; wall sides are stacked log-end circles like the color mark. -->
     <symbol id="d-cabin-mono" viewBox="0 0 200 190">
       <g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
-        <rect x="149" y="40" width="15" height="32"/>
+        <rect x="146" y="33" width="21" height="9" rx="1.5"/>
+        <line x1="149" y1="42" x2="149" y2="62.3"/>
+        <line x1="164" y1="42" x2="164" y2="75.3"/>
         <path d="M 100 20 L 12 96 L 188 96 Z"/>
-        <rect x="30" y="97" width="140" height="79"/>
-        <line x1="31" y1="110" x2="169" y2="110"/>
-        <line x1="31" y1="123" x2="45" y2="123"/><line x1="73" y1="123" x2="127" y2="123"/><line x1="155" y1="123" x2="169" y2="123"/>
-        <line x1="31" y1="136" x2="45" y2="136"/><line x1="73" y1="136" x2="86" y2="136"/><line x1="114" y1="136" x2="127" y2="136"/><line x1="155" y1="136" x2="169" y2="136"/>
-        <line x1="31" y1="149" x2="86" y2="149"/><line x1="114" y1="149" x2="169" y2="149"/>
-        <line x1="31" y1="162" x2="86" y2="162"/><line x1="114" y1="162" x2="169" y2="162"/>
+        <circle cx="30" cy="103.5" r="6.5"/><circle cx="30" cy="116.5" r="6.5"/><circle cx="30" cy="129.5" r="6.5"/><circle cx="30" cy="142.5" r="6.5"/><circle cx="30" cy="155.5" r="6.5"/><circle cx="30" cy="168.5" r="6.5"/>
+        <circle cx="170" cy="103.5" r="6.5"/><circle cx="170" cy="116.5" r="6.5"/><circle cx="170" cy="129.5" r="6.5"/><circle cx="170" cy="142.5" r="6.5"/><circle cx="170" cy="155.5" r="6.5"/><circle cx="170" cy="168.5" r="6.5"/>
+        <line x1="37.5" y1="110" x2="162.5" y2="110"/>
+        <line x1="37.5" y1="123" x2="45" y2="123"/><line x1="73" y1="123" x2="86" y2="123"/><line x1="114" y1="123" x2="127" y2="123"/><line x1="155" y1="123" x2="162.5" y2="123"/>
+        <line x1="37.5" y1="136" x2="45" y2="136"/><line x1="73" y1="136" x2="86" y2="136"/><line x1="114" y1="136" x2="127" y2="136"/><line x1="155" y1="136" x2="162.5" y2="136"/>
+        <line x1="37.5" y1="149" x2="86" y2="149"/><line x1="114" y1="149" x2="162.5" y2="149"/>
+        <line x1="37.5" y1="162" x2="86" y2="162"/><line x1="114" y1="162" x2="162.5" y2="162"/>
         <line x1="18" y1="176" x2="182" y2="176"/>
         <path d="M 86 176 L 86 140 Q 86 125 100 125 Q 114 125 114 140 L 114 176 Z"/>
+        <g stroke-width="2.5"><path d="M 155 26 c 7 -4 8 -8 4 -13 c -3 -4 -2 -8 3 -11"/></g>
       </g>
       <g fill="currentColor">
         <rect x="45" y="113" width="12" height="12"/><rect x="61" y="113" width="12" height="12"/>
@@ -213,7 +219,7 @@
         <rect x="127" y="113" width="12" height="12"/><rect x="143" y="113" width="12" height="12"/>
         <rect x="127" y="129" width="12" height="12"/><rect x="143" y="129" width="12" height="12"/>
         <rect x="92" y="132" width="16" height="16" rx="4"/>
-        <circle cx="108" cy="162" r="2.8"/>
+        <circle cx="108" cy="162" r="2.1"/>
       </g>
     </symbol>
 
