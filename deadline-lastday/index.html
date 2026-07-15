@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hacker Cottage Weekend — Last Day to Apply</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --espresso: #1C1410;
+    --cream: #D6C6AB;
+    --ivory: #E2D4BC;
+    --amber: #C8923C;
+
+    --slide-w: 1080px;
+    --slide-h: 1350px;      /* 4:5 — companion still to the 2-days countdown video */
+    --preview-scale: 0.5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0e0a07; color: var(--ivory); font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* ── preview stage ── */
+  .stage { min-height: 100vh; padding: 48px 24px 80px; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+  .stage-header { text-align: center; color: var(--cream); max-width: 640px; }
+  .stage-header .kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); opacity: 0.85; }
+  .stage-header h1 { font-family: "Space Mono", monospace; font-style: italic; font-weight: 400; font-size: 34px; margin-top: 14px; color: var(--ivory); }
+  .stage-header p { margin-top: 12px; font-size: 14px; color: rgba(226,212,188,0.7); line-height: 1.55; }
+
+  .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .slide-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(214,198,171,0.55); }
+  .slide-frame {
+    width: calc(var(--slide-w) * var(--preview-scale));
+    height: calc(var(--slide-h) * var(--preview-scale));
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+    background: var(--espresso);
+  }
+
+  /* ── the slide (1080×1350) ── */
+  .slide {
+    width: var(--slide-w); height: var(--slide-h);
+    position: relative; overflow: hidden;
+    transform: scale(var(--preview-scale)); transform-origin: top left;
+    background: var(--espresso); color: var(--ivory);
+  }
+
+  .header {
+    position: absolute; top: 104px; width: 100%; text-align: center;
+    font-family: "Space Mono", monospace; font-style: italic; font-weight: 700;
+    font-size: 42px; color: var(--cream);
+  }
+  .header-rule { position: absolute; top: 174px; left: 508px; width: 64px; height: 3px; background: var(--amber); }
+
+  /* board cabinet */
+  .board {
+    position: absolute; top: 396px; left: 40px; width: 1000px;
+    border-radius: 28px; background: #191007;
+    border: 1px solid rgba(214,198,171,0.08);
+    padding: 34px 36px 44px; box-sizing: border-box;
+  }
+  .strip {
+    display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 40px;
+    font-family: "JetBrains Mono", monospace; font-size: 22px; letter-spacing: 6px;
+    color: rgba(214,198,171,0.62);
+  }
+  .strip .dot { width: 10px; height: 10px; border-radius: 5px; background: var(--amber); box-shadow: 0 0 12px var(--amber); }
+
+  .row { display: flex; justify-content: center; }
+
+  /* split-flap cell (settled) — ported from the countdown video's Cell */
+  .cell {
+    position: relative; width: var(--w); height: var(--h);
+    border-radius: 8px; background: #150D07;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35); flex-shrink: 0;
+  }
+  .half { position: absolute; left: 0; width: 100%; height: 50%; overflow: hidden; }
+  .half.top { top: 0; background: linear-gradient(180deg, #3B2B1B 0%, #2E2117 100%); border-radius: 8px 8px 0 0; }
+  .half.bottom { top: 50%; background: linear-gradient(180deg, #281C11 0%, #221709 130%); border-radius: 0 0 8px 8px; }
+  .glyph {
+    position: absolute; left: 0; width: 100%; height: var(--h); line-height: var(--h);
+    text-align: center; font-family: "Space Mono", monospace; font-weight: 700;
+    font-size: var(--fs); color: var(--col);
+  }
+  .half.top .glyph { top: 0; }
+  .half.bottom .glyph { top: calc(var(--h) * -0.5); }
+  .seam { position: absolute; top: calc(50% - 1px); left: 0; width: 100%; height: 2px; background: rgba(0,0,0,0.55); z-index: 4; }
+  .peg { position: absolute; top: calc(50% - 7px); width: 5px; height: 14px; background: #120C07; border-radius: 2px; z-index: 5; }
+  .peg.l { left: -1px; } .peg.r { right: -1px; }
+  .ish { position: absolute; inset: 0; border-radius: 8px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.45); z-index: 6; pointer-events: none; }
+
+  .footer {
+    position: absolute; bottom: 116px; width: 100%; text-align: center; font-family: "DM Sans", sans-serif;
+  }
+  .footer .line1 { font-size: 30px; color: rgba(214,198,171,0.72); margin-bottom: 10px; }
+  .footer .line2 { font-size: 26px; color: rgba(214,198,171,0.5); }
+
+  /* vignette + grain */
+  .vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 100% at 50% 38%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.42) 100%); z-index: 30; }
+  .grain { position: absolute; inset: 0; pointer-events: none; z-index: 31; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 180px 180px; }
+
+  /* ── export mode (?only=<id>) ── */
+  body.export { background: #fff; }
+  body.export .stage-header, body.export .slide-label { display: none !important; }
+  body.export .stage { padding: 0; gap: 0; display: block; }
+  body.export .slide-wrap { display: none; }
+  body.export .slide-wrap.show { display: block; margin: 0; }
+  body.export .slide-frame { width: var(--slide-w); height: var(--slide-h); box-shadow: none; }
+  body.export .slide { transform: none; }
+
+  @media (max-width: 560px) { :root { --preview-scale: 0.33; } }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="stage-header">
+    <div class="kicker">Deadline · July 15</div>
+    <h1>Last day to apply</h1>
+    <p>Static companion to the split-flap countdown video. The board is now flipped to LAST DAY / TO APPLY. 1080×1350 (4:5), works on Instagram and LinkedIn without a crop.</p>
+  </div>
+
+  <div class="slide-wrap" data-id="deadline-lastday">
+    <div class="slide-label">deadline-lastday</div>
+    <div class="slide-frame">
+      <div class="slide">
+        <div class="header">Hacker Cottage Weekend</div>
+        <div class="header-rule"></div>
+
+        <div class="board">
+          <div class="strip"><span class="dot"></span>APPLICATIONS CLOSE TONIGHT · 11:59 PM</div>
+          <div class="row" data-row="hero" style="margin-bottom:40px"></div>
+          <div class="row" data-row="sub"  style="margin-bottom:26px"></div>
+          <div class="row" data-row="cta"></div>
+        </div>
+
+        <div class="footer">
+          <div class="line1">Aug 28–31, 2026 · St-Sauveur, QC</div>
+          <div class="line2">Hosted by AGI Ventures Canada</div>
+        </div>
+
+        <div class="vignette"></div>
+        <div class="grain"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Build the settled split-flap rows. Kept in JS so the copy is one edit, not 33.
+  (function () {
+    var ROWS = {
+      hero: { text: 'LAST DAY',          w: 108, h: 148, fs: 88, gap: 8, col: '#D6C6AB' },
+      sub:  { text: 'TO APPLY',          w: 94,  h: 124, fs: 72, gap: 8, col: '#D6C6AB' },
+      cta:  { text: 'HACKERCOTTAGE.COM', w: 49,  h: 68,  fs: 36, gap: 5, col: '#C8923C' }
+    };
+    // deterministic per-plate mounting imperfection (mirrors the video's seeded rot)
+    var seed = 28312026;
+    function rnd() { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; }
+
+    Object.keys(ROWS).forEach(function (key) {
+      var spec = ROWS[key];
+      var row = document.querySelector('.row[data-row="' + key + '"]');
+      row.style.gap = spec.gap + 'px';
+      for (var i = 0; i < spec.text.length; i++) {
+        var ch = spec.text[i];
+        var rot = (rnd() * 0.7 - 0.35).toFixed(3);
+        var cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.style.cssText =
+          '--w:' + spec.w + 'px;--h:' + spec.h + 'px;--fs:' + spec.fs + 'px;--col:' + spec.col +
+          ';transform:rotate(' + rot + 'deg)';
+        var g = ch === ' ' ? '' : ch;
+        cell.innerHTML =
+          '<div class="half top"><div class="glyph">' + g + '</div></div>' +
+          '<div class="half bottom"><div class="glyph">' + g + '</div></div>' +
+          '<div class="seam"></div><div class="peg l"></div><div class="peg r"></div><div class="ish"></div>';
+        row.appendChild(cell);
+      }
+    });
+  })();
+
+  (function () {
+    var only = new URLSearchParams(location.search).get('only');
+    if (only) {
+      document.body.classList.add('export');
+      var w = document.querySelector('.slide-wrap[data-id="' + only + '"]');
+      if (w) w.classList.add('show');
+    }
+  })();
+</script>
+</body>
+</html>
