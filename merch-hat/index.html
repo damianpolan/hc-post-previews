@@ -373,32 +373,31 @@
 
     <!-- ═══ composed: cap front house, 2¼ × 2¼ in — the cabin is the hero ═══ -->
     <!-- Sibling design (Damian: bigger house, HACKER COTTAGE on one line, AGIV
-         below, type much smaller than the house). R2 (Damian: AGIV and type
-         proportionally bigger, house slightly smaller): cabin at 1.1872
-         (42.6 mm wide), one line of type at 28.5 (4.1 mm caps — the line is
-         width-bound, tracking eased 0.0476F -> 1.1 to buy the size), AGIV at
-         0.6F = 17.1u (3.5 mm, above the tumbler's 0.438F ratio on purpose).
-         Honest flag: caps and AGIV sit under the 5 mm floor — the embroiderer
-         must confirm before this one is picked. AGIV image retarget:
-         scale 53.90/58, place at (113.05, 255.90). -->
+         below, type much smaller than the house; then twice: bigger text).
+         R3: type at the width limit — font 31 with ZERO tracking (the line is
+         width-bound; Space Mono's monospace advance keeps natural spacing), caps
+         4.4 mm, side margins 1.5 mm. AGIV at 0.7F = 21.7u (4.4 mm). Cabin at
+         1.1564 (41.5 mm). Honest flag: caps and AGIV sit under the 5 mm floor —
+         the embroiderer must confirm before this one is picked. AGIV image
+         retarget: scale 68.40/58, place at (105.80, 251.30). -->
     <symbol id="cap-house-base" viewBox="0 0 280 280">
-      <g transform="translate(21.28 4.63) scale(1.1872)"><use href="#d-cabin-hat" width="200" height="190"/></g>
-      <text x="140" y="249.52" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="28.5" letter-spacing="1.1" fill="currentColor">HACKER COTTAGE</text>
-      <line x1="10.21" y1="264.45" x2="102.87" y2="264.45" style="stroke:var(--acc, currentColor)" stroke-width="2"/>
-      <line x1="177.13" y1="264.45" x2="269.79" y2="264.45" style="stroke:var(--acc, currentColor)" stroke-width="2"/>
+      <g transform="translate(24.36 4.69) scale(1.1564)"><use href="#d-cabin-hat" width="200" height="190"/></g>
+      <text x="140" y="245.91" text-anchor="middle" font-family="'Space Mono',monospace" font-weight="700" font-size="31" fill="currentColor">HACKER COTTAGE</text>
+      <line x1="7.2" y1="262.15" x2="94.73" y2="262.15" style="stroke:var(--acc, currentColor)" stroke-width="2.2"/>
+      <line x1="185.27" y1="262.15" x2="272.8" y2="262.15" style="stroke:var(--acc, currentColor)" stroke-width="2.2"/>
     </symbol>
     <symbol id="cap-house-white" viewBox="0 0 280 280">
       <use href="#cap-house-base" width="280" height="280"/>
-      <g transform="translate(0.60 165.94) scale(0.92935)"><use href="#agiv-png-white"/></g>
+      <g transform="translate(-36.90 137.14) scale(1.17936)"><use href="#agiv-png-white"/></g>
     </symbol>
     <!-- ivory AGIV lives in cap-stack-color's image (home box 102.71, 249.37, 74.58w) -->
     <symbol id="cap-house-color" viewBox="0 0 280 280">
       <use href="#cap-house-base" width="280" height="280" style="color:#E2D4BC; --acc:#E8A63A"/>
-      <g transform="translate(38.82 75.65) scale(0.72275)"><use href="#agiv-png-ivory"/></g>
+      <g transform="translate(11.60 22.59) scale(0.91717)"><use href="#agiv-png-ivory"/></g>
     </symbol>
     <symbol id="cap-house-proof" viewBox="0 0 280 280">
       <use href="#cap-house-base" width="280" height="280"/>
-      <g transform="translate(0.60 165.94) scale(0.92935)"><use href="#agiv-png-graphite"/></g>
+      <g transform="translate(-36.90 137.14) scale(1.17936)"><use href="#agiv-png-graphite"/></g>
     </symbol>
 
   </defs>
@@ -447,7 +446,7 @@
           </div>
           <div class="tile stack">
             <div class="field dark"><svg viewBox="0 0 280 280"><use href="#cap-house-white"/></svg></div>
-            <div class="tlabel"><span class="t1">Front · house, white</span><span class="tright"><span class="t2">type 4.1 mm · vendor check</span><a class="dl" href="assets/cap-front-house-white.svg" download>SVG</a><a class="dl" href="assets/cap-front-house-white.png" download>PNG</a></span></div>
+            <div class="tlabel"><span class="t1">Front · house, white</span><span class="tright"><span class="t2">type 4.4 mm · vendor check</span><a class="dl" href="assets/cap-front-house-white.svg" download>SVG</a><a class="dl" href="assets/cap-front-house-white.png" download>PNG</a></span></div>
           </div>
           <div class="tile stack">
             <div class="field dark"><svg viewBox="0 0 280 280"><use href="#cap-house-color"/></svg></div>
