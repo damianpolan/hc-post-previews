@@ -162,13 +162,15 @@
      CONCEPT B — "Golden Hour"  (dusk lake full-bleed · frosted base)
      ══════════════════════════════════════════════════════════ */
   .cB { background: #14100C; }
-  /* aerial is landscape: 115% height + -15% top crops the empty sky so the chalet
-     lands in the clear window between the dateline and the sponsor band;
-     object-position 41% centres the vertical slice on the house */
-  .cB .photo { position: absolute; left: 0; right: 0; top: -15%; width: 100%; height: 115%; object-fit: cover; object-position: 41% 50%; z-index: 1;
-    /* bright winter noon → dusk alpenglow: the multi-layer grade below finishes the job */
-    filter: brightness(0.86) sepia(0.3) saturate(1.1) contrast(1.1) hue-rotate(-8deg);
-  }
+  .cB .photo { position: absolute; left: 0; right: 0; top: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+  /* B — Facade: slice centred on the entrance gable; porch glows under the sun grade */
+  .bFacade .photo { object-position: 44% 50%; filter: brightness(0.62) sepia(0.5) saturate(1.0) contrast(1.14) hue-rotate(-8deg); }
+  .bFacade .grade-sun { background: radial-gradient(55% 26% at 47% 46%, rgba(255,224,156,0.6) 0%, rgba(216,152,66,0.26) 28%,
+    rgba(200,146,60,0.1) 46%, transparent 62%); }
+  /* B — Lake: 112% height crops the kayak nose out the bottom; sun haze low over the water */
+  .bLake .photo { height: 112%; object-position: 50% 50%; filter: brightness(0.6) sepia(0.6) saturate(0.94) contrast(1.16) hue-rotate(-8deg); }
+  .bLake .grade-sun { background: radial-gradient(48% 24% at 58% 52%, rgba(255,224,156,0.65) 0%, rgba(216,152,66,0.28) 26%,
+    rgba(200,146,60,0.08) 44%, transparent 60%); }
   .cB .layer { position: absolute; inset: 0; }
   /* sink the sky to night at the zenith, amber band across the chalet + frozen lake */
   .cB .grade-multiply { z-index: 2; mix-blend-mode: multiply;
@@ -227,7 +229,7 @@
   <header class="stage-header">
     <div class="kicker" style="text-indent:0">On-site event banner · retractable stand</div>
     <h1>Hacker Cottage Weekend — Banner</h1>
-    <p>Proportioned for a standard <code>850 × 2000 mm</code> (≈33"×79") roll-up stand, designed at <code>1080 × 2540</code> and shown at 30%. Two concepts to choose from. Print export runs at 2× via <code>?only=&lt;id&gt;</code>. Keep critical type clear of the bottom ~90&nbsp;px (base cassette).</p>
+    <p>Proportioned for a standard <code>850 × 2000 mm</code> (≈33"×79") roll-up stand, designed at <code>1080 × 2540</code> and shown at 30%. Three options: The Sign, plus Golden Hour with two backgrounds. Print export runs at 2× via <code>?only=&lt;id&gt;</code>. Keep critical type clear of the bottom ~90&nbsp;px (base cassette).</p>
   </header>
 
   <div class="deck">
@@ -286,10 +288,10 @@
       <div class="slide-label">Concept A · The Sign</div>
     </div>
 
-    <!-- ══════════ CONCEPT B — GOLDEN HOUR ══════════ -->
-    <div class="slide-wrap size-banner" data-id="golden">
-      <div class="slide-frame"><div class="slide cB">
-        <img class="photo" src="assets/chalet-aerial.jpg" alt="" />
+    <!-- ══════════ CONCEPT B — GOLDEN HOUR · FACADE ══════════ -->
+    <div class="slide-wrap size-banner" data-id="golden-facade">
+      <div class="slide-frame"><div class="slide cB bFacade">
+        <img class="photo" src="assets/chalet-02.jpg" alt="" />
         <div class="layer grade-multiply"></div>
         <div class="layer grade-sun"></div>
         <div class="layer grade-vignette"></div>
@@ -343,7 +345,67 @@
         </div>
         <div class="grain"></div>
       </div></div>
-      <div class="slide-label">Concept B · Golden Hour</div>
+      <div class="slide-label">Concept B · Golden Hour · Facade</div>
+    </div>
+
+    <!-- ══════════ CONCEPT B — GOLDEN HOUR · LAKE ══════════ -->
+    <div class="slide-wrap size-banner" data-id="golden-lake">
+      <div class="slide-frame"><div class="slide cB bLake">
+        <img class="photo" src="assets/chalet-kayak.jpg" alt="" />
+        <div class="layer grade-multiply"></div>
+        <div class="layer grade-sun"></div>
+        <div class="layer grade-vignette"></div>
+        <div class="layer scrim"></div>
+        <div class="layer scrim-head"></div>
+        <div class="plate"></div>
+
+        <div class="content">
+          <div class="kicker">Hosted by AGI Ventures Canada</div>
+
+          <div class="headline">
+            <div class="wordmark">Hacker<br/>Cottage<br/>Weekend</div>
+            <div class="title-rule"></div>
+            <div class="slogan">Think in years.<br/>Ship this weekend.</div>
+            <div class="dateline">Aug 28–31, 2026 · St-Sauveur, QC</div>
+          </div>
+
+          <div class="sponsors">
+            <div class="sponsors-cap">Proudly supported by</div>
+            <div class="tier">
+              <div class="tier-label"><span>Gold</span></div>
+              <div class="tier-logos">
+                <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
+                <img class="cog" src="assets/cognition-white.svg" alt="Cognition" />
+              </div>
+            </div>
+            <div class="tier">
+              <div class="tier-label"><span>Silver</span></div>
+              <div class="tier-logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz" /></div>
+            </div>
+            <div class="tier">
+              <div class="tier-label"><span>Supporting</span></div>
+              <div class="tier-logos support">
+                <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
+                <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
+                <span class="pm-logo">Partnr<span class="d">.</span></span>
+              </div>
+            </div>
+            <div class="tier">
+              <div class="tier-label"><span>Energy</span></div>
+              <div class="tier-logos energy">
+                <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
+                <img src="assets/powrd-white.png" alt="POWRD" />
+              </div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <div class="url">hackercottage.com</div>
+          </div>
+        </div>
+        <div class="grain"></div>
+      </div></div>
+      <div class="slide-label">Concept B · Golden Hour · Lake</div>
     </div>
 
   </div>
