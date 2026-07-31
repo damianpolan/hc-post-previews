@@ -107,13 +107,18 @@
   }
   .tier-label::before, .tier-label::after { content: ""; height: 1px; flex: 1; max-width: 150px; background: rgba(226,212,188,0.24); }
   .tier-logos { display: flex; align-items: center; justify-content: center; gap: 72px; flex-wrap: wrap; }
-  .tl-logo { display: inline-flex; align-items: center; line-height: 1; color: #fff; font-size: 100px; filter: drop-shadow(0 0 40px rgba(255,255,255,0.06)); }
+  .tl-logo { display: inline-flex; align-items: center; line-height: 1; color: #fff; font-size: 68px; filter: drop-shadow(0 0 40px rgba(255,255,255,0.06)); }
   .tl-logo .tl-mark { height: 1.05em; width: auto; display: block; }
   .tl-logo .tl-mark path { fill: currentColor; }
+  /* Cognition lockup height = 0.93× the TextLayer mark — its glyphs run taller per unit
+     height, this makes the two wordmarks read the same size (matches the website wall) */
+  .cog { height: 66px; width: auto; display: block; }
   .lk { height: 82px; width: auto; }
   .tier-logos.support { gap: 60px; }
   .tier-logos.support img { max-height: 50px; max-width: 210px; object-fit: contain; }
   .tier-logos.support img.mx { max-height: 84px; }
+  .tier-logos.energy { gap: 64px; }
+  .tier-logos.energy img { max-height: 44px; max-width: 240px; object-fit: contain; }
   .pm-logo { font-family: var(--body); font-weight: 700; font-size: 44px; letter-spacing: -0.03em; line-height: 1; display: inline-flex; align-items: baseline; color: #fff; }
   .pm-logo .d { color: #18C667; }
   .logo-white { filter: brightness(0) invert(1); }   /* force a dark logo to white */
@@ -157,19 +162,22 @@
      CONCEPT B — "Golden Hour"  (dusk lake full-bleed · frosted base)
      ══════════════════════════════════════════════════════════ */
   .cB { background: #14100C; }
-  .cB .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 44%; z-index: 1;
-    /* daytime lake → dusk: the multi-layer grade below finishes the job */
-    filter: brightness(0.6) sepia(0.6) saturate(0.94) contrast(1.16) hue-rotate(-8deg);
+  /* aerial is landscape: 115% height + -15% top crops the empty sky so the chalet
+     lands in the clear window between the dateline and the sponsor band;
+     object-position 41% centres the vertical slice on the house */
+  .cB .photo { position: absolute; left: 0; right: 0; top: -15%; width: 100%; height: 115%; object-fit: cover; object-position: 41% 50%; z-index: 1;
+    /* bright winter noon → dusk alpenglow: the multi-layer grade below finishes the job */
+    filter: brightness(0.86) sepia(0.3) saturate(1.1) contrast(1.1) hue-rotate(-8deg);
   }
   .cB .layer { position: absolute; inset: 0; }
-  /* sink the sky to night at the zenith, amber at the horizon band */
+  /* sink the sky to night at the zenith, amber band across the chalet + frozen lake */
   .cB .grade-multiply { z-index: 2; mix-blend-mode: multiply;
-    background: linear-gradient(186deg, rgba(26,19,28,0.68) 0%, rgba(46,33,23,0.32) 24%,
-      rgba(200,146,60,0.40) 46%, rgba(60,42,28,0.42) 66%, rgba(20,14,10,0.88) 100%); }
-  /* low sun glinting over the open water — core kept below the type so the date reads */
+    background: linear-gradient(186deg, rgba(26,19,28,0.66) 0%, rgba(46,33,23,0.28) 26%,
+      rgba(216,158,68,0.38) 52%, rgba(60,42,28,0.34) 70%, rgba(20,14,10,0.86) 100%); }
+  /* low sun behind the treeline, glow settling on the snow around the chalet */
   .cB .grade-sun { z-index: 3; mix-blend-mode: screen;
-    background: radial-gradient(48% 24% at 64% 58%, rgba(255,224,156,0.6) 0%, rgba(216,152,66,0.26) 26%,
-      rgba(200,146,60,0.08) 44%, transparent 60%); }
+    background: radial-gradient(62% 28% at 50% 53%, rgba(255,224,156,0.8) 0%, rgba(216,152,66,0.32) 28%,
+      rgba(200,146,60,0.1) 48%, transparent 66%); }
   .cB .grade-vignette { z-index: 4; mix-blend-mode: multiply;
     background: radial-gradient(120% 82% at 60% 40%, transparent 40%, rgba(15,10,7,0.62) 100%); }
   /* dusk scrim rising from the base — carries the frosted sponsor band */
@@ -196,7 +204,7 @@
 
   /* left/right + inherited width:100% would over-constrain and shove the block
      off-centre; pin full-width and inset with padding so centring is true */
-  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1636px; padding: 0 92px; gap: 58px; }
+  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1560px; padding: 0 92px; gap: 54px; }
   .cB .sponsors-cap { color: rgba(233,205,151,0.62); }
   .cB .sponsors-cap::before, .cB .sponsors-cap::after { background: rgba(233,205,151,0.24); }
   .cB .foot { position: absolute; left: 0; right: 0; bottom: 138px; text-align: center; }
@@ -248,6 +256,7 @@
               <div class="tier-label"><span>Gold</span></div>
               <div class="tier-logos">
                 <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
+                <img class="cog" src="assets/cognition-white.svg" alt="Cognition" />
               </div>
             </div>
             <div class="tier">
@@ -258,9 +267,15 @@
               <div class="tier-label"><span>Supporting</span></div>
               <div class="tier-logos support">
                 <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
-                <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
                 <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
                 <span class="pm-logo">Partnr<span class="d">.</span></span>
+              </div>
+            </div>
+            <div class="tier">
+              <div class="tier-label"><span>Energy</span></div>
+              <div class="tier-logos energy">
+                <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
+                <img src="assets/powrd-white.png" alt="POWRD" />
               </div>
             </div>
             <div class="url">hackercottage.com</div>
@@ -274,7 +289,7 @@
     <!-- ══════════ CONCEPT B — GOLDEN HOUR ══════════ -->
     <div class="slide-wrap size-banner" data-id="golden">
       <div class="slide-frame"><div class="slide cB">
-        <img class="photo" src="assets/chalet-dock.jpg" alt="" />
+        <img class="photo" src="assets/chalet-aerial.jpg" alt="" />
         <div class="layer grade-multiply"></div>
         <div class="layer grade-sun"></div>
         <div class="layer grade-vignette"></div>
@@ -298,6 +313,7 @@
               <div class="tier-label"><span>Gold</span></div>
               <div class="tier-logos">
                 <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
+                <img class="cog" src="assets/cognition-white.svg" alt="Cognition" />
               </div>
             </div>
             <div class="tier">
@@ -308,9 +324,15 @@
               <div class="tier-label"><span>Supporting</span></div>
               <div class="tier-logos support">
                 <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
-                <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
                 <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
                 <span class="pm-logo">Partnr<span class="d">.</span></span>
+              </div>
+            </div>
+            <div class="tier">
+              <div class="tier-label"><span>Energy</span></div>
+              <div class="tier-logos energy">
+                <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
+                <img src="assets/powrd-white.png" alt="POWRD" />
               </div>
             </div>
           </div>
