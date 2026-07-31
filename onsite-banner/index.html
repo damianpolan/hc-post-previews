@@ -42,7 +42,8 @@
   .stage-header p { margin-top: 14px; font-size: 13.5px; color: rgba(226,212,188,0.7); line-height: 1.6; }
   .stage-header code { font-family: var(--mono); font-size: 12px; color: var(--amber-light); }
 
-  .deck { display: grid; grid-template-columns: repeat(2, auto); gap: 40px; align-items: start; justify-items: center; }
+  .deck { display: grid; grid-template-columns: repeat(3, auto); gap: 40px; align-items: start; justify-items: center; }
+  @media (max-width: 1120px) { .deck { grid-template-columns: repeat(2, auto); } }
   @media (max-width: 900px) { .deck { grid-template-columns: 1fr; } }
   @media (max-width: 560px) { :root { --preview-scale: 0.26; } .stage { padding: 40px 10px 80px; } }
 
