@@ -166,8 +166,8 @@
   .cB .photo { position: absolute; left: 0; right: 0; top: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
   /* B — Golden Hour: slice centred on the entrance gable; porch glows under the sun grade */
   .bFacade .photo { object-position: 44% 50%; filter: brightness(0.62) sepia(0.5) saturate(1.0) contrast(1.14) hue-rotate(-8deg); }
-  .bFacade .grade-sun { background: radial-gradient(70% 36% at 47% 46%, rgba(255,224,156,0.22) 0%, rgba(216,152,66,0.12) 30%,
-    rgba(200,146,60,0.05) 52%, transparent 72%); }
+  .bFacade .grade-sun { background: radial-gradient(76% 40% at 47% 46%, rgba(255,224,156,0.09) 0%, rgba(216,152,66,0.05) 32%,
+    rgba(200,146,60,0.02) 54%, transparent 74%); }
   /* C — Still Water: 112% height crops the kayak nose out the bottom; sun haze low over the water */
   .cStill .photo { height: 112%; object-position: 50% 50%; filter: brightness(0.6) sepia(0.6) saturate(0.94) contrast(1.16) hue-rotate(-8deg); }
   .cStill .grade-sun { background: radial-gradient(64% 34% at 58% 52%, rgba(255,224,156,0.24) 0%, rgba(216,152,66,0.13) 28%,
@@ -177,10 +177,9 @@
   .cB .grade-multiply { z-index: 2; mix-blend-mode: multiply;
     background: linear-gradient(186deg, rgba(26,19,28,0.66) 0%, rgba(46,33,23,0.28) 26%,
       rgba(216,158,68,0.38) 52%, rgba(60,42,28,0.34) 70%, rgba(20,14,10,0.86) 100%); }
-  /* low sun behind the treeline, glow settling on the snow around the chalet */
-  .cB .grade-sun { z-index: 3; mix-blend-mode: screen;
-    background: radial-gradient(62% 28% at 50% 53%, rgba(255,224,156,0.8) 0%, rgba(216,152,66,0.32) 28%,
-      rgba(200,146,60,0.1) 48%, transparent 66%); }
+  /* low sun glow — each concept supplies its own gradient above; setting a background
+     here too would override them (equal specificity, later in source) */
+  .cB .grade-sun { z-index: 3; mix-blend-mode: screen; }
   .cB .grade-vignette { z-index: 4; mix-blend-mode: multiply;
     background: radial-gradient(120% 82% at 60% 40%, transparent 40%, rgba(15,10,7,0.62) 100%); }
   /* dusk scrim rising from the base — carries the frosted sponsor band */
