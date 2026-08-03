@@ -115,9 +115,13 @@
      height, this makes the two wordmarks read the same size (matches the website wall) */
   .cog { height: 66px; width: auto; display: block; }
   .lk { height: 82px; width: auto; }
-  .tier-logos.support { gap: 60px; }
+  .aqc { height: 72px; width: auto; }
+  .tier-logos.support { gap: 52px; }
   .tier-logos.support img { max-height: 50px; max-width: 210px; object-fit: contain; }
   .tier-logos.support img.mx { max-height: 84px; }
+  /* 0.8x the supporting cap: the tmie wordmark runs edge-to-edge, so it reads larger
+     than its neighbours at the same box height (mirrors the website's optical correction) */
+  .tier-logos.support img.tmie { max-height: 40px; }
   .tier-logos.energy { gap: 64px; }
   .tier-logos.energy img { max-height: 44px; max-width: 240px; object-fit: contain; }
   .pm-logo { font-family: var(--body); font-weight: 700; font-size: 44px; letter-spacing: -0.03em; line-height: 1; display: inline-flex; align-items: baseline; color: #fff; }
@@ -138,7 +142,7 @@
 
   /* flexbox column: head pinned top, photo band auto-centered, sponsors pinned bottom —
      robust against wordmark height so nothing can collide */
-  .cA .content { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 166px 92px 140px; }
+  .cA .content { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 140px 92px 140px; }
 
   .cA .head { display: flex; flex-direction: column; align-items: center; }
   .cA .wordmark { margin-top: 40px; color: var(--ivory); text-shadow: 0 2px 30px rgba(0,0,0,0.35); }
@@ -147,14 +151,16 @@
   .cA .dateline { margin-top: 36px; }
 
   /* the framed photo band — the cabin as a warm 'window', amber-hairlined */
-  .cA .band { margin: auto 0; width: 100%; height: 466px; position: relative; overflow: hidden; }
+  /* height is the slack in the column: head + 5 sponsor tiers leave ~360px before the
+     auto margins collapse and the band collides with the dateline / caption */
+  .cA .band { margin: auto 0; width: 100%; height: 330px; position: relative; overflow: hidden; }
   .cA .band img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%;
     filter: brightness(0.9) saturate(1.04) contrast(1.03) sepia(0.12) hue-rotate(-6deg); }
   .cA .band .frame { position: absolute; inset: 0; border: 1.5px solid rgba(200,146,60,0.6);
     box-shadow: inset 0 0 70px rgba(15,10,7,0.55); }
   .cA .band .frame::after { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(226,212,188,0.14); }
 
-  .cA .sponsors { gap: 56px; }
+  .cA .sponsors { gap: 40px; }
   .cA .sponsors-cap { color: rgba(226,212,188,0.6); }
   .cA .sponsors-cap::before, .cA .sponsors-cap::after { background: rgba(226,212,188,0.2); }
   .cA .url { margin-top: 52px; }
@@ -206,7 +212,7 @@
 
   /* left/right + inherited width:100% would over-constrain and shove the block
      off-centre; pin full-width and inset with padding so centring is true */
-  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1560px; padding: 0 92px; gap: 54px; }
+  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1420px; padding: 0 92px; gap: 48px; }
   .cB .sponsors-cap { color: rgba(233,205,151,0.62); }
   .cB .sponsors-cap::before, .cB .sponsors-cap::after { background: rgba(233,205,151,0.24); }
   .cB .foot { position: absolute; left: 0; right: 0; bottom: 138px; text-align: center; }
@@ -266,11 +272,16 @@
               <div class="tier-logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz" /></div>
             </div>
             <div class="tier">
+              <div class="tier-label"><span>Bronze</span></div>
+              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /></div>
+            </div>
+            <div class="tier">
               <div class="tier-label"><span>Supporting</span></div>
               <div class="tier-logos support">
                 <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
                 <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
                 <span class="pm-logo">Partnr<span class="d">.</span></span>
+                <img class="tmie" src="assets/tmie.png" alt="TMIE Media" />
               </div>
             </div>
             <div class="tier">
@@ -323,11 +334,16 @@
               <div class="tier-logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz" /></div>
             </div>
             <div class="tier">
+              <div class="tier-label"><span>Bronze</span></div>
+              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /></div>
+            </div>
+            <div class="tier">
               <div class="tier-label"><span>Supporting</span></div>
               <div class="tier-logos support">
                 <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
                 <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
                 <span class="pm-logo">Partnr<span class="d">.</span></span>
+                <img class="tmie" src="assets/tmie.png" alt="TMIE Media" />
               </div>
             </div>
             <div class="tier">
@@ -383,11 +399,16 @@
               <div class="tier-logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz" /></div>
             </div>
             <div class="tier">
+              <div class="tier-label"><span>Bronze</span></div>
+              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /></div>
+            </div>
+            <div class="tier">
               <div class="tier-label"><span>Supporting</span></div>
               <div class="tier-logos support">
                 <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
                 <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
                 <span class="pm-logo">Partnr<span class="d">.</span></span>
+                <img class="tmie" src="assets/tmie.png" alt="TMIE Media" />
               </div>
             </div>
             <div class="tier">
