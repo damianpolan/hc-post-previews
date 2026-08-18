@@ -128,25 +128,27 @@
      per line by design — the tight row gap keeps them reading as a single tier block */
   .t-gold .tier-logos { row-gap: 30px; }
   /* Tier ladder — logo box heights step hard by tier so rank reads from across the room:
-     gold 92 · silver 64 · bronze 48 · supporting 34 · energy 26.
+     gold 120 · silver 94 · bronze 62 · supporting 44 · energy 34.
+     Silver sits above its proportional step on purpose: Logan Katz is a stacked lockup
+     (mark over wordmark) so it reads optically smaller than its box height.
      Each tier's per-logo optical corrections below are scaled off its own tier height. */
-  .tl-logo { display: inline-flex; align-items: center; line-height: 1; color: #fff; font-size: 88px; filter: drop-shadow(0 0 40px rgba(255,255,255,0.06)); }
+  .tl-logo { display: inline-flex; align-items: center; line-height: 1; color: #fff; font-size: 114px; filter: drop-shadow(0 0 40px rgba(255,255,255,0.06)); }
   .tl-logo .tl-mark { height: 1.05em; width: auto; display: block; }
   .tl-logo .tl-mark path { fill: currentColor; }
   /* Cognition lockup height = 0.93× the TextLayer mark — its glyphs run taller per unit
      height, this makes the two wordmarks read the same size (matches the website wall) */
-  .cog { height: 86px; width: auto; display: block; }
-  .lk { height: 64px; width: auto; }
-  .aqc { height: 48px; width: auto; }
-  .tier-logos.support { gap: 46px; }
-  .tier-logos.support img { max-height: 34px; max-width: 150px; object-fit: contain; }
-  .tier-logos.support img.mx { max-height: 57px; }
+  .cog { height: 112px; width: auto; display: block; }
+  .lk { height: 94px; width: auto; }
+  .aqc { height: 62px; width: auto; }
+  .tier-logos.support { gap: 40px; }
+  .tier-logos.support img { max-height: 44px; max-width: 195px; object-fit: contain; }
+  .tier-logos.support img.mx { max-height: 74px; }
   /* 0.8x the supporting cap: the tmie wordmark runs edge-to-edge, so it reads larger
      than its neighbours at the same box height (mirrors the website's optical correction) */
-  .tier-logos.support img.tmie { max-height: 27px; }
+  .tier-logos.support img.tmie { max-height: 35px; }
   .tier-logos.energy { gap: 46px; }
-  .tier-logos.energy img { max-height: 26px; max-width: 150px; object-fit: contain; }
-  .pm-logo { font-family: var(--body); font-weight: 700; font-size: 30px; letter-spacing: -0.03em; line-height: 1; display: inline-flex; align-items: baseline; color: #fff; }
+  .tier-logos.energy img { max-height: 34px; max-width: 195px; object-fit: contain; }
+  .pm-logo { font-family: var(--body); font-weight: 700; font-size: 39px; letter-spacing: -0.03em; line-height: 1; display: inline-flex; align-items: baseline; color: #fff; }
   .pm-logo .d { color: #18C667; }
   .logo-white { filter: brightness(0) invert(1); }   /* force a dark logo to white */
 
@@ -164,13 +166,15 @@
 
   /* flexbox column: head pinned top, photo band auto-centered, sponsors pinned bottom —
      robust against wordmark height so nothing can collide */
-  .cA .content { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 118px 92px 118px; }
+  /* asymmetric bottom padding: a roll-up's base cassette swallows the last ~90px, so the
+     URL has to land above 2450 even though the top can start higher */
+  .cA .content { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 100px 92px 130px; }
 
   .cA .head { display: flex; flex-direction: column; align-items: center; }
-  .cA .wordmark { margin-top: 40px; color: var(--ivory); text-shadow: 0 2px 30px rgba(0,0,0,0.35); }
-  .cA .title-rule { margin-top: 42px; }
-  .cA .slogan { margin-top: 38px; color: var(--ivory); }
-  .cA .dateline { margin-top: 36px; }
+  .cA .wordmark { margin-top: 34px; color: var(--ivory); text-shadow: 0 2px 30px rgba(0,0,0,0.35); }
+  .cA .title-rule { margin-top: 36px; }
+  .cA .slogan { margin-top: 32px; color: var(--ivory); }
+  .cA .dateline { margin-top: 30px; }
 
   /* the framed photo band — the cabin as a warm 'window', amber-hairlined */
   /* height is the slack in the column: the AGIV host lockup and the two-line gold tier
@@ -183,10 +187,10 @@
     box-shadow: inset 0 0 70px rgba(15,10,7,0.55); }
   .cA .band .frame::after { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(226,212,188,0.14); }
 
-  .cA .sponsors { gap: 40px; }
+  .cA .sponsors { gap: 33px; }
   .cA .sponsors-cap { color: rgba(226,212,188,0.6); }
   .cA .sponsors-cap::before, .cA .sponsors-cap::after { background: rgba(226,212,188,0.2); }
-  .cA .url { margin-top: 52px; }
+  .cA .url { margin-top: 38px; }
 
   /* ══════════════════════════════════════════════════════════
      CONCEPT B — "Golden Hour"  (dusk lake full-bleed · frosted base)
@@ -212,9 +216,11 @@
   .cB .grade-vignette { z-index: 4; mix-blend-mode: multiply;
     background: radial-gradient(120% 82% at 60% 40%, transparent 40%, rgba(15,10,7,0.62) 100%); }
   /* dusk scrim rising from the base — carries the frosted sponsor band */
+  /* ramp raised ~8 points to follow the sponsor wall up the canvas — the "proudly supported
+     by" caption now sits at 50% from the base and needs real value under it */
   .cB .scrim { z-index: 5;
-    background: linear-gradient(to top, rgba(11,9,10,0.97) 0%, rgba(11,9,10,0.95) 26%, rgba(11,9,10,0.86) 34%,
-      rgba(11,9,10,0.62) 42%, rgba(11,9,10,0.34) 50%, rgba(11,9,10,0.12) 58%, rgba(11,9,10,0) 66%); }
+    background: linear-gradient(to top, rgba(11,9,10,0.97) 0%, rgba(11,9,10,0.95) 30%, rgba(11,9,10,0.88) 40%,
+      rgba(11,9,10,0.70) 48%, rgba(11,9,10,0.44) 54%, rgba(11,9,10,0.16) 62%, rgba(11,9,10,0) 70%); }
   /* soft top veil: holds the kicker, wordmark, slogan + date on controlled value
      without reading as a plate (monotonic falloff through 42%) */
   .cB .scrim-head { z-index: 5;
@@ -236,9 +242,9 @@
 
   /* left/right + inherited width:100% would over-constrain and shove the block
      off-centre; pin full-width and inset with padding so centring is true */
-  /* top + gap are tuned together: the two-line gold tier makes the wall ~938px tall, and
-     the foot starts at 2352 — these values leave ~74px between the energy row and the URL */
-  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1380px; padding: 0 92px; gap: 40px; }
+  /* top + gap are tuned together: at the current tier sizes the wall runs ~985px tall and
+     the foot starts at 2352 — these values leave ~97px between the energy row and the URL */
+  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1270px; padding: 0 92px; gap: 33px; }
   .cB .sponsors-cap { color: rgba(233,205,151,0.62); }
   .cB .sponsors-cap::before, .cB .sponsors-cap::after { background: rgba(233,205,151,0.24); }
   .cB .foot { position: absolute; left: 0; right: 0; bottom: 138px; text-align: center; }
