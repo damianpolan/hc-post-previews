@@ -42,12 +42,15 @@
   .stage-header p { margin-top: 14px; font-size: 13.5px; color: rgba(226,212,188,0.7); line-height: 1.6; }
   .stage-header code { font-family: var(--mono); font-size: 12px; color: var(--amber-light); }
 
-  .deck { display: grid; grid-template-columns: repeat(3, auto); gap: 40px; align-items: start; justify-items: center; }
+  .deck { display: grid; grid-template-columns: auto; gap: 40px; align-items: start; justify-items: center; }
   @media (max-width: 1120px) { .deck { grid-template-columns: repeat(2, auto); } }
   @media (max-width: 900px) { .deck { grid-template-columns: 1fr; } }
   @media (max-width: 560px) { :root { --preview-scale: 0.26; } .stage { padding: 40px 10px 80px; } }
 
   .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  /* A and C are parked: Golden Hour is the chosen concept. Markup kept so ?only=sign
+     and ?only=still still export if we ever want them back. */
+  .slide-wrap.parked { display: none; }
   .slide-wrap.size-banner { --w: 1080px; --h: 2540px; }
   .slide-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(214,198,171,0.55); }
 
@@ -234,7 +237,7 @@
   /* .hosted is the positioned block now — the kicker lives inside it */
   .cB .hosted { position: absolute; top: 118px; left: 0; right: 0; opacity: 0.9; }
   .cB .kicker { text-align: center; text-shadow: 0 1px 10px rgba(15,10,7,0.7); }
-  .cB .headline { position: absolute; left: 92px; right: 92px; top: 252px; text-align: center; }
+  .cB .headline { position: absolute; left: 92px; right: 92px; top: 306px; text-align: center; }
   .cB .wordmark { color: var(--champagne); text-shadow: 0 2px 3px rgba(15,10,7,0.65), 0 4px 44px rgba(15,10,7,0.55); }
   .cB .title-rule { margin: 44px auto 0; }
   .cB .slogan { margin-top: 40px; color: var(--ivory); text-shadow: 0 2px 5px rgba(11,9,10,0.85), 0 0 24px rgba(11,9,10,0.6); }
@@ -267,13 +270,13 @@
   <header class="stage-header">
     <div class="kicker" style="text-indent:0">On-site event banner · retractable stand</div>
     <h1>Hacker Cottage Weekend — Banner</h1>
-    <p>Proportioned for a standard <code>850 × 2000 mm</code> (≈33"×79") roll-up stand, designed at <code>1080 × 2540</code> and shown at 30%. Three concepts: The Sign, Golden Hour, Still Water. Print export runs at 2× via <code>?only=&lt;id&gt;</code>. Keep critical type clear of the bottom ~90&nbsp;px (base cassette).</p>
+    <p>Proportioned for a standard <code>850 × 2000 mm</code> (≈33"×79") roll-up stand, designed at <code>1080 × 2540</code> and shown at 30%. Golden Hour is the chosen concept; The Sign and Still Water are parked. Print export runs at 2× via <code>?only=golden</code>. Keep critical type clear of the bottom ~90&nbsp;px (base cassette).</p>
   </header>
 
   <div class="deck">
 
     <!-- ══════════ CONCEPT A — THE SIGN ══════════ -->
-    <div class="slide-wrap size-banner" data-id="sign">
+    <div class="slide-wrap size-banner parked" data-id="sign">
       <div class="slide-frame"><div class="slide cA">
         <div class="plate"></div>
         <div class="content">
@@ -403,7 +406,7 @@
     </div>
 
     <!-- ══════════ CONCEPT C — STILL WATER (lake vista) ══════════ -->
-    <div class="slide-wrap size-banner" data-id="still">
+    <div class="slide-wrap size-banner parked" data-id="still">
       <div class="slide-frame"><div class="slide cB cStill">
         <img class="photo" src="assets/chalet-kayak.jpg" alt="" />
         <div class="layer grade-multiply"></div>
