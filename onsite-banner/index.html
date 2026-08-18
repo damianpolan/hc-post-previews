@@ -78,6 +78,11 @@
     font-family: var(--mono); font-weight: 500; font-size: 25px;
     letter-spacing: 0.32em; text-indent: 0.32em; text-transform: uppercase; color: var(--champagne);
   }
+  /* host lockup: "HOSTED BY" over the AGIV mark */
+  .hosted { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .hosted .kicker { font-size: 22px; }
+  .hosted .agiv { height: 58px; width: auto; display: block; opacity: 0.94;
+    filter: drop-shadow(0 2px 12px rgba(15,10,7,0.55)); }
   .wordmark {
     font-family: var(--display); font-weight: 700;
     font-size: 156px; line-height: 0.98; letter-spacing: -0.02em;
@@ -101,30 +106,47 @@
   .sponsors-cap::before, .sponsors-cap::after { content: ""; height: 1px; flex: 1; max-width: 120px; }
 
   .tier { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; }
+  /* label-to-logo air tightens down the ladder so the lower tiers read as compact blocks */
+  .tier.t-gold { gap: 36px; }
+  .tier.t-silver { gap: 27px; }
+  .tier.t-bronze { gap: 23px; }
+  .tier.t-support { gap: 21px; }
+  .tier.t-energy { gap: 19px; }
+  /* the rules flanking a tier label shorten with rank, so the band narrows as it descends */
+  .t-silver .tier-label::before, .t-silver .tier-label::after { max-width: 130px; }
+  .t-bronze .tier-label::before, .t-bronze .tier-label::after { max-width: 115px; }
+  .t-support .tier-label::before, .t-support .tier-label::after { max-width: 100px; }
+  .t-energy .tier-label::before, .t-energy .tier-label::after { max-width: 90px; }
   .tier-label {
     display: flex; align-items: center; justify-content: center; gap: 30px; width: 100%;
     font-family: var(--mono); font-weight: 700; font-size: 21px;
     letter-spacing: 0.34em; text-indent: 0.34em; text-transform: uppercase; color: var(--amber);
   }
   .tier-label::before, .tier-label::after { content: ""; height: 1px; flex: 1; max-width: 150px; background: rgba(226,212,188,0.24); }
-  .tier-logos { display: flex; align-items: center; justify-content: center; gap: 72px; flex-wrap: wrap; }
-  .tl-logo { display: inline-flex; align-items: center; line-height: 1; color: #fff; font-size: 68px; filter: drop-shadow(0 0 40px rgba(255,255,255,0.06)); }
+  .tier-logos { display: flex; align-items: center; justify-content: center; gap: 84px; flex-wrap: wrap; }
+  /* at gold size the two marks total ~945px against an 896px column, so gold stacks one
+     per line by design — the tight row gap keeps them reading as a single tier block */
+  .t-gold .tier-logos { row-gap: 30px; }
+  /* Tier ladder — logo box heights step hard by tier so rank reads from across the room:
+     gold 92 · silver 64 · bronze 48 · supporting 34 · energy 26.
+     Each tier's per-logo optical corrections below are scaled off its own tier height. */
+  .tl-logo { display: inline-flex; align-items: center; line-height: 1; color: #fff; font-size: 88px; filter: drop-shadow(0 0 40px rgba(255,255,255,0.06)); }
   .tl-logo .tl-mark { height: 1.05em; width: auto; display: block; }
   .tl-logo .tl-mark path { fill: currentColor; }
   /* Cognition lockup height = 0.93× the TextLayer mark — its glyphs run taller per unit
      height, this makes the two wordmarks read the same size (matches the website wall) */
-  .cog { height: 66px; width: auto; display: block; }
-  .lk { height: 82px; width: auto; }
-  .aqc { height: 72px; width: auto; }
-  .tier-logos.support { gap: 52px; }
-  .tier-logos.support img { max-height: 50px; max-width: 210px; object-fit: contain; }
-  .tier-logos.support img.mx { max-height: 84px; }
+  .cog { height: 86px; width: auto; display: block; }
+  .lk { height: 64px; width: auto; }
+  .aqc { height: 48px; width: auto; }
+  .tier-logos.support { gap: 46px; }
+  .tier-logos.support img { max-height: 34px; max-width: 150px; object-fit: contain; }
+  .tier-logos.support img.mx { max-height: 57px; }
   /* 0.8x the supporting cap: the tmie wordmark runs edge-to-edge, so it reads larger
      than its neighbours at the same box height (mirrors the website's optical correction) */
-  .tier-logos.support img.tmie { max-height: 40px; }
-  .tier-logos.energy { gap: 64px; }
-  .tier-logos.energy img { max-height: 44px; max-width: 240px; object-fit: contain; }
-  .pm-logo { font-family: var(--body); font-weight: 700; font-size: 44px; letter-spacing: -0.03em; line-height: 1; display: inline-flex; align-items: baseline; color: #fff; }
+  .tier-logos.support img.tmie { max-height: 27px; }
+  .tier-logos.energy { gap: 46px; }
+  .tier-logos.energy img { max-height: 26px; max-width: 150px; object-fit: contain; }
+  .pm-logo { font-family: var(--body); font-weight: 700; font-size: 30px; letter-spacing: -0.03em; line-height: 1; display: inline-flex; align-items: baseline; color: #fff; }
   .pm-logo .d { color: #18C667; }
   .logo-white { filter: brightness(0) invert(1); }   /* force a dark logo to white */
 
@@ -142,7 +164,7 @@
 
   /* flexbox column: head pinned top, photo band auto-centered, sponsors pinned bottom —
      robust against wordmark height so nothing can collide */
-  .cA .content { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 140px 92px 140px; }
+  .cA .content { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 118px 92px 118px; }
 
   .cA .head { display: flex; flex-direction: column; align-items: center; }
   .cA .wordmark { margin-top: 40px; color: var(--ivory); text-shadow: 0 2px 30px rgba(0,0,0,0.35); }
@@ -151,9 +173,10 @@
   .cA .dateline { margin-top: 36px; }
 
   /* the framed photo band — the cabin as a warm 'window', amber-hairlined */
-  /* height is the slack in the column: head + 5 sponsor tiers leave ~360px before the
-     auto margins collapse and the band collides with the dateline / caption */
-  .cA .band { margin: auto 0; width: 100%; height: 330px; position: relative; overflow: hidden; }
+  /* height is the slack in the column: the AGIV host lockup and the two-line gold tier
+     eat ~80px more than the old text kicker did, so the band caps near 286px before the
+     auto margins collapse and it collides with the dateline / caption */
+  .cA .band { margin: auto 0; width: 100%; height: 286px; position: relative; overflow: hidden; }
   .cA .band img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%;
     filter: brightness(0.9) saturate(1.04) contrast(1.03) sepia(0.12) hue-rotate(-6deg); }
   .cA .band .frame { position: absolute; inset: 0; border: 1.5px solid rgba(200,146,60,0.6);
@@ -202,8 +225,9 @@
   .cB .plate::after { content: ""; position: absolute; inset: 13px; border: 1px solid rgba(233,205,151,0.13); }
 
   .cB .content { position: absolute; inset: 0; z-index: 10; }
-  .cB .kicker { position: absolute; top: 128px; left: 0; right: 0; text-align: center; opacity: 0.9;
-    text-shadow: 0 1px 10px rgba(15,10,7,0.7); }
+  /* .hosted is the positioned block now — the kicker lives inside it */
+  .cB .hosted { position: absolute; top: 118px; left: 0; right: 0; opacity: 0.9; }
+  .cB .kicker { text-align: center; text-shadow: 0 1px 10px rgba(15,10,7,0.7); }
   .cB .headline { position: absolute; left: 92px; right: 92px; top: 252px; text-align: center; }
   .cB .wordmark { color: var(--champagne); text-shadow: 0 2px 3px rgba(15,10,7,0.65), 0 4px 44px rgba(15,10,7,0.55); }
   .cB .title-rule { margin: 44px auto 0; }
@@ -212,7 +236,9 @@
 
   /* left/right + inherited width:100% would over-constrain and shove the block
      off-centre; pin full-width and inset with padding so centring is true */
-  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1420px; padding: 0 92px; gap: 48px; }
+  /* top + gap are tuned together: the two-line gold tier makes the wall ~938px tall, and
+     the foot starts at 2352 — these values leave ~74px between the energy row and the URL */
+  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1380px; padding: 0 92px; gap: 40px; }
   .cB .sponsors-cap { color: rgba(233,205,151,0.62); }
   .cB .sponsors-cap::before, .cB .sponsors-cap::after { background: rgba(233,205,151,0.24); }
   .cB .foot { position: absolute; left: 0; right: 0; bottom: 138px; text-align: center; }
@@ -246,7 +272,10 @@
         <div class="plate"></div>
         <div class="content">
           <div class="head">
-            <div class="kicker">Hosted by AGI Ventures Canada</div>
+            <div class="hosted">
+            <div class="kicker">Hosted by</div>
+            <img class="agiv" src="assets/agiv-white.png" alt="AGI Ventures Canada" />
+          </div>
             <div class="wordmark">Hacker<br/>Cottage<br/>Weekend</div>
             <div class="title-rule"></div>
             <div class="slogan">Think in years.<br/>Ship this weekend.</div>
@@ -260,22 +289,22 @@
 
           <div class="sponsors">
             <div class="sponsors-cap">Proudly supported by</div>
-            <div class="tier">
+            <div class="tier t-gold">
               <div class="tier-label"><span>Gold</span></div>
               <div class="tier-logos">
                 <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
                 <img class="cog" src="assets/cognition-white.svg" alt="Cognition" />
               </div>
             </div>
-            <div class="tier">
+            <div class="tier t-silver">
               <div class="tier-label"><span>Silver</span></div>
               <div class="tier-logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz" /></div>
             </div>
-            <div class="tier">
+            <div class="tier t-bronze">
               <div class="tier-label"><span>Bronze</span></div>
               <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /></div>
             </div>
-            <div class="tier">
+            <div class="tier t-support">
               <div class="tier-label"><span>Supporting</span></div>
               <div class="tier-logos support">
                 <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
@@ -284,7 +313,7 @@
                 <img class="tmie" src="assets/tmie.png" alt="TMIE Media" />
               </div>
             </div>
-            <div class="tier">
+            <div class="tier t-energy">
               <div class="tier-label"><span>Energy</span></div>
               <div class="tier-logos energy">
                 <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
@@ -311,7 +340,10 @@
         <div class="plate"></div>
 
         <div class="content">
-          <div class="kicker">Hosted by AGI Ventures Canada</div>
+          <div class="hosted">
+            <div class="kicker">Hosted by</div>
+            <img class="agiv" src="assets/agiv-white.png" alt="AGI Ventures Canada" />
+          </div>
 
           <div class="headline">
             <div class="wordmark">Hacker<br/>Cottage<br/>Weekend</div>
@@ -322,22 +354,22 @@
 
           <div class="sponsors">
             <div class="sponsors-cap">Proudly supported by</div>
-            <div class="tier">
+            <div class="tier t-gold">
               <div class="tier-label"><span>Gold</span></div>
               <div class="tier-logos">
                 <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
                 <img class="cog" src="assets/cognition-white.svg" alt="Cognition" />
               </div>
             </div>
-            <div class="tier">
+            <div class="tier t-silver">
               <div class="tier-label"><span>Silver</span></div>
               <div class="tier-logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz" /></div>
             </div>
-            <div class="tier">
+            <div class="tier t-bronze">
               <div class="tier-label"><span>Bronze</span></div>
               <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /></div>
             </div>
-            <div class="tier">
+            <div class="tier t-support">
               <div class="tier-label"><span>Supporting</span></div>
               <div class="tier-logos support">
                 <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
@@ -346,7 +378,7 @@
                 <img class="tmie" src="assets/tmie.png" alt="TMIE Media" />
               </div>
             </div>
-            <div class="tier">
+            <div class="tier t-energy">
               <div class="tier-label"><span>Energy</span></div>
               <div class="tier-logos energy">
                 <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
@@ -376,7 +408,10 @@
         <div class="plate"></div>
 
         <div class="content">
-          <div class="kicker">Hosted by AGI Ventures Canada</div>
+          <div class="hosted">
+            <div class="kicker">Hosted by</div>
+            <img class="agiv" src="assets/agiv-white.png" alt="AGI Ventures Canada" />
+          </div>
 
           <div class="headline">
             <div class="wordmark">Hacker<br/>Cottage<br/>Weekend</div>
@@ -387,22 +422,22 @@
 
           <div class="sponsors">
             <div class="sponsors-cap">Proudly supported by</div>
-            <div class="tier">
+            <div class="tier t-gold">
               <div class="tier-label"><span>Gold</span></div>
               <div class="tier-logos">
                 <span class="tl-logo"><svg class="tl-mark" viewBox="0 0 108.063 19.98"><path d="M 9.977 0 L 0 10.013 L 9.962 19.98 L 7.655 10.019 L 13.771 3.881 Z"/><path d="M 18.858 0 L 9 10.012 L 18.843 19.979 L 28.76 10.027 Z M 36.646 15.936 L 34.641 15.936 L 34.641 4.654 L 30.376 4.654 L 30.376 2.849 L 40.911 2.849 L 40.911 4.654 L 36.646 4.654 Z M 44.683 16.118 C 41.893 16.118 40.016 14.095 40.016 11.051 C 40.016 8.19 41.966 6.094 44.627 6.094 C 47.507 6.094 49.421 8.427 49.093 11.562 L 41.893 11.562 C 42.039 13.53 43.023 14.678 44.646 14.678 C 46.013 14.678 46.96 13.931 47.27 12.673 L 49.093 12.673 C 48.619 14.824 46.96 16.118 44.683 16.118 Z M 44.591 7.478 C 43.115 7.478 42.112 8.536 41.911 10.34 L 47.143 10.34 C 47.052 8.554 46.086 7.479 44.591 7.479 Z"/><path d="M 51.077 16.087 L 49 16.087 L 52.426 11.147 L 49.218 6.427 L 51.351 6.427 L 53.738 10.072 L 56.126 6.427 L 58.114 6.427 L 54.943 11.202 L 58.333 16.087 L 56.218 16.087 L 53.63 12.241 L 51.078 16.087 Z M 65.294 14.301 L 65.294 15.923 C 64.781 16.161 64.22 16.279 63.654 16.269 C 61.867 16.269 60.628 15.303 60.628 13.171 L 60.628 7.994 L 58.494 7.994 L 58.494 6.427 L 60.627 6.427 L 60.627 3.565 L 62.467 3.565 L 62.467 6.427 L 65.384 6.427 L 65.384 7.994 L 62.467 7.994 L 62.467 12.751 C 62.467 14.082 63.105 14.556 64.09 14.556 C 64.527 14.556 64.91 14.483 65.293 14.301 Z M 74.09 16.087 L 66.161 16.087 L 66.161 3 L 68.166 3 L 68.166 14.283 L 74.09 14.283 Z M 81.216 16.087 L 81.216 14.592 C 80.614 15.668 79.539 16.269 78.117 16.269 C 76.113 16.269 74.8 15.121 74.8 13.353 C 74.8 11.457 76.313 10.473 79.193 10.473 C 79.758 10.473 80.213 10.491 80.997 10.583 L 80.997 9.872 C 80.997 8.487 80.25 7.702 78.974 7.702 C 77.625 7.702 76.805 8.505 76.75 9.853 L 75.074 9.853 C 75.164 7.685 76.714 6.245 78.974 6.245 C 81.362 6.245 82.747 7.593 82.747 9.89 L 82.747 16.087 Z M 76.55 13.298 C 76.55 14.301 77.297 14.957 78.482 14.957 C 80.032 14.957 80.997 13.991 80.997 12.515 L 80.997 11.731 C 80.435 11.656 79.869 11.619 79.302 11.621 C 77.462 11.621 76.55 12.168 76.55 13.298 Z M 92.379 6.427 L 87.549 19.605 L 85.544 19.605 L 86.929 15.959 L 83.119 6.427 L 85.106 6.427 L 87.913 13.79 L 90.519 6.427 Z M 96.81 16.269 C 94.021 16.269 92.144 14.246 92.144 11.202 C 92.144 8.341 94.094 6.245 96.755 6.245 C 99.635 6.245 101.549 8.578 101.221 11.713 L 94.021 11.713 C 94.167 13.681 95.151 14.829 96.773 14.829 C 98.14 14.829 99.088 14.082 99.398 12.824 L 101.221 12.824 C 100.747 14.975 99.088 16.269 96.81 16.269 Z M 96.719 7.629 C 95.242 7.629 94.239 8.687 94.039 10.491 L 99.27 10.491 C 99.18 8.705 98.213 7.63 96.719 7.63 Z M 104.472 11.147 L 104.472 16.087 L 102.631 16.087 L 102.631 6.427 L 104.344 6.427 L 104.344 8.467 C 105.019 7.137 106.477 6.298 108.063 6.298 L 108.063 8.212 C 105.985 8.102 104.472 9.014 104.472 11.147 Z"/></svg></span>
                 <img class="cog" src="assets/cognition-white.svg" alt="Cognition" />
               </div>
             </div>
-            <div class="tier">
+            <div class="tier t-silver">
               <div class="tier-label"><span>Silver</span></div>
               <div class="tier-logos"><img class="lk" src="assets/logankatz-white.png" alt="Logan Katz" /></div>
             </div>
-            <div class="tier">
+            <div class="tier t-bronze">
               <div class="tier-label"><span>Bronze</span></div>
               <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /></div>
             </div>
-            <div class="tier">
+            <div class="tier t-support">
               <div class="tier-label"><span>Supporting</span></div>
               <div class="tier-logos support">
                 <img src="assets/extreme-white.png" alt="Extreme Entertainment" />
@@ -411,7 +446,7 @@
                 <img class="tmie" src="assets/tmie.png" alt="TMIE Media" />
               </div>
             </div>
-            <div class="tier">
+            <div class="tier t-energy">
               <div class="tier-label"><span>Energy</span></div>
               <div class="tier-logos energy">
                 <img src="assets/ananda-white.png" alt="Ananda Elixirs" />
