@@ -9,32 +9,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --espresso: #1C1410;
-    --walnut:   #2E2117;
     --ink:      #1A1613;
     --charcoal: #3D3530;
     --stone:    #8E8478;
-    --sand:     #C4B49A;
-    --cream:    #D6C6AB;
-    --ivory:    #E2D4BC;
     --paper:    #EDE3D0;
     --amber:    #C8923C;
     --champagne:#E9CD97;
-    --rust:     #A8472B;
+    --ivory:    #E2D4BC;
+    --cream:    #D6C6AB;
 
     --display: "Space Mono", ui-monospace, monospace;
     --body:    "DM Sans", system-ui, sans-serif;
     --mono:    "JetBrains Mono", ui-monospace, monospace;
 
     /* Sheet is 1275×1650 = US Letter at 150dpi. Export at 2× for 300dpi print. */
-    --preview-scale: 0.42;
+    --preview-scale: 0.46;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: #0e0a07; color: var(--ivory); font-family: var(--body); -webkit-font-smoothing: antialiased; }
 
-  /* ── Preview stage (hidden in export) ── */
-  .stage { min-height: 100vh; padding: 56px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 56px; }
+  .stage { min-height: 100vh; padding: 56px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 44px; }
   .stage-header { text-align: center; color: var(--cream); max-width: 780px; }
   .stage-header .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); }
   .stage-header h1 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 32px; margin-top: 14px; color: var(--ivory); }
@@ -43,12 +38,8 @@
   .stage-header .dl { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; margin-top: 18px; }
   .stage-header .dl a { color: var(--amber); }
 
-  .group { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 30px; }
-  .group-title { font-family: var(--mono); font-size: 12px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--amber); border-top: 1px solid rgba(200,146,60,0.28); padding-top: 22px; width: min(1100px, 92%); text-align: center; }
-  .group-note { font-size: 12.5px; color: rgba(226,212,188,0.55); max-width: 640px; text-align: center; margin-top: -18px; line-height: 1.6; }
-
   .deck { display: grid; grid-template-columns: repeat(2, auto); gap: 34px; align-items: start; justify-items: center; }
-  @media (max-width: 1240px) { .deck { grid-template-columns: 1fr; } }
+  @media (max-width: 1320px) { .deck { grid-template-columns: 1fr; } }
   @media (max-width: 560px)  { :root { --preview-scale: 0.33; } .stage { padding: 40px 10px 80px; } }
 
   .slide-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
@@ -63,70 +54,86 @@
     width: 1275px; height: 1650px;
     position: relative; overflow: hidden;
     transform: scale(var(--preview-scale)); transform-origin: top left;
+    background: var(--paper); color: var(--ink);
   }
 
-  /* ══════════════════ SHEET SHELL ══════════════════ */
-  .sheet { display: flex; flex-direction: column; height: 100%; padding: 92px 96px 74px; }
+  /* Accent per room = that person's Room badge colour in Notion. */
+  .sheet { display: flex; flex-direction: column; height: 100%; padding: 84px 92px 68px; }
 
-  /* Top rail: event mark on the left, room number on the right */
-  .rail { display: flex; align-items: baseline; justify-content: space-between; }
-  .rail .mark { font-family: var(--display); font-style: italic; font-size: 22px; letter-spacing: 0.01em; }
-  .rail .num  { font-family: var(--mono); font-size: 15px; font-weight: 700; letter-spacing: 0.3em; }
+  .rail { display: flex; align-items: baseline; justify-content: space-between; color: var(--charcoal); }
+  .rail .mark { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--ink); }
+  .rail .when { font-family: var(--mono); font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
 
-  .hairline { height: 1px; width: 100%; }
+  .hairline { height: 1px; width: 100%; background: var(--accent-rule); }
+  .rail-rule { margin-top: 18px; }
 
-  /* Room name block */
-  .roomname { display: flex; align-items: flex-end; gap: 26px; }
+  .roomname { margin-top: 52px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .roomname .lockup { display: flex; align-items: flex-end; gap: 24px; }
   .roomname .word {
     font-family: var(--display); font-style: italic; font-weight: 700;
-    font-size: 178px; line-height: 0.86; letter-spacing: -0.035em;
+    font-size: 172px; line-height: 0.86; letter-spacing: -0.035em; color: var(--ink);
   }
-  .roomname .word.long { font-size: 146px; }
+  .roomname .word.long { font-size: 142px; }
   .roomname .suffix {
-    font-family: var(--mono); font-weight: 700; font-size: 40px;
-    letter-spacing: 0.26em; padding-bottom: 16px;
+    font-family: var(--mono); font-weight: 700; font-size: 38px;
+    letter-spacing: 0.26em; padding-bottom: 15px; color: var(--accent);
+  }
+  .roomname .num {
+    font-family: var(--display); font-style: italic; font-weight: 700;
+    font-size: 132px; line-height: 0.82; letter-spacing: -0.04em;
+    color: var(--accent); opacity: 0.42;
   }
 
-  /* Innovator block: portrait beside the story */
-  .who { margin-bottom: 48px; display: grid; grid-template-columns: 322px 1fr; gap: 46px; align-items: start; }
-  .portrait { position: relative; width: 322px; height: 505px; overflow: hidden; }
+  .accentbar { height: 9px; width: 176px; background: var(--accent); margin-top: 34px; }
+
+  .who { margin-top: 42px; flex: 1; min-height: 0; display: grid; grid-template-columns: 400px 1fr; gap: 48px; align-items: stretch; }
+  .portrait { position: relative; width: 400px; overflow: hidden; }
   .portrait img {
     width: 100%; height: 100%; object-fit: cover;
     filter: grayscale(1) sepia(0.42) contrast(1.06) brightness(1.02);
   }
-  .portrait .tint { position: absolute; inset: 0; mix-blend-mode: multiply; }
-  .portrait .edge { position: absolute; inset: 0; }
+  .portrait .tint { position: absolute; inset: 0; background: var(--accent); opacity: 0.16; mix-blend-mode: multiply; }
+  .portrait .edge { position: absolute; inset: 0; box-shadow: inset 0 0 0 2px var(--accent-ring); }
   /* Nudge crops where the source photo puts the face off-centre */
   .portrait img.up   { object-position: 50% 22%; }
   .portrait img.high { object-position: 50% 12%; }
 
-  .story { padding-top: 6px; }
-  .story .name { font-family: var(--display); font-weight: 700; font-size: 46px; line-height: 1.06; letter-spacing: -0.02em; }
-  .story .meta { font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 14px; }
-  .story .bio  { font-size: 24px; line-height: 1.52; margin-top: 22px; letter-spacing: -0.004em; }
-  .story .ghost {
-    font-family: var(--display); font-style: italic; font-weight: 700;
-    font-size: 232px; line-height: 0.8; letter-spacing: -0.04em;
-    text-align: right; margin-top: 40px;
+  .story { align-self: start; }
+  .story .name { font-family: var(--display); font-weight: 700; font-size: 54px; line-height: 1.06; letter-spacing: -0.02em; color: var(--ink); }
+  .story .meta { font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 13px; color: var(--accent); }
+  .story .bio  { font-size: var(--bio); line-height: 1.46; margin-top: 26px; letter-spacing: -0.006em; color: rgba(26,22,19,0.84); text-wrap: pretty; }
+
+  .mid-rule { margin-top: 0; }
+
+  /* Circles: source headshots arrive at every aspect and framing. */
+  .residents { margin-top: 36px; margin-bottom: 38px; }
+  .residents .label { font-family: var(--mono); font-size: 14px; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); }
+  .residents .row { margin-top: 32px; display: flex; align-items: flex-start; gap: var(--gap); }
+  .person { width: var(--dia); display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .avatar { position: relative; width: var(--dia); height: var(--dia); border-radius: 50%; overflow: hidden; flex: none; }
+  .avatar img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(1) sepia(0.42) contrast(1.06) brightness(1.03);
   }
+  .avatar .tint { position: absolute; inset: 0; border-radius: 50%; background: var(--accent); opacity: 0.15; mix-blend-mode: multiply; }
+  .avatar .edge { position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 3px var(--accent-ring); }
+  .person .who-name {
+    text-align: center; font-weight: 600; color: var(--ink);
+    font-size: var(--nsize); line-height: 1.24; letter-spacing: -0.016em;
+    text-wrap: balance;
+  }
+  /* Rooms hold 2 to 5; diameters are capped so the row never outruns the text column. */
+  .residents[data-n="2"] .row { --dia: 362px; --gap: 62px; --nsize: 40px; }
+  .residents[data-n="3"] .row { --dia: 318px; --gap: 44px; --nsize: 35px; }
+  .residents[data-n="4"] .row { --dia: 250px; --gap: 27px; --nsize: 30px; }
+  .residents[data-n="5"] .row { --dia: 198px; --gap: 22px; --nsize: 24px; }
 
-  /* Residents */
-  .residents .label { font-family: var(--mono); font-size: 14px; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; }
-  .residents ul { list-style: none; margin-top: 30px; display: flex; flex-direction: column; }
-  .residents li { display: flex; align-items: baseline; gap: 22px; font-weight: 500; letter-spacing: -0.012em; }
-  .residents li .dot { width: 11px; height: 11px; border-radius: 50%; flex: none; transform: translateY(-4px); }
-  /* Roster sizes run 2 to 5 names; the sheet holds its rhythm at each count. */
-  .residents[data-n="2"] li { font-size: 74px; line-height: 1.46; }
-  .residents[data-n="3"] li { font-size: 66px; line-height: 1.38; }
-  .residents[data-n="4"] li { font-size: 58px; line-height: 1.34; }
-  .residents[data-n="5"] li { font-size: 50px; line-height: 1.3; }
+  .foot-rule { margin-top: 0; }
+  .foot { margin-top: 24px; display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; }
+  .foot .left  { font-family: var(--mono); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.8; color: var(--charcoal); }
+  .foot .right { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; text-align: right; line-height: 1.7; max-width: 580px; color: rgba(26,22,19,0.42); }
 
-  /* Footer */
-  .foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; }
-  .foot .left  { font-family: var(--mono); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.8; }
-  .foot .right { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; text-align: right; line-height: 1.7; max-width: 460px; }
-
-  /* Fine print grain so the portrait and the flat panels read as one printed piece */
+  /* Grain ties the photos to the flat panels so nothing looks pasted on. */
   .grain {
     position: absolute; inset: 0; z-index: 40; pointer-events: none;
     opacity: 0.055; mix-blend-mode: multiply;
@@ -134,81 +141,10 @@
     background-size: 300px 300px;
   }
 
-  /* ══════════════════ CONCEPT A — "PLATE" ══════════════════
-     Cream stock, espresso ink, one accent colour per room. Light on toner,
-     reads like a museum wall label. */
-  .plate { background: var(--paper); color: var(--ink); }
-  .plate .sheet { gap: 0; }
-  .plate .rail { color: var(--charcoal); }
-  .plate .rail .mark { color: var(--ink); }
-  .plate .rail .num { color: var(--accent); }
-  .plate .hairline { background: rgba(26,22,19,0.22); }
-  .plate .rail-rule { margin-top: 20px; }
-  .plate .roomname { margin-top: 62px; }
-  .plate .roomname .word { color: var(--ink); }
-  .plate .roomname .suffix { color: var(--accent); }
-  .plate .accentbar { height: 9px; width: 190px; background: var(--accent); margin-top: 40px; }
-  .plate .who { margin-top: 46px; }
-  .plate .portrait .tint { background: var(--accent); opacity: 0.16; }
-  .plate .portrait .edge { box-shadow: inset 0 0 0 1px rgba(26,22,19,0.35); }
-  .plate .story .name { color: var(--ink); }
-  .plate .story .meta { color: var(--accent); }
-  .plate .story .bio  { color: rgba(26,22,19,0.82); }
-  .plate .story .ghost { color: var(--accent); opacity: 0.15; }
-  .plate .mid-rule { margin-top: auto; }
-  .plate .residents { margin-top: 40px; }
-  .plate .residents .label { color: var(--accent); }
-  .plate .residents li { color: var(--ink); }
-  .plate .residents li .dot { background: var(--accent); }
-  .plate .foot-rule { margin-top: auto; }
-  .plate .foot { margin-top: 26px; }
-  .plate .foot .left  { color: var(--charcoal); }
-  .plate .foot .right { color: rgba(26,22,19,0.42); }
-
-  /* ══════════════════ CONCEPT B — "NIGHT" ══════════════════
-     Full-bleed espresso, ivory type, amber accent. Matches the banner and the
-     site; costs real toner, so it wants a print shop rather than a home printer. */
-  .night { background: var(--espresso); color: var(--ivory); }
-  .night::before {
-    content: ""; position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(110% 62% at 80% 2%, rgba(200,146,60,0.11) 0%, rgba(200,146,60,0) 56%),
-      linear-gradient(180deg, #1F1710 0%, #1A130E 48%, #130E0A 100%);
-  }
-  .night .sheet { position: relative; z-index: 1; gap: 0; }
-  .night .rail { color: var(--sand); }
-  .night .rail .mark { color: var(--ivory); }
-  .night .rail .num { color: var(--accent-lt); }
-  .night .hairline { background: rgba(226,212,188,0.2); }
-  .night .rail-rule { margin-top: 20px; }
-  .night .roomname { margin-top: 62px; }
-  .night .roomname .word { color: var(--ivory); }
-  .night .roomname .suffix { color: var(--accent-lt); }
-  .night .accentbar { height: 9px; width: 190px; background: var(--accent-lt); margin-top: 40px; }
-  .night .who { margin-top: 46px; }
-  .night .portrait img { filter: grayscale(1) sepia(0.5) contrast(1.1) brightness(0.96); }
-  .night .portrait .tint { background: var(--accent-lt); opacity: 0.2; }
-  .night .portrait .edge { box-shadow: inset 0 0 0 1px rgba(226,212,188,0.45); }
-  .night .story .name { color: var(--ivory); }
-  .night .story .meta { color: var(--accent-lt); }
-  .night .story .bio  { color: rgba(226,212,188,0.78); }
-  .night .story .ghost { color: var(--accent-lt); opacity: 0.16; }
-  .night .mid-rule { margin-top: auto; }
-  .night .residents { margin-top: 40px; }
-  .night .residents .label { color: var(--accent-lt); }
-  .night .residents li { color: var(--ivory); }
-  .night .residents li .dot { background: var(--accent-lt); }
-  .night .foot-rule { margin-top: auto; }
-  .night .foot { margin-top: 26px; }
-  .night .foot .left  { color: var(--sand); }
-  .night .foot .right { color: rgba(226,212,188,0.34); }
-  .night .grain { mix-blend-mode: overlay; opacity: 0.05; }
-
-  /* ── Export mode: ?only=<id> renders one sheet at full size ── */
+  /* ?only=<n> renders one sheet at full size for PNG export. */
   body.export { background: #fff; }
   body.export .stage { display: block; padding: 0; min-height: 0; }
-  body.export .stage-header, body.export .group-title, body.export .group-note, body.export .slide-label { display: none; }
-  body.export .group { display: block; gap: 0; }
+  body.export .stage-header, body.export .slide-label { display: none; }
   body.export .deck { display: block; }
   body.export .slide-wrap { display: none; }
   body.export .slide-wrap.only { display: block; }
@@ -223,27 +159,56 @@
     <div class="kicker">Hacker Cottage Weekend</div>
     <h1>Room signs</h1>
     <p>
-      One sheet per room, US Letter portrait (8.5 × 11 in). Each carries the room name, the
-      innovator it is named for with a two-sentence note on what they did, and the people sleeping
-      in it. Two concepts below: <strong>Plate</strong> on cream stock and <strong>Night</strong> on
-      espresso. Export a single sheet at full size with
-      <code>?only=a-1</code> (concept letter, then room number).
+      One sheet per room, US Letter portrait (8.5 × 11 in) on cream stock. Each carries the room
+      name, the innovator it is named for with a two-sentence note on what they did, and the face
+      and name of everyone sleeping in it. Export a single sheet at full size with
+      <code>?only=1</code> through <code>?only=9</code>.
     </p>
     <p class="dl">
-      Print-ready, nine pages each:
-      <a href="export/room-signs-plate.pdf">Plate PDF</a> ·
-      <a href="export/room-signs-night.pdf">Night PDF</a>
+      Print-ready, nine pages: <a href="export/room-signs.pdf">room-signs.pdf</a>
     </p>
   </div>
-  <div id="mount"></div>
+  <div class="deck" id="mount"></div>
 </div>
 
 <script>
-/* Room data. Assignments come from facts/room-assignments.md; portraits are freely
-   licensed files from Wikimedia Commons, credited in each sheet's footer. */
+/* Room data. Assignments come from facts/room-assignments.md. Innovator portraits are
+   freely licensed Wikimedia Commons files, credited in each sheet's footer. Resident
+   photos are the Profile Image on each person's Hacker Cottage Notion profile. */
+const PHOTOS = {
+  "Abhinav Thukral": "abhinav-thukral.jpg",
+  "Abhiram Manoj Sivavilasam": "abhiram-manoj-sivavilasam.jpg",
+  "Ayoub Alghali": "ayoub-alghali.jpg",
+  "Camilo Rivera": "camilo-rivera.jpg",
+  "Damian Polan": "damian-polan.jpg",
+  "Eric Gershtein": "eric-gershtein.jpg",
+  "Evan He": "evan-he.png",
+  "Gilad Sarusi": "gilad-sarusi.jpg",
+  "Hai Phu Nghiem": "hai-phu-nghiem.jpg",
+  "Huu An Duc (Jack) Le": "huu-an-duc-le.jpg",
+  "Joel Diab": "joel-diab.jpg",
+  "Julian Urrego": "julian-urrego.jpg",
+  "Kerstan Deevy": "kerstan-deevy.jpg",
+  "Kirill Kravinsky": "kirill-kravinsky.jpg",
+  "Leah Mazur": "leah-mazur.jpg",
+  "Lila Galipeau": "lila-galipeau.jpg",
+  "Mason Landers": "mason-landers.jpg",
+  "Matt Krainski": "matt-krainski.jpg",
+  "Mohammed Elshrief": "mohammed-elshrief.png",
+  "Neilda Gagne": "neilda-gagne.jpg",
+  "Nick Stroncea": "nick-stroncea.jpg",
+  "Parisa Zare": "parisa-zare.jpg",
+  "Rahim Iqbal": "rahim-iqbal.jpg",
+  "Simon Bergeron": "simon-bergeron.png",
+  "Thoufeek Baber": "thoufeek-baber.jpg",
+  "Tomas Kolafa": "tomas-kolafa.jpg",
+  "Tommy-James Tremblay": "tommy-james-tremblay.jpg",
+  "Zachary Itzcovitch": "zachary-itzcovitch.jpg",
+};
+
 const ROOMS = [
   {
-    n: 1, badge: "Fuller", accent: "#A8472B", accentLt: "#D9724F",
+    n: 1, badge: "Fuller", accent: "#A8472B",
     person: "Buckminster Fuller",
     meta: "Architect & systems thinker · 1895–1983",
     bio: "Fuller made the geodesic dome famous, a structure that covers enormous space with very little material. He spent his life on one question: how much can you do with the least?",
@@ -252,7 +217,7 @@ const ROOMS = [
     residents: ["Thoufeek Baber", "Ayoub Alghali", "Lila Galipeau", "Damian Polan"],
   },
   {
-    n: 2, badge: "Lamarr", accent: "#B5566B", accentLt: "#DE8397",
+    n: 2, badge: "Lamarr", accent: "#B5566B",
     person: "Hedy Lamarr",
     meta: "Actor & inventor · 1914–2000",
     bio: "Lamarr was a Hollywood movie star who also co-invented frequency hopping, a way for a radio signal to jump between channels so it stays hard to jam. The same idea shows up today inside Wi-Fi, Bluetooth and GPS.",
@@ -261,7 +226,7 @@ const ROOMS = [
     residents: ["Mason Landers", "Abhiram Manoj Sivavilasam"],
   },
   {
-    n: 3, badge: "Simon", accent: "#7A5B8C", accentLt: "#B08FC4",
+    n: 3, badge: "Simon", accent: "#7A5B8C",
     person: "Herbert A. Simon",
     meta: "Economist & AI pioneer · 1916–2001",
     bio: "Simon won a Nobel Prize for showing that people decide with limited time and information, then pick the first option that is good enough. He also co-wrote the first program that proved mathematical theorems, which opened the field of AI.",
@@ -270,7 +235,7 @@ const ROOMS = [
     residents: ["Kirill Kravinsky", "Tommy-James Tremblay", "Julian Urrego"],
   },
   {
-    n: 4, badge: "Johnson", accent: "#3F6B8A", accentLt: "#7BA6C4",
+    n: 4, badge: "Johnson", accent: "#3F6B8A",
     person: "Katherine Johnson",
     meta: "NASA mathematician · 1918–2020",
     bio: "Johnson calculated the flight paths that put the first Americans in orbit and on the way to the Moon. John Glenn asked her to check the electronic computer's numbers by hand before he would fly.",
@@ -279,7 +244,7 @@ const ROOMS = [
     residents: ["Kerstan Deevy", "Nick Stroncea"],
   },
   {
-    n: 5, badge: "Hopper", accent: "#4E7A55", accentLt: "#89B491",
+    n: 5, badge: "Hopper", accent: "#4E7A55",
     person: "Grace Hopper",
     meta: "Computer scientist & rear admiral · 1906–1992",
     bio: "Hopper built the first compiler, the tool that turns code people can read into something a machine can run. She believed computers should take instructions in plain English, and COBOL, the language she helped create, still runs banks today.",
@@ -288,7 +253,7 @@ const ROOMS = [
     residents: ["Tomas Kolafa", "Zachary Itzcovitch"],
   },
   {
-    n: 6, badge: "Carmack", accent: "#B07A2E", accentLt: "#E0AC58",
+    n: 6, badge: "Carmack", accent: "#B07A2E",
     person: "John Carmack",
     meta: "Game engine programmer · born 1970",
     bio: "Carmack wrote the engines behind Doom and Quake and made fast 3D graphics run on ordinary PCs. He released that code publicly years later, and a generation of engine programmers learned from it.",
@@ -297,7 +262,7 @@ const ROOMS = [
     residents: ["Evan He", "Mohammed Elshrief", "Joel Diab"],
   },
   {
-    n: 7, badge: "Torvalds", accent: "#C4703A", accentLt: "#E5975F",
+    n: 7, badge: "Torvalds", accent: "#C4703A",
     person: "Linus Torvalds",
     meta: "Creator of Linux & Git · born 1969",
     bio: "Torvalds started Linux as a side project in 1991 and gave it away for free. It now runs most of the internet, every Android phone, and all 500 of the world's fastest supercomputers.",
@@ -306,7 +271,7 @@ const ROOMS = [
     residents: ["Simon Bergeron", "Eric Gershtein", "Huu An Duc (Jack) Le"],
   },
   {
-    n: 8, badge: "Perlman", accent: "#7A5334", accentLt: "#B98A5E",
+    n: 8, badge: "Perlman", accent: "#7A5334",
     person: "Radia Perlman",
     meta: "Network engineer · born 1951",
     bio: "Perlman invented the spanning tree protocol, which lets a room full of network switches agree on one clean path for traffic. Large ethernet networks stay up because of it, and she wrote the algorithm in about a week.",
@@ -315,7 +280,7 @@ const ROOMS = [
     residents: ["Parisa Zare", "Leah Mazur", "Neilda Gagne"],
   },
   {
-    n: 9, badge: "Shannon", accent: "#6B6459", accentLt: "#A79E90",
+    n: 9, badge: "Shannon", accent: "#776A57",
     person: "Claude Shannon",
     meta: "Founder of information theory · 1916–2001",
     bio: "Shannon proved that any message can be measured in bits and sent perfectly across a noisy line. Every phone call, file and video stream since runs on the math he published in 1948.",
@@ -325,34 +290,44 @@ const ROOMS = [
   },
 ];
 
-const CONCEPTS = [
-  { key: "a", cls: "plate", title: "Concept A — Plate",
-    note: "Cream stock, espresso ink, one accent colour per room matching the badge on that person's profile. Prints on any office printer." },
-  { key: "b", cls: "night", title: "Concept B — Night",
-    note: "Full-bleed espresso to match the roll-up banner and the site. Wants a print shop, since a home printer will drink toner." },
-];
+const BIO_START = 40, BIO_MIN = 26, BIO_MAX = 52, BIO_SLACK = 22;
+
+const rgba = (hex, a) => {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${n >> 16 & 255}, ${n >> 8 & 255}, ${n & 255}, ${a})`;
+};
 
 const esc = (s) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
 
-function sheet(room, concept) {
+function sheet(room) {
   const long = room.badge.length >= 8 ? " long" : "";
-  const names = room.residents.map((r) =>
-    `<li><span class="dot"></span><span>${esc(r)}</span></li>`).join("");
+  const people = room.residents.map((r) => `
+              <div class="person">
+                <div class="avatar">
+                  <img src="assets/people/${PHOTOS[r]}" alt="${esc(r)}" />
+                  <div class="tint"></div>
+                  <div class="edge"></div>
+                </div>
+                <div class="who-name">${esc(r)}</div>
+              </div>`).join("");
   return `
-  <div class="slide-wrap" data-id="${concept.key}-${room.n}">
-    <div class="slide-label">${concept.key.toUpperCase()} · Room ${room.n} · ${esc(room.badge)}</div>
+  <div class="slide-wrap" data-id="${room.n}">
+    <div class="slide-label">Room ${room.n} · ${esc(room.badge)}</div>
     <div class="slide-frame">
-      <div class="slide ${concept.cls}" style="--accent:${room.accent};--accent-lt:${room.accentLt}">
+      <div class="slide" style="--accent:${room.accent};--accent-rule:${rgba(room.accent, 0.42)};--accent-ring:${rgba(room.accent, 0.7)};--bio:${BIO_START}px">
         <div class="sheet">
           <div class="rail">
             <div class="mark">Hacker Cottage Weekend</div>
-            <div class="num">Room ${String(room.n).padStart(2, "0")}</div>
+            <div class="when">Aug 28–31, 2026</div>
           </div>
           <div class="hairline rail-rule"></div>
 
           <div class="roomname">
-            <div class="word${long}">${esc(room.badge)}</div>
-            <div class="suffix">ROOM</div>
+            <div class="lockup">
+              <div class="word${long}">${esc(room.badge)}</div>
+              <div class="suffix">ROOM</div>
+            </div>
+            <div class="num">${String(room.n).padStart(2, "0")}</div>
           </div>
           <div class="accentbar"></div>
 
@@ -366,7 +341,6 @@ function sheet(room, concept) {
               <div class="name">${esc(room.person)}</div>
               <div class="meta">${esc(room.meta)}</div>
               <div class="bio">${esc(room.bio)}</div>
-              <div class="ghost">${String(room.n).padStart(2, "0")}</div>
             </div>
           </div>
 
@@ -374,13 +348,13 @@ function sheet(room, concept) {
 
           <div class="residents" data-n="${room.residents.length}">
             <div class="label">In this room</div>
-            <ul>${names}</ul>
+            <div class="row">${people}</div>
           </div>
 
           <div class="hairline foot-rule"></div>
           <div class="foot">
             <div class="left">
-              Aug 28–31, 2026 · St-Sauveur, QC<br />
+              St-Sauveur, QC<br />
               Hosted by AGI Ventures Canada
             </div>
             <div class="right">${esc(room.credit)}</div>
@@ -392,12 +366,29 @@ function sheet(room, concept) {
   </div>`;
 }
 
-document.getElementById("mount").innerHTML = CONCEPTS.map((c) => `
-  <div class="group">
-    <div class="group-title">${c.title}</div>
-    <div class="group-note">${c.note}</div>
-    <div class="deck">${ROOMS.map((r) => sheet(r, c)).join("")}</div>
-  </div>`).join("");
+document.getElementById("mount").innerHTML = ROOMS.map(sheet).join("");
+
+/* Each bio is set to the largest size that still clears the roster rule, so no
+   sheet overflows and none leaves the column short. Sizes therefore differ
+   between rooms, which is invisible when a sheet hangs alone on a door. */
+async function fitBios() {
+  if (document.fonts && document.fonts.ready) await document.fonts.ready;
+  document.querySelectorAll(".slide").forEach((slide) => {
+    const who = slide.querySelector(".who");
+    const story = slide.querySelector(".story");
+    const bio = slide.querySelector(".bio");
+    const fits = () => story.scrollHeight <= who.clientHeight - BIO_SLACK;
+    let size = BIO_START;
+    while (!fits() && size > BIO_MIN) { size -= 1; bio.style.fontSize = size + "px"; }
+    while (size < BIO_MAX) {
+      bio.style.fontSize = size + 1 + "px";
+      if (!fits()) { bio.style.fontSize = size + "px"; break; }
+      size += 1;
+    }
+  });
+  document.documentElement.dataset.fitted = "1";
+}
+fitBios();
 
 const only = new URLSearchParams(location.search).get("only");
 if (only) {
