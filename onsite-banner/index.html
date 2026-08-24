@@ -143,6 +143,12 @@
   .cog { height: 112px; width: auto; display: block; }
   .lk { height: 119px; width: auto; }
   .aqc { height: 62px; width: auto; }
+  /* bronze optical corrections, scaled off the 62px tier box: the tavily lockup is 7x
+     wider than tall so its type dwarfs the row at full height; Invest Ottawa stacks two
+     text lines that each read at half the box */
+  .tavily { height: 42px; width: auto; }
+  .invott { height: 73px; width: auto; }
+  .t-bronze .tier-logos { gap: 66px; }
   .tier-logos.support { gap: 40px; }
   .tier-logos.support img { max-height: 44px; max-width: 195px; object-fit: contain; }
   .tier-logos.support img.mx { max-height: 74px; }
@@ -180,10 +186,10 @@
   .cA .dateline { margin-top: 30px; }
 
   /* the framed photo band — the cabin as a warm 'window', amber-hairlined */
-  /* height is the slack in the column: the AGIV host lockup and the two-line gold tier
-     eat ~80px more than the old text kicker did, so the band caps near 286px before the
-     auto margins collapse and it collides with the dateline / caption */
-  .cA .band { margin: auto 0; width: 100%; height: 286px; position: relative; overflow: hidden; }
+  /* height is the slack in the column: the AGIV host lockup, the two-line gold tier and the
+     three-logo bronze row eat ~90px more than the old text kicker did, so the band caps near
+     275px before the auto margins collapse and it collides with the dateline / caption */
+  .cA .band { margin: auto 0; width: 100%; height: 275px; position: relative; overflow: hidden; }
   .cA .band img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%;
     filter: brightness(0.9) saturate(1.04) contrast(1.03) sepia(0.12) hue-rotate(-6deg); }
   .cA .band .frame { position: absolute; inset: 0; border: 1.5px solid rgba(200,146,60,0.6);
@@ -245,9 +251,9 @@
 
   /* left/right + inherited width:100% would over-constrain and shove the block
      off-centre; pin full-width and inset with padding so centring is true */
-  /* top + gap are tuned together: at the current tier sizes the wall runs ~985px tall and
-     the foot starts at 2352 — these values leave ~97px between the energy row and the URL */
-  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1270px; padding: 0 92px; gap: 33px; }
+  /* top + gap are tuned together: at the current tier sizes the wall runs ~1017px tall and
+     the foot starts at 2352 — these values leave ~87px between the energy row and the URL */
+  .cB .sponsors { position: absolute; left: 0; right: 0; top: 1248px; padding: 0 92px; gap: 33px; }
   .cB .sponsors-cap { color: rgba(233,205,151,0.62); }
   .cB .sponsors-cap::before, .cB .sponsors-cap::after { background: rgba(233,205,151,0.24); }
   .cB .foot { position: absolute; left: 0; right: 0; bottom: 138px; text-align: center; }
@@ -311,7 +317,7 @@
             </div>
             <div class="tier t-bronze">
               <div class="tier-label"><span>Bronze</span></div>
-              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /></div>
+              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /><img class="tavily logo-white" src="assets/tavily.svg" alt="Tavily" /><img class="invott logo-white" src="assets/investottawa.svg" alt="Invest Ottawa" /></div>
             </div>
             <div class="tier t-support">
               <div class="tier-label"><span>Supporting</span></div>
@@ -376,7 +382,7 @@
             </div>
             <div class="tier t-bronze">
               <div class="tier-label"><span>Bronze</span></div>
-              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /></div>
+              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /><img class="tavily logo-white" src="assets/tavily.svg" alt="Tavily" /><img class="invott logo-white" src="assets/investottawa.svg" alt="Invest Ottawa" /></div>
             </div>
             <div class="tier t-support">
               <div class="tier-label"><span>Supporting</span></div>
@@ -444,7 +450,7 @@
             </div>
             <div class="tier t-bronze">
               <div class="tier-label"><span>Bronze</span></div>
-              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /></div>
+              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /><img class="tavily logo-white" src="assets/tavily.svg" alt="Tavily" /><img class="invott logo-white" src="assets/investottawa.svg" alt="Invest Ottawa" /></div>
             </div>
             <div class="tier t-support">
               <div class="tier-label"><span>Supporting</span></div>
