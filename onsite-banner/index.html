@@ -143,15 +143,14 @@
   .cog { height: 112px; width: auto; display: block; }
   .lk { height: 119px; width: auto; }
   .aqc { height: 62px; width: auto; }
-  /* bronze optical corrections, scaled off the 62px tier box: the tavily lockup is 7x
-     wider than tall so its type dwarfs the row at full height; Invest Ottawa stacks two
-     text lines that each read at half the box */
-  .tavily { height: 42px; width: auto; }
+  /* 1.18x the 62px bronze box: Invest Ottawa stacks two text lines that each read at half the box */
   .invott { height: 73px; width: auto; }
-  .t-bronze .tier-logos { gap: 66px; }
   .tier-logos.support { gap: 40px; }
   .tier-logos.support img { max-height: 44px; max-width: 195px; object-fit: contain; }
   .tier-logos.support img.mx { max-height: 74px; }
+  /* 0.61x the supporting cap: a single-line lockup 7x wider than tall, so at full height its
+     type dwarfs the row. Own max-width so the row cap can't shrink it off its tuned height. */
+  .tier-logos.support img.tavily { max-height: 27px; max-width: 260px; }
   /* 0.8x the supporting cap: the tmie wordmark runs edge-to-edge, so it reads larger
      than its neighbours at the same box height (mirrors the website's optical correction) */
   .tier-logos.support img.tmie { max-height: 35px; }
@@ -317,7 +316,7 @@
             </div>
             <div class="tier t-bronze">
               <div class="tier-label"><span>Bronze</span></div>
-              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /><img class="tavily logo-white" src="assets/tavily.svg" alt="Tavily" /><img class="invott logo-white" src="assets/investottawa.svg" alt="Invest Ottawa" /></div>
+              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /><img class="invott logo-white" src="assets/investottawa.svg" alt="Invest Ottawa" /></div>
             </div>
             <div class="tier t-support">
               <div class="tier-label"><span>Supporting</span></div>
@@ -326,6 +325,7 @@
                 <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
                 <span class="pm-logo">Partnr<span class="d">.</span></span>
                 <img class="tmie" src="assets/tmie.png" alt="TMIE Media" />
+                <img class="tavily logo-white" src="assets/tavily.svg" alt="Tavily" />
               </div>
             </div>
             <div class="tier t-energy">
@@ -382,7 +382,7 @@
             </div>
             <div class="tier t-bronze">
               <div class="tier-label"><span>Bronze</span></div>
-              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /><img class="tavily logo-white" src="assets/tavily.svg" alt="Tavily" /><img class="invott logo-white" src="assets/investottawa.svg" alt="Invest Ottawa" /></div>
+              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /><img class="invott logo-white" src="assets/investottawa.svg" alt="Invest Ottawa" /></div>
             </div>
             <div class="tier t-support">
               <div class="tier-label"><span>Supporting</span></div>
@@ -391,6 +391,7 @@
                 <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
                 <span class="pm-logo">Partnr<span class="d">.</span></span>
                 <img class="tmie" src="assets/tmie.png" alt="TMIE Media" />
+                <img class="tavily logo-white" src="assets/tavily.svg" alt="Tavily" />
               </div>
             </div>
             <div class="tier t-energy">
@@ -450,7 +451,7 @@
             </div>
             <div class="tier t-bronze">
               <div class="tier-label"><span>Bronze</span></div>
-              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /><img class="tavily logo-white" src="assets/tavily.svg" alt="Tavily" /><img class="invott logo-white" src="assets/investottawa.svg" alt="Invest Ottawa" /></div>
+              <div class="tier-logos"><img class="aqc logo-white" src="assets/aqc.png" alt="AQC Capital" /><img class="invott logo-white" src="assets/investottawa.svg" alt="Invest Ottawa" /></div>
             </div>
             <div class="tier t-support">
               <div class="tier-label"><span>Supporting</span></div>
@@ -459,6 +460,7 @@
                 <img class="mx logo-white" src="assets/mirepoix-logo2026.png" alt="Mirepoix Traiteur" />
                 <span class="pm-logo">Partnr<span class="d">.</span></span>
                 <img class="tmie" src="assets/tmie.png" alt="TMIE Media" />
+                <img class="tavily logo-white" src="assets/tavily.svg" alt="Tavily" />
               </div>
             </div>
             <div class="tier t-energy">
