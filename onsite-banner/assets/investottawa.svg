@@ -13,6 +13,13 @@
 	.st7{fill:#221F1F;}
 	.st8{fill:url(#SVGID_00000057129962089020047460000015686431914260281514_);}
 </style>
+<defs>
+<mask id="ioClockKnockout" maskUnits="userSpaceOnUse" x="0" y="0" width="98.2" height="35.1">
+	<rect x="0" y="0" width="98.2" height="35.1" fill="#fff"/>
+	<path d="M16.2,16.9c0,1-0.8,1.8-1.8,1.8c-1,0-1.8-0.8-1.8-1.8c0-1,0.8-1.8,1.8-1.8C15.4,15.2,16.2,15.9,16.2,16.9z" fill="#000"/>
+</mask>
+</defs>
+<g mask="url(#ioClockKnockout)">
 <g>
 	<g>
 		<g>
@@ -133,5 +140,6 @@
 	</linearGradient>
 	
 		<rect x="58.6" y="19.8" style="fill:url(#SVGID_00000177473652165972970350000016029215583955171259_);" width="0.5" height="15.3"/>
+</g>
 </g>
 </svg>
